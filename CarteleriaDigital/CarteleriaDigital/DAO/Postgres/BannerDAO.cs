@@ -4,33 +4,35 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Npgsql;
+using CarteleriaDigital.DTO;
 
 namespace CarteleriaDigital.DAO
 {
     class BannerDAO
     {
-        public void insertar(Conexion con, Banner ban)
+
+        private Conexion iConexion;
+
+        public BannerDAO(Conexion pConexion)
+        {
+            this.iConexion = pConexion;
+
+        }
+
+        public void insertar(Conexion con, BannerDTO ban)
         {
             try
             {
-                con.openConection();
+                iConexion.openConection();
                 
                 // Create insert command.
                 NpgsqlCommand command = new NpgsqlCommand("INSERT INTO " +
-                    "rango(nombre, activo) VALUES(:nombre, :activo)", con.connection);
+                    "rango(idRango, nombre, activo) VALUES(: idRango, :nombre, :activo)", con.connection);
                 // Add paramaters.
-                command.Parameters.Add(new NpgsqlParameter("nombre",
-                    NpgsqlTypes.NpgsqlDbType.Varchar));
-                command.Parameters.Add(new NpgsqlParameter("activo",
-                    NpgsqlTypes.NpgsqlDbType.Boolean));
-                
-                // Prepare the command.
-                command.Prepare();
+                command.Parameters.AddWithValue("@nombre", ban.Nombre);
+                command.Parameters.AddWithValue("@Activo", ban.Activo);
+                command.Parameters.AddWithValue("@idRango", ban.IdRango);
 
-                // Add value to the paramater.
-                command.Parameters[0].Value = ban.Nombre;
-                command.Parameters[1].Value = ban.Activo;
-                
                 // Execute SQL command.
                 Int32 recordAffected = command.ExecuteNonQuery();
                 if (Convert.ToBoolean(recordAffected))
@@ -43,7 +45,38 @@ namespace CarteleriaDigital.DAO
                 //Mostrar error
             }
 
-            con.closeConection();
+            iConexion.closeConection();
         }
+
+        public void Modificar(BannerDTO ban)
+        {
+            iConexion.openConection();
+
+            try
+            {
+                // Create update command.
+                NpgsqlCommand command = new NpgsqlCommand(@"UPDATE Banner " +
+                    "SET idRango = @idRango, Nombre = @Nombre, Activo = @Activo WHERE idBanner = " + ban.IdBanner , iConexion.connection);
+
+                // Add paramaters.
+                command.Parameters.AddWithValue("@Nombre", ban.Nombre);
+                command.Parameters.AddWithValue("@Activo", ban.Activo);
+                command.Parameters.AddWithValue("@idRango", ban.Activo);
+
+                // Execute SQL command.
+                int recordAffected = command.ExecuteNonQuery();
+                if (Convert.ToBoolean(recordAffected))
+                {
+                    //showInformation("Data successfully updated!");
+                }
+            }
+            catch (NpgsqlException ex)
+            {
+                //showError(ex);
+            }
+
+            iConexion.closeConection();
+        }
+
     }
 }
