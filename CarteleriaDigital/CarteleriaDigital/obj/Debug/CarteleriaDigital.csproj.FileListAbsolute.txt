@@ -36,3 +36,6 @@ C:\Users\Gastón\Source\Repos\Digital-Signage\CarteleriaDigital\CarteleriaDigita
 C:\Users\Gastón\Source\Repos\Digital-Signage\CarteleriaDigital\CarteleriaDigital\obj\Debug\CarteleriaDigital.PantallaInicio.resources
 C:\Users\Gastón\Source\Repos\Digital-Signage\CarteleriaDigital\CarteleriaDigital\obj\Debug\CarteleriaDigital.Properties.Resources.resources
 C:\Users\Gastón\Source\Repos\Digital-Signage\CarteleriaDigital\CarteleriaDigital\obj\Debug\CarteleriaDigital.csproj.GenerateResource.Cache
+C:\Users\Dan\Source\Repos\Digital-Signage\CarteleriaDigital\CarteleriaDigital\bin\Debug\CarteleriaDigital.exe.config
+C:\Users\Dan\Source\Repos\Digital-Signage\CarteleriaDigital\CarteleriaDigital\obj\Debug\CarteleriaDigital.exe
+C:\Users\Dan\Source\Repos\Digital-Signage\CarteleriaDigital\CarteleriaDigital\obj\Debug\CarteleriaDigital.pdb
