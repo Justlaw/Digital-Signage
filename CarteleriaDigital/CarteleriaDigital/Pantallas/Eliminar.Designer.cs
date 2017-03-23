@@ -39,9 +39,9 @@
             // button1
             // 
             this.button1.ForeColor = System.Drawing.Color.Teal;
-            this.button1.Location = new System.Drawing.Point(174, 304);
+            this.button1.Location = new System.Drawing.Point(190, 284);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(95, 25);
+            this.button1.Size = new System.Drawing.Size(81, 33);
             this.button1.TabIndex = 0;
             this.button1.Text = "Atrás";
             this.button1.UseVisualStyleBackColor = true;
@@ -50,9 +50,9 @@
             // button2
             // 
             this.button2.ForeColor = System.Drawing.Color.Teal;
-            this.button2.Location = new System.Drawing.Point(297, 304);
+            this.button2.Location = new System.Drawing.Point(290, 284);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(95, 25);
+            this.button2.Size = new System.Drawing.Size(81, 33);
             this.button2.TabIndex = 1;
             this.button2.Text = "Eliminar";
             this.button2.UseVisualStyleBackColor = true;
