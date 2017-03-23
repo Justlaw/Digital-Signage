@@ -16,7 +16,7 @@ namespace CarteleriaDigital.Pantallas
     public partial class AgregarCampaña : Form
     {
         List<ImagenDTO> ListIMG = new List<ImagenDTO>();
-
+        OpenFileDialog Img = new OpenFileDialog();
         public AgregarCampaña()
         {
             InitializeComponent();         
@@ -146,23 +146,22 @@ namespace CarteleriaDigital.Pantallas
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
+            
+            Img.InitialDirectory = "C:/Imágenes";
+            Img.Filter = "Archivos de Imagen (*.jpg)(*.jpeg)|*.jpg;*jpeg|PNG (*.png)|*.png|GIF (*.gif)|*.gif";
+            Img.FilterIndex = 1;
+            Img.Multiselect = true;
 
-            openFileDialog.InitialDirectory = "C:/Imágenes";
-            openFileDialog.Filter = "Archivos de Imagen (*.jpg)(*.jpeg)|*.jpg;*jpeg|PNG (*.png)|*.png|GIF (*.gif)|*.gif";
-            openFileDialog.FilterIndex = 1;
-            openFileDialog.Multiselect = true;
-
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            if (Img.ShowDialog() == DialogResult.OK)
             {
-                pictureBox1.ImageLocation = openFileDialog.FileName; 
+                pictureBox1.ImageLocation = Img.FileName; 
             }
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             //Incorpora una nueva Imagen a la lista de imagenes con su correspondiente duración.                     
-            if (!openFileDialog1.FileName.Equals(""))
+            if (!Img.FileName.Equals(""))
             {
                 try
                 {
@@ -171,9 +170,9 @@ namespace CarteleriaDigital.Pantallas
                         this.listView1.Items.Clear();
                       
                         //Carga la imagen desde la ruta y de la un formato, luego la agrega la lista de img.
-                        Image fotoEntrante = Image.FromFile(openFileDialog1.FileName);
-                        imageList1.Images.Add(fotoEntrante);
-                        imageList1.ImageSize = new Size(256, 256);
+                        Image fotoEntra = Image.FromFile(Img.FileName);
+                        imageList1.Images.Add(fotoEntra);
+                        imageList1.ImageSize = new Size(156, 156);
                         this.listView1.View = View.LargeIcon;
                       
                         //Arma los indices del listview.
@@ -191,14 +190,14 @@ namespace CarteleriaDigital.Pantallas
                         //Carga el objeto de tipo imagen con los datos del usuario.
                         ImagenDTO imagen1 = new ImagenDTO();                  
                         imagen1.Duracion = Convert.ToInt16(textBox2.Text);
-                        imagen1.RutaImagen = openFileDialog1.FileName;
+                        imagen1.RutaImagen = Img.FileName;
                         openFileDialog1.FileName = "";
                       
                         //Lo agrega a la lista de imagenes de la campaña y vacia el picturebox.
                         ListIMG.Add(imagen1);
                         pictureBox1.Image = null;
                         pictureBox1.Update();
-                        button4.Enabled = false;
+                        button4.Enabled = true;
                     }
                     else
                     {
@@ -220,6 +219,58 @@ namespace CarteleriaDigital.Pantallas
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+
+        {
+            if (listView1.Items.Count > 0)
+            {
+                {
+
+                    {   //Se obtiene la posicion del elemento seleccionado.
+                        Int32 pos = listView1.SelectedIndices[0];
+                        //Se establece el índice de la imágen.
+                        ListViewItem item = new ListViewItem();
+                        item.ImageIndex = pos;
+                        //Se elimina la imágen de la posicion.
+                        imageList1.Images.RemoveAt(pos);
+                        ListIMG.RemoveAt(pos);
+                        listView1.Clear();
+                        //Actualizo los indices.
+                        for (int counter = 0; counter < imageList1.Images.Count; counter++)
+                        {
+                            ListViewItem item1 = new ListViewItem();
+                            item1.ImageIndex = counter;
+                            this.listView1.Items.Add(item1);
+                        }
+                        this.listView1.LargeImageList = imageList1;
+                    }
+                }
+            }
+        }
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            {   //Al seleccionar una imagen se activa el boton Borrar.
+                if (listView1.SelectedIndices.Count != 0)
+                { button5.Enabled = true; }
+                else { button5.Enabled = false; }
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            {   //Quita todas las imagenes del ListView.
+                imageList1.Dispose();
+                ListIMG.Clear();
+                listView1.LargeImageList = null;
+                listView1.Clear();
+            }
         }
     }
 }

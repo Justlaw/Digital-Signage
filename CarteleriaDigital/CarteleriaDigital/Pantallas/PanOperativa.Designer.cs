@@ -43,12 +43,18 @@
             // 
             // textBox1
             // 
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox1.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.textBox1.Location = new System.Drawing.Point(26, 327);
-            this.textBox1.Multiline = true;
+            this.textBox1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBox1.Enabled = false;
+            this.textBox1.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.textBox1.Location = new System.Drawing.Point(26, 366);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(617, 39);
-            this.textBox1.TabIndex = 1;
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(617, 20);
+            this.textBox1.TabIndex = 3;
+            this.textBox1.TabStop = false;
             // 
             // PanOperativa
             // 
@@ -60,6 +66,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Name = "PanOperativa";
             this.Text = "PanOperativa";
+            this.Load += new System.EventHandler(this.PanOperativa_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

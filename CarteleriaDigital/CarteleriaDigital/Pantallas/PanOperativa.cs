@@ -16,5 +16,10 @@ namespace CarteleriaDigital.Pantallas
         {
             InitializeComponent();
         }
+
+        private void PanOperativa_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
