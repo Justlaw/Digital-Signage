@@ -8,11 +8,11 @@ using CarteleriaDigital.DTO;
 
 namespace CarteleriaDigital.DAO
 {
-    class CampaniaDAO
+    class CampañaDAO
     {
         private Conexion iConexion;
 
-        public CampaniaDAO(Conexion pConexion)
+        public CampañaDAO(Conexion pConexion)
         {
             this.iConexion = pConexion;
 
@@ -77,9 +77,9 @@ namespace CarteleriaDigital.DAO
             iConexion.closeConection();
         }
 
-        public List<Campania> Listar(String Where)
+        public List<Campaña> Listar(String Where)
         {
-            List<Campania> listaCamp = new List<Campania>();
+            List<Campaña> listaCamp = new List<Campaña>();
 
             iConexion.openConection();
 
