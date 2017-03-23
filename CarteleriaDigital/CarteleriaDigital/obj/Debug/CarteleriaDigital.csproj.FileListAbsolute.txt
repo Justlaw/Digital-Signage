@@ -17,6 +17,3 @@ C:\Users\Jenifer\Source\Repos\CarteleriaDigital\CarteleriaDigital\CarteleriaDigi
 C:\Users\Jenifer\Source\Repos\CarteleriaDigital\CarteleriaDigital\CarteleriaDigital\obj\Debug\CarteleriaDigital.Pantallas.Campaña_OR_Banner.resources
 C:\Users\Jenifer\Source\Repos\CarteleriaDigital\CarteleriaDigital\CarteleriaDigital\obj\Debug\CarteleriaDigital.Pantallas.PanOperativa.resources
 C:\Users\Jenifer\Source\Repos\CarteleriaDigital\CarteleriaDigital\CarteleriaDigital\obj\Debug\CarteleriaDigital.PanCampaña.resources
-C:\Users\Jenifer\Source\Repos\Digital-Signage\CarteleriaDigital\CarteleriaDigital\bin\Debug\CarteleriaDigital.exe.config
-C:\Users\Jenifer\Source\Repos\Digital-Signage\CarteleriaDigital\CarteleriaDigital\obj\Debug\CarteleriaDigital.exe
-C:\Users\Jenifer\Source\Repos\Digital-Signage\CarteleriaDigital\CarteleriaDigital\obj\Debug\CarteleriaDigital.pdb
