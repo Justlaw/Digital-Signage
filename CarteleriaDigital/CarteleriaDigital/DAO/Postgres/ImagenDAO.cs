@@ -15,7 +15,6 @@ namespace CarteleriaDigital.DAO
         public ImagenDAO(Conexion pConexion)
         {
             this.iConexion = pConexion;
-
         }
 
         public void insertar(ImagenDTO imagenDTO)
@@ -75,6 +74,39 @@ namespace CarteleriaDigital.DAO
             }
 
             iConexion.closeConection();
+        }
+
+        public List<ImagenDTO> Listar(String where)
+        {
+            List<ImagenDTO> listaImagenes = new List<ImagenDTO>();
+
+            iConexion.openConection();
+
+            try
+            {
+                // Create select command.
+                NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM " +
+                    "imagen " + where + " ORDER BY id ASC", iConexion.connection);
+
+                // Prepare the command.
+                command.Prepare();
+
+                // Execute SQL command.
+                NpgsqlDataReader dr = command.ExecuteReader();
+
+                // Fill results to music list.
+                while (dr.Read())
+                {
+                    //listaCamp.Add(new Campania(dr.GetString(1), dr.GetInt32(0), dr. , ,));
+                }
+            }
+            catch (NpgsqlException ex)
+            {
+
+            }
+            iConexion.closeConection();
+
+            return listaImagenes;
         }
     }
 }

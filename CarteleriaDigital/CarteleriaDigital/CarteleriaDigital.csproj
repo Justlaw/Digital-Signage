@@ -57,8 +57,9 @@
     <Compile Include="DAO\Postgres\BannerDAO.cs" />
     <Compile Include="DAO\Postgres\BannerRSSDAO.cs" />
     <Compile Include="DAO\Postgres\BannerSimpleDAO.cs" />
-    <Compile Include="DAO\Postgres\CampaniaDAO.cs" />
+    <Compile Include="DAO\Postgres\CampañaDAO.cs" />
     <Compile Include="DAO\Conexion.cs" />
+    <Compile Include="DAO\Postgres\filtro.cs" />
     <Compile Include="DAO\Postgres\ImagenDAO.cs" />
     <Compile Include="DAO\Postgres\RangoDAO.cs" />
     <Compile Include="DTO\BannerDTO.cs" />
@@ -82,7 +83,7 @@
     <Compile Include="Clase\Banner.cs" />
     <Compile Include="Clase\BannerRSS.cs" />
     <Compile Include="Clase\BannerSimple.cs" />
-    <Compile Include="Clase\Campania.cs" />
+    <Compile Include="Clase\Campaña.cs" />
     <Compile Include="Clase\FuenteRSS.cs" />
     <Compile Include="Clase\Imagen.cs" />
     <Compile Include="Pantallas\AgregarCampaña.cs">

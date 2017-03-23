@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace CarteleriaDigital
 {
-    class Campania
+    class Campaña
     {
         private Boolean iActivo;
         private String iNombre;
         private List<Imagen> iListaImagenes;
         private Rango iRango;
 
-        public Campania(Boolean pActivo, String pNombre, List<Imagen> pListaImagenes, Rango pRango)
+        public Campaña(Boolean pActivo, String pNombre, List<Imagen> pListaImagenes, Rango pRango)
         {
             iActivo = pActivo;
             iNombre = pNombre;
