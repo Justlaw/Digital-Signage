@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CarteleriaDigital.DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,10 @@ namespace CarteleriaDigital.DAO
 {
     interface IImagen
     {
+        void Insertar(ImagenDTO imagenDTO);
+
+        void Modificar(ImagenDTO imagenDTO);
+
+        List<ImagenDTO> Listar(String where);
     }
 }

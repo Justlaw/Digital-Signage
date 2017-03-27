@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CarteleriaDigital.DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,12 +10,10 @@ namespace CarteleriaDigital.DAO
     interface IBanner 
         //REEVER LOS TIPOS DE LOS RETURN Y DEMÁS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     {
-        Boolean Insertar(Conexion con, Banner ban);
+        void Insertar(BannerDTO ban);
 
-        Boolean Modificar();
+        void Modificar(BannerDTO ban);
 
-        Boolean Listar();
-
-        Boolean Borrar();
+        void Listar();
     }
 }

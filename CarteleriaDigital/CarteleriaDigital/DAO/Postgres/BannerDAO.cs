@@ -8,7 +8,7 @@ using CarteleriaDigital.DTO;
 
 namespace CarteleriaDigital.DAO
 {
-    class BannerDAO
+    class BannerDAO : IBanner
     {
 
         private Conexion iConexion;
@@ -19,7 +19,7 @@ namespace CarteleriaDigital.DAO
 
         }
 
-        public void insertar(Conexion con, BannerDTO ban)
+        public void Insertar(BannerDTO ban)
         {
             try
             {
@@ -27,7 +27,7 @@ namespace CarteleriaDigital.DAO
                 
                 // Create insert command.
                 NpgsqlCommand command = new NpgsqlCommand("INSERT INTO " +
-                    "rango(idRango, nombre, activo) VALUES(: idRango, :nombre, :activo)", con.connection);
+                    "rango(idRango, nombre, activo) VALUES(: idRango, :nombre, :activo)", iConexion.connection);
                 // Add paramaters.
                 command.Parameters.AddWithValue("@nombre", ban.Nombre);
                 command.Parameters.AddWithValue("@Activo", ban.Activo);
@@ -76,6 +76,11 @@ namespace CarteleriaDigital.DAO
             }
 
             iConexion.closeConection();
+        }
+
+        public void Listar()
+        {
+            throw new NotImplementedException();
         }
 
     }

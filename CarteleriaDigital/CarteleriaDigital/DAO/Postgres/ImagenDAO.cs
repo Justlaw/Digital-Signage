@@ -8,7 +8,7 @@ using CarteleriaDigital.DTO;
 
 namespace CarteleriaDigital.DAO
 {
-    class ImagenDAO
+    class ImagenDAO: IImagen
     {
         private Conexion iConexion;
 
@@ -17,7 +17,7 @@ namespace CarteleriaDigital.DAO
             this.iConexion = pConexion;
         }
 
-        public void insertar(ImagenDTO imagenDTO)
+        public void Insertar(ImagenDTO imagenDTO)
         {
             try
             {
