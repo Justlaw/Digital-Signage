@@ -68,6 +68,12 @@
     <Compile Include="DTO\CampañaDTO.cs" />
     <Compile Include="DTO\ImagenDTO.cs" />
     <Compile Include="DTO\RangoDTO.cs" />
+    <Compile Include="Pantallas\AcercaDe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\AcercaDe.Designer.cs">
+      <DependentUpon>AcercaDe.cs</DependentUpon>
+    </Compile>
     <Compile Include="Pantallas\Campaña_OR_Banner.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,6 +103,12 @@
     </Compile>
     <Compile Include="Pantallas\Eliminar.Designer.cs">
       <DependentUpon>Eliminar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas\ListarCampaña.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\ListarCampaña.Designer.cs">
+      <DependentUpon>ListarCampaña.cs</DependentUpon>
     </Compile>
     <Compile Include="Pantallas\PanOperativa.cs">
       <SubType>Form</SubType>
@@ -135,6 +147,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Pantallas\AcercaDe.resx">
+      <DependentUpon>AcercaDe.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Pantallas\Campaña_OR_Banner.resx">
       <DependentUpon>Campaña_OR_Banner.cs</DependentUpon>
     </EmbeddedResource>
@@ -143,6 +158,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Pantallas\AgregarCampaña.resx">
       <DependentUpon>AgregarCampaña.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\ListarCampaña.resx">
+      <DependentUpon>ListarCampaña.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pantallas\PanCampaña.resx">
       <DependentUpon>PanCampaña.cs</DependentUpon>
@@ -164,7 +182,15 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\LogoUTN.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LogoUTN2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LogoUTN3.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
