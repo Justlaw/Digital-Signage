@@ -131,12 +131,13 @@ namespace CarteleriaDigital.DAO
 
                 // Fill results to music list.
                 while (dr.Read())
-                {                    
+                {
                     camp.IdCampaña = dr.GetInt32(0);
                     camp.IdRango = dr.GetInt32(1);
                     camp.Activo = dr.GetBoolean(2);
                     camp.Nombre = dr.GetString(3);
-                    listaCamp.Add(camp);
+                    listaCamp.Add(camp); 
+                    //
                 }
             }
             catch (NpgsqlException ex)
