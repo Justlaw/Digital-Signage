@@ -17,7 +17,6 @@ namespace CarteleriaDigital.Pantallas
     {
         List<ImagenDTO> ListIMG = new List<ImagenDTO>();
         OpenFileDialog Img = new OpenFileDialog();
-
         public AgregarCampaña()
         {
             InitializeComponent();         
@@ -173,7 +172,7 @@ namespace CarteleriaDigital.Pantallas
                         //Carga la imagen desde la ruta y de la un formato, luego la agrega la lista de img.
                         Image fotoEntra = Image.FromFile(Img.FileName);
                         imageList1.Images.Add(fotoEntra);
-                        imageList1.ImageSize = new Size(160, 160);
+                        imageList1.ImageSize = new Size(156, 156);
                         this.listView1.View = View.LargeIcon;
                       
                         //Arma los indices del listview.
@@ -224,7 +223,7 @@ namespace CarteleriaDigital.Pantallas
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -257,6 +256,7 @@ namespace CarteleriaDigital.Pantallas
         }
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
+           
             {   //Al seleccionar una imagen se activa el boton Borrar.
                 if (listView1.SelectedIndices.Count != 0)
                 { button5.Enabled = true; }

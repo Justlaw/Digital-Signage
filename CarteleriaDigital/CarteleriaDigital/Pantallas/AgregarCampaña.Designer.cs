@@ -105,7 +105,7 @@
             this.button2.ForeColor = System.Drawing.Color.Teal;
             this.button2.Location = new System.Drawing.Point(476, 636);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(81, 33);
+            this.button2.Size = new System.Drawing.Size(78, 33);
             this.button2.TabIndex = 7;
             this.button2.Text = "Aceptar";
             this.button2.UseVisualStyleBackColor = true;
@@ -276,9 +276,9 @@
             // 
             // listView1
             // 
-            this.listView1.Location = new System.Drawing.Point(251, 19);
+            this.listView1.Location = new System.Drawing.Point(239, 19);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(247, 264);
+            this.listView1.Size = new System.Drawing.Size(270, 264);
             this.listView1.TabIndex = 5;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
