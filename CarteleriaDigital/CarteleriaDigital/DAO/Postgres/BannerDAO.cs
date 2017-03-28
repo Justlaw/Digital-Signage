@@ -27,7 +27,7 @@ namespace CarteleriaDigital.DAO
                 
                 // Create insert command.
                 NpgsqlCommand command = new NpgsqlCommand("INSERT INTO " +
-                    "rango(idRango, nombre, activo) VALUES(: idRango, :nombre, :activo)", iConexion.connection);
+                    "banner(idRango, nombre, activo) VALUES(: idRango, :nombre, :activo)", iConexion.connection);
                 // Add paramaters.
                 command.Parameters.AddWithValue("@nombre", ban.Nombre);
                 command.Parameters.AddWithValue("@Activo", ban.Activo);
