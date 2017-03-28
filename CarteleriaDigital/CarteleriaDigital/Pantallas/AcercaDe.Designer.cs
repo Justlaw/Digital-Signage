@@ -95,6 +95,7 @@
             // 
             // Cerrar
             // 
+            this.Cerrar.ForeColor = System.Drawing.Color.Teal;
             this.Cerrar.Location = new System.Drawing.Point(160, 186);
             this.Cerrar.Name = "Cerrar";
             this.Cerrar.Size = new System.Drawing.Size(87, 29);
