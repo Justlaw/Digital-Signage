@@ -85,12 +85,19 @@ namespace CarteleriaDigital.Pantallas
 
         private void salirToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+           
             this.Close();
         }
 
         private void archivoToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void acercaDeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Pantallas.AcercaDe abrir = new Pantallas.AcercaDe();
+            abrir.Show();
         }
     }
 }
