@@ -10,11 +10,9 @@ namespace CarteleriaDigital.DAO
 {
     class BannerSimpleDAO
     {
-        private Conexion iConexion;
 
-        public BannerSimpleDAO(Conexion pConexion)
+        public BannerSimpleDAO()
         {
-            this.iConexion = pConexion;
 
         }
 
@@ -23,12 +21,12 @@ namespace CarteleriaDigital.DAO
             try
             {
                 //VER COMO TRATAMOS ESTA INSERCION EN LA BASE DE DATOS <<<<<<<<<<<<<<<<<<<<<<<<<<< NO ESTA TERMINADO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-                iConexion.openConection();
+                Connection.con.Open();
                 // Create insert command.
                 NpgsqlCommand command = new NpgsqlCommand("INSERT INTO " +
-                    "banner(idrango, nombre, activo) VALUES(:idrango, :nombre, :activo)", iConexion.connection);
+                    "banner(idrango, nombre, activo) VALUES(:idrango, :nombre, :activo)", Connection.con);
                 command = new NpgsqlCommand("INSERT INTO " +
-                    "bannersimple(idbanner, text) VALUES(:idbanner, :text)", iConexion.connection);
+                    "bannersimple(idbanner, text) VALUES(:idbanner, :text)", Connection.con);
 
                 command.Parameters.AddWithValue("@id", bsDTO.IdBanner);
                 command.Parameters.AddWithValue("@idrango", bsDTO.IdRango);
@@ -48,18 +46,18 @@ namespace CarteleriaDigital.DAO
                 //Mostrar error
             }
 
-            iConexion.closeConection();
+            Connection.con.Close();
         }
 
         public void Modificar(BannerSimpleDTO bsDTO)
         {
-            iConexion.openConection();
+            Connection.con.Open();
 
             try
             {
                 // Create update command.
                 NpgsqlCommand command = new NpgsqlCommand(@"UPDATE Banner " +
-                    "SET idbanner = @idbanner, texto = @texto WHERE idbannersimple = " + bsDTO.IdBannerSimple , iConexion.connection);
+                    "SET idbanner = @idbanner, texto = @texto WHERE idbannersimple = " + bsDTO.IdBannerSimple , Connection.con);
 
                 // Add paramaters.
                 command.Parameters.AddWithValue("@idbanner", bsDTO.IdBanner);
@@ -78,7 +76,7 @@ namespace CarteleriaDigital.DAO
                 //showError(ex);
             }
 
-            iConexion.closeConection();
+            Connection.con.Close();
         }
     }
 }

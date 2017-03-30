@@ -9,10 +9,9 @@ namespace CarteleriaDigital.DAO
 {
     interface IRango
     {
-        void insertar(RangoDTO rangoDTO);
+        void Insertar(RangoDTO rangoDTO);
 
-        void modificar(RangoDTO rangoDTO);
+        void Modificar(RangoDTO rangoDTO);
 
-        void eliminar(RangoDTO rangoDTO);
     }
 }

@@ -11,11 +11,8 @@ namespace CarteleriaDigital.DAO
     class BannerDAO : IBanner
     {
 
-        private Conexion iConexion;
-
-        public BannerDAO(Conexion pConexion)
+        public BannerDAO()
         {
-            this.iConexion = pConexion;
 
         }
 
@@ -23,11 +20,11 @@ namespace CarteleriaDigital.DAO
         {
             try
             {
-                iConexion.openConection();
+                Connection.con.Open();
                 
                 // Create insert command.
                 NpgsqlCommand command = new NpgsqlCommand("INSERT INTO " +
-                    "banner(idRango, nombre, activo) VALUES(: idRango, :nombre, :activo)", iConexion.connection);
+                    "banner(idRango, nombre, activo) VALUES(: idRango, :nombre, :activo)", Connection.con);
                 // Add paramaters.
                 command.Parameters.AddWithValue("@nombre", ban.Nombre);
                 command.Parameters.AddWithValue("@Activo", ban.Activo);
@@ -45,18 +42,18 @@ namespace CarteleriaDigital.DAO
                 //Mostrar error
             }
 
-            iConexion.closeConection();
+            Connection.con.Close();
         }
 
         public void Modificar(BannerDTO ban)
         {
-            iConexion.openConection();
+            Connection.con.Open();
 
             try
             {
                 // Create update command.
                 NpgsqlCommand command = new NpgsqlCommand(@"UPDATE Banner " +
-                    "SET idRango = @idRango, Nombre = @Nombre, Activo = @Activo WHERE idBanner = " + ban.IdBanner , iConexion.connection);
+                    "SET idRango = @idRango, Nombre = @Nombre, Activo = @Activo WHERE idBanner = " + ban.IdBanner , Connection.con);
 
                 // Add paramaters.
                 command.Parameters.AddWithValue("@Nombre", ban.Nombre);
@@ -75,7 +72,7 @@ namespace CarteleriaDigital.DAO
                 //showError(ex);
             }
 
-            iConexion.closeConection();
+            Connection.con.Close();
         }
 
         public void Listar()

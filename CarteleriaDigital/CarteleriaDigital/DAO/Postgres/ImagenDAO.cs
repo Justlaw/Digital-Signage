@@ -10,21 +10,20 @@ namespace CarteleriaDigital.DAO
 {
     class ImagenDAO: IImagen
     {
-        private Conexion iConexion;
 
-        public ImagenDAO(Conexion pConexion)
+        public ImagenDAO()
         {
-            this.iConexion = pConexion;
+            
         }
 
         public void Insertar(ImagenDTO imagenDTO)
         {
             try
             {
-                iConexion.openConection();
+                Connection.con.Open();
                 // Create insert command.
                 NpgsqlCommand command = new NpgsqlCommand("INSERT INTO " +
-                    "rango(idcampaña, duracion, rutaimagen) VALUES(:idcampaña, :duracion, :rutaimagen)");
+                    "rango(idcampaña, duracion, rutaimagen) VALUES(:idcampaña, :duracion, :rutaimagen)",Connection.con);
 
                 command.Parameters.AddWithValue("@idcampaña", imagenDTO.IdCampaña);
                 command.Parameters.AddWithValue("@duracion", imagenDTO.Duracion);
@@ -42,18 +41,18 @@ namespace CarteleriaDigital.DAO
                 //Mostrar error
             }
 
-            iConexion.closeConection();
+            Connection.con.Close();
         }
 
         public void Modificar(ImagenDTO imagenDTO)
         {
-            iConexion.openConection();
+            Connection.con.Close();
 
             try
             {
                 // Create update command.
                 NpgsqlCommand command = new NpgsqlCommand(@"UPDATE rango " +
-                    "SET idcampaña = @idcampaña, duracion = @duracion, rutaimagen = @rutaimagen WHERE idmagen = " + imagenDTO.IdImagen, iConexion.connection);
+                    "SET idcampaña = @idcampaña, duracion = @duracion, rutaimagen = @rutaimagen WHERE idmagen = " + imagenDTO.IdImagen, Connection.con);
 
                 // Add paramaters.
                 command.Parameters.AddWithValue("@idimagen", imagenDTO.IdImagen);
@@ -73,20 +72,20 @@ namespace CarteleriaDigital.DAO
                 //showError(ex);
             }
 
-            iConexion.closeConection();
+            Connection.con.Close();
         }
 
         public List<ImagenDTO> Listar(String where)
         {
             List<ImagenDTO> listaImagenes = new List<ImagenDTO>();
 
-            iConexion.openConection();
+            Connection.con.Open();
 
             try
             {
                 // Create select command.
                 NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM " +
-                    "imagen " + where + " ORDER BY id ASC", iConexion.connection);
+                    "imagen " + where + " ORDER BY id ASC", Connection.con);
 
                 // Prepare the command.
                 command.Prepare();
@@ -104,7 +103,7 @@ namespace CarteleriaDigital.DAO
             {
 
             }
-            iConexion.closeConection();
+            Connection.con.Close();
 
             return listaImagenes;
         }

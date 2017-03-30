@@ -9,26 +9,23 @@ using CarteleriaDigital.DTO;
 
 namespace CarteleriaDigital.DAO
 {
-    class RangoDAO
+    class RangoDAO : IRango
     {
 
-        private Conexion iConexion;
-
-        public RangoDAO(Conexion pConexion)
+        public RangoDAO()
         {
-            this.iConexion = pConexion;
-
+            
         }
 
 
-        public void insertar(RangoDTO ranDTO)
+        public void Insertar(RangoDTO ranDTO)
         {
             try
             {
-                iConexion.openConection();
+                Connection.con.Open();
                 // Create insert command.
                 NpgsqlCommand command = new NpgsqlCommand("INSERT INTO " +
-                    "rango(fechainicio, fechafin, horainicio, horafin) VALUES(:fechainicio, :fechafin, :horainicio, :horafin)", this.iConexion.connection);
+                    "rango(fechainicio, fechafin, horainicio, horafin) VALUES(:fechainicio, :fechafin, :horainicio, :horafin)", Connection.con);
 
                 command.Parameters.AddWithValue("@fechainicio", ranDTO.FechaInicio);
                 command.Parameters.AddWithValue("@fechafin", ranDTO.FechaFin);
@@ -48,18 +45,18 @@ namespace CarteleriaDigital.DAO
                 //Mostrar error
             }
 
-            iConexion.closeConection();
+            Connection.con.Close();
         }
 
         public void Modificar(RangoDTO ranDTO)
         {
-            iConexion.openConection();
+            Connection.con.Open();
 
             try
             {
                 // Create update command.
                 NpgsqlCommand command = new NpgsqlCommand(@"UPDATE rango " +
-                    "SET fechainicio = @fechainicio, fechafin = @fechafin, horainicio = @horainicio, horafin = @horafin WHERE idRango = " + ranDTO.IdRango, iConexion.connection);
+                    "SET fechainicio = @fechainicio, fechafin = @fechafin, horainicio = @horainicio, horafin = @horafin WHERE idRango = " + ranDTO.IdRango, Connection.con);
 
                 // Add paramaters.
                 command.Parameters.AddWithValue("@fechainicio", ranDTO.FechaInicio);
@@ -79,9 +76,8 @@ namespace CarteleriaDigital.DAO
                 //showError(ex);
             }
 
-            iConexion.closeConection();
+            Connection.con.Close();
         }
-
 
     }
 }
