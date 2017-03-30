@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAO\Postgres\Connection.cs" />
     <Compile Include="DAO\IBanner.cs" />
     <Compile Include="DAO\IBannerRSS.cs" />
     <Compile Include="DAO\IBannerSimple.cs" />
