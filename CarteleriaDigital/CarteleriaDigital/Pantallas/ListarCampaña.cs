@@ -12,7 +12,7 @@ using CarteleriaDigital.DAO;
 
 namespace CarteleriaDigital.Pantallas
 {
-    public partial class ListarCampaña : Form        
+    public partial class ListarCampaña : Form
     {
         CampañaDAO camp = new CampañaDAO();
 
@@ -28,22 +28,27 @@ namespace CarteleriaDigital.Pantallas
             cerrar.Hide();
             this.SetVisibleCore(false);
 
-            PanCampaña abrir = new PanCampaña ();
+            PanCampaña abrir = new PanCampaña();
             abrir.Show();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //Segun el tipo de busqueda seleccionada en el ComboBox, se realizara la operacion que corresponda.
             
-                    {   //Carga el datasource con las campañas cuyas fechas se encuentren en el intervalo.
-                        List<CampañaDTO> campañasFecha = new List<CampañaDTO>();
-                campañasFecha = 
-                        
+            {   
+                //Carga el datasource con las campañas cuyas fechas se encuentren en el intervalo.
+                List<CampañaDTO> campañasFecha = new List<CampañaDTO>();
+                campañasFecha = camp.ListarPorFecha(dateTimePicker1.Value, dateTimePicker2.Value);
+                
 
-                        dataGridView1.DataSource = campañasFecha;
-                 
-            
+
+                dataGridView1.DataSource = campañasFecha;
+            }
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
