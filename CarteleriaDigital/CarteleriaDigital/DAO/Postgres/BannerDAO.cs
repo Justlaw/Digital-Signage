@@ -187,5 +187,9 @@ namespace CarteleriaDigital.DAO
 
         }
 
+        public void Listar()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
