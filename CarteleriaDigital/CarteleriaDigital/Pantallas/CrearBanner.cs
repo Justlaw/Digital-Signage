@@ -64,6 +64,8 @@ namespace CarteleriaDigital.Pantallas
                 BannerRSSDTO brssDTO = new BannerRSSDTO();
                 brssDTO.FuenteRSS = txtURL.Text;
             }
+
+
         }
     }
 }

@@ -48,6 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controladores\ControladorBanners.cs" />
+    <Compile Include="Controladores\ControladorCampañas.cs" />
     <Compile Include="DAO\Postgres\Connection.cs" />
     <Compile Include="DAO\IBanner.cs" />
     <Compile Include="DAO\IBannerRSS.cs" />
