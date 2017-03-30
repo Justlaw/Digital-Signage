@@ -12,20 +12,18 @@ namespace CarteleriaDigital.DAO
     {
         private Conexion iConexion;
 
-        public CampañaDAO(Conexion pConexion)
+        public CampañaDAO()
         {
-            this.iConexion = pConexion;
-
         }
 
         public void insertar(CampañaDTO camDTO)
         {
             try
             {
-                iConexion.openConection();
+                Connection.con.Open();
                 // Create insert command.
                 NpgsqlCommand command = new NpgsqlCommand("INSERT INTO " +
-                    "campaña(nombre, activo, listaimagenes) VALUES(:nombre, :activo, :listaimagenes)", iConexion.connection);
+                    "campaña(nombre, activo, listaimagenes) VALUES(:nombre, :activo, :listaimagenes)", Connection.con);
 
                 command.Parameters.AddWithValue("@idcampaña", camDTO.Nombre);
                 command.Parameters.AddWithValue("@duracion", camDTO.Activo);
@@ -43,21 +41,20 @@ namespace CarteleriaDigital.DAO
                 //Mostrar error
             }
 
-            iConexion.closeConection();
+            Connection.con.Close();
         }
 
         public void Modificar(CampañaDTO camDTO)
         {
-            iConexion.openConection();
+            Connection.con.Open();
 
             try
             {
                 // Create update command.
                 NpgsqlCommand command = new NpgsqlCommand(@"UPDATE campaña " +
-                    "SET idrango = @idrango, activo = @activo, nombre = @nombre WHERE idcampaña = " + camDTO.IdCampaña, iConexion.connection);
+                    "SET idrango = @idrango, activo = @activo, nombre = @nombre WHERE idcampaña = " + camDTO.IdCampaña, Connection.con);
 
                 // Add paramaters.
-             // command.Parameters.AddWithValue("@idcampaña", camDTO.IdCampaña);
                 command.Parameters.AddWithValue("@idrango", camDTO.IdRango);
                 command.Parameters.AddWithValue("@activo", camDTO.Activo);
                 command.Parameters.AddWithValue("@nombre", camDTO.Nombre);
@@ -74,19 +71,18 @@ namespace CarteleriaDigital.DAO
                 //showError(ex);
             }
 
-            iConexion.closeConection();
+            Connection.con.Close();
         }
 
         public CampañaDTO BuscarPorNombre(String pNombre)
         {
 
-            iConexion.openConection();
+            Connection.con.Open();
             CampañaDTO camp = new CampañaDTO();
             try
             {
                 // Create select command.
-                NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM " +
-                    "campaña where nombre = " + pNombre + "ORDER BY id ASC", iConexion.connection);
+                NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM campaña WHERE nombre = " + pNombre + "ORDER BY idcampaña ASC", Connection.con);
 
                 // Prepare the command.
                 command.Prepare();
@@ -105,7 +101,7 @@ namespace CarteleriaDigital.DAO
 
             }
 
-            iConexion.closeConection();
+            Connection.con.Close();
 
             return camp;
         }
@@ -115,13 +111,12 @@ namespace CarteleriaDigital.DAO
             List<CampañaDTO> listaCamp = new List<CampañaDTO>();
             CampañaDTO camp = new CampañaDTO();
 
-            iConexion.openConection();
+            Connection.con.Open();
 
             try
             {
                 // Create select command.
-                NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM " +
-                    "campaña where activo = " + pActivo + "ORDER BY id ASC", iConexion.connection);
+                NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM campaña WHERE activo = " + pActivo + "ORDER BY idcampaña ASC", Connection.con);
 
                 // Prepare the command.
                 command.Prepare();
@@ -137,7 +132,6 @@ namespace CarteleriaDigital.DAO
                     camp.Activo = dr.GetBoolean(2);
                     camp.Nombre = dr.GetString(3);
                     listaCamp.Add(camp); 
-                    //
                 }
             }
             catch (NpgsqlException ex)
@@ -145,7 +139,48 @@ namespace CarteleriaDigital.DAO
 
             }
 
-            iConexion.closeConection();
+            Connection.con.Close();
+
+            return listaCamp;
+
+        }
+
+        public List<CampañaDTO> ListarPorFecha(DateTime pFechaIni, DateTime pFechaFin)
+        {
+            List<CampañaDTO> listaCamp = new List<CampañaDTO>();
+            CampañaDTO camp = new CampañaDTO();
+
+            Connection.con.Open();
+
+            try
+            {
+                // Create select command.
+                NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM campaña, rango WHERE "+ 
+                    "campaña.idrango = rango.idrango and " + pFechaIni + " < rango.fechainicio and " 
+                    + pFechaIni + " > rango.fechafin ORDER BY idcampaña ASC", Connection.con);
+                
+                // Prepare the command.
+                command.Prepare();
+
+                // Execute SQL command.
+                NpgsqlDataReader dr = command.ExecuteReader();
+
+                // Fill results to music list.
+                while (dr.Read())
+                {
+                    camp.IdCampaña = dr.GetInt32(0);
+                    camp.IdRango = dr.GetInt32(1);
+                    camp.Activo = dr.GetBoolean(2);
+                    camp.Nombre = dr.GetString(3);
+                    listaCamp.Add(camp);
+                }
+            }
+            catch (NpgsqlException ex)
+            {
+
+            }
+
+            Connection.con.Close();
 
             return listaCamp;
 
