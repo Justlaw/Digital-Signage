@@ -34,7 +34,6 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
@@ -86,32 +85,19 @@
             this.toolTip1.SetToolTip(this.button4, "Modificar Banner");
             this.button4.UseVisualStyleBackColor = false;
             // 
-            // button5
-            // 
-            this.button5.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button5.BackgroundImage")));
-            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button5.Location = new System.Drawing.Point(445, 85);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(102, 47);
-            this.button5.TabIndex = 4;
-            this.toolTip1.SetToolTip(this.button5, "Vista Previa Banner");
-            this.button5.UseVisualStyleBackColor = false;
-            // 
-            // PanBannerSimple
+            // PanBanner
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(634, 411);
-            this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "PanBannerSimple";
+            this.Name = "PanBanner";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Banner";
             this.Load += new System.EventHandler(this.PanBannerSimple_Load);
@@ -125,7 +111,6 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
         private System.Windows.Forms.ToolTip toolTip1;
     }
 }

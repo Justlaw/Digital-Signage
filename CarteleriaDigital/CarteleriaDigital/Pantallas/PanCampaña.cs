@@ -61,7 +61,12 @@ namespace CarteleriaDigital
 
         private void button4_Click(object sender, EventArgs e)
         {
+            PanCampaña cerrar = new PanCampaña();
+            cerrar.Hide();
+            this.SetVisibleCore(false);
 
+            ListarCampaña abrir = new ListarCampaña();
+            abrir.Show();
         }
     }
 }
