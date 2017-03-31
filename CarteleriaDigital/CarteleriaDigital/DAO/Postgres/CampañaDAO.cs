@@ -156,8 +156,8 @@ namespace CarteleriaDigital.DAO
             {
                 // Create select command.
                 NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM campaña, rango WHERE "+ 
-                    "campaña.idrango = rango.idrango and " + pFechaIni + " = rango.fechainicio and " 
-                    + pFechaIni + " = rango.fechafin ORDER BY idcampaña ASC", Connection.con);
+                    "campaña.idrango = rango.idrango and " + pFechaIni + " < rango.fechainicio and " 
+                    + pFechaIni + " > rango.fechafin ORDER BY idcampaña ASC", Connection.con);
                 
                 // Prepare the command.
                 command.Prepare();
