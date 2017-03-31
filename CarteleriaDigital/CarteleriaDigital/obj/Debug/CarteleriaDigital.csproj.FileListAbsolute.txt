@@ -76,3 +76,5 @@ C:\Users\Jenifer\Source\Repos\Digital-Signage\CarteleriaDigital\CarteleriaDigita
 C:\Users\Jenifer\Source\Repos\Digital-Signage\CarteleriaDigital\CarteleriaDigital\obj\Debug\CarteleriaDigital.PantallaInicio.resources
 C:\Users\Jenifer\Source\Repos\Digital-Signage\CarteleriaDigital\CarteleriaDigital\obj\Debug\CarteleriaDigital.Properties.Resources.resources
 C:\Users\Jenifer\Source\Repos\Digital-Signage\CarteleriaDigital\CarteleriaDigital\obj\Debug\CarteleriaDigital.csproj.GenerateResource.Cache
+C:\Users\Dan\Source\Repos\Digital-Signage\CarteleriaDigital\CarteleriaDigital\obj\Debug\CarteleriaDigital.Pantallas.AcercaDe.resources
+C:\Users\Dan\Source\Repos\Digital-Signage\CarteleriaDigital\CarteleriaDigital\obj\Debug\CarteleriaDigital.Pantallas.ListarCampaña.resources

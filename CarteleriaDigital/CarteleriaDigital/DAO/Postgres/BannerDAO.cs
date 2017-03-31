@@ -78,9 +78,116 @@ namespace CarteleriaDigital.DAO
             iConexion.closeConection();
         }
 
-        public void Listar()
+        public BannerDTO BuscarPorNombre(String pNombre)
         {
-            throw new NotImplementedException();
+
+            iConexion.openConection();
+            BannerDTO ban = new BannerDTO();
+            try
+            {
+                // Create select command.
+                NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM banner WHERE nombre = " + pNombre + "ORDER BY idbanner ASC", iConexion.connection);
+
+                // Prepare the command.
+                command.Prepare();
+
+                // Execute SQL command.
+                NpgsqlDataReader dr = command.ExecuteReader();
+
+                ban.IdBanner = dr.GetInt16(0);
+                ban.IdRango = dr.GetInt32(1);
+                ban.Activo = dr.GetBoolean(2);
+                ban.Nombre = dr.GetString(3);
+           
+            }
+            catch (NpgsqlException ex)
+            {
+
+            }
+
+            iConexion.closeConection();
+
+            return ban;
+        }
+
+        public List<BannerDTO> ListarPorActivo(Boolean pActivo)
+        {
+            List<BannerDTO> listaBan = new List<BannerDTO>();
+            BannerDTO ban = new BannerDTO();
+
+            iConexion.openConection();
+
+            try
+            {
+                // Create select command.
+                NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM banner WHERE activo = " + pActivo + "ORDER BY idbanner ASC", iConexion.connection);
+
+                // Prepare the command.
+                command.Prepare();
+
+                // Execute SQL command.
+                NpgsqlDataReader dr = command.ExecuteReader();
+
+                // Fill results to music list.
+                while (dr.Read())
+                {
+                    ban.IdBanner = dr.GetInt32(0);
+                    ban.IdRango = dr.GetInt32(1);
+                    ban.Activo = dr.GetBoolean(2);
+                    ban.Nombre = dr.GetString(3);
+                    listaBan.Add(ban);
+                }
+            }
+            catch (NpgsqlException ex)
+            {
+
+            }
+
+            iConexion.closeConection();
+
+            return listaBan;
+
+        }
+
+        public List<BannerDTO> ListarPorFecha(DateTime pFechaIni, DateTime pFechaFin)
+        {
+            List<BannerDTO> listaBan = new List<BannerDTO>();
+            BannerDTO ban = new BannerDTO();
+
+            iConexion.openConection();
+
+            try
+            {
+                // Create select command.
+                NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM banner, rango WHERE" +
+                    "banner.idrango = rango.idrango and pFechaIni = rango.fechainicio and"
+                    + "pFechaFin = rango.fechafin ORDER BY idbanner ASC", iConexion.connection);
+
+                // Prepare the command.
+                command.Prepare();
+
+                // Execute SQL command.
+                NpgsqlDataReader dr = command.ExecuteReader();
+
+                // Fill results to music list.
+                while (dr.Read())
+                {
+                    ban.IdBanner = dr.GetInt32(0);
+                    ban.IdRango = dr.GetInt32(1);
+                    ban.Activo = dr.GetBoolean(2);
+                    ban.Nombre = dr.GetString(3);
+                    listaBan.Add(ban);
+                }
+            }
+            catch (NpgsqlException ex)
+            {
+
+            }
+
+            iConexion.closeConection();
+
+            return listaBan;
+
         }
 
     }
