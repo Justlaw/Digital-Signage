@@ -20,25 +20,20 @@ namespace CarteleriaDigital.DAO
         {
             try
             {
-                //VER COMO TRATAMOS ESTA INSERCION EN LA BASE DE DATOS <<<<<<<<<<<<<<<<<<<<<<<<<<< NO ESTA TERMINADO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
                 Connection.con.Open();
                 // Create insert command.
                 NpgsqlCommand command = new NpgsqlCommand("INSERT INTO " +
-                    "banner(idrango, nombre, activo) VALUES(:idrango, :nombre, :activo)", Connection.con);
-                command = new NpgsqlCommand("INSERT INTO " +
                     "bannersimple(idbanner, text) VALUES(:idbanner, :text)", Connection.con);
 
-                command.Parameters.AddWithValue("@id", bsDTO.IdBanner);
-                command.Parameters.AddWithValue("@idrango", bsDTO.IdRango);
-                command.Parameters.AddWithValue("@nombre", bsDTO.Nombre);
-                command.Parameters.AddWithValue("@activo", bsDTO.Activo);
+                command.Parameters.AddWithValue("@id", bsDTO.IdBannerSimple);
+                command.Parameters.AddWithValue("@idrango", bsDTO.IdBanner);
                 command.Parameters.AddWithValue("@Text", bsDTO.Texto);
 
                 // Execute SQL command.
                 Int32 recordAffected = command.ExecuteNonQuery();
                 if (Convert.ToBoolean(recordAffected))
                 {
-                    //Mostrar error
+                    //Mostrar
                 }
             }
             catch (NpgsqlException ex)
@@ -78,5 +73,8 @@ namespace CarteleriaDigital.DAO
 
             Connection.con.Close();
         }
+
+
+
     }
 }

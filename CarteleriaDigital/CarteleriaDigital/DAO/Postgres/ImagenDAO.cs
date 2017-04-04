@@ -75,17 +75,16 @@ namespace CarteleriaDigital.DAO
             Connection.con.Close();
         }
 
-        public List<ImagenDTO> Listar(String where)
+        public List<ImagenDTO> Listar(int pIdCampaña)
         {
             List<ImagenDTO> listaImagenes = new List<ImagenDTO>();
-
+            ImagenDTO img = new ImagenDTO();
             Connection.con.Open();
 
             try
             {
                 // Create select command.
-                NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM " +
-                    "imagen " + where + " ORDER BY id ASC", Connection.con);
+                NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM imagen WHERE imagen.idcampaña = "+ pIdCampaña +" ORDER BY idimagen ASC", Connection.con);
 
                 // Prepare the command.
                 command.Prepare();
@@ -96,7 +95,11 @@ namespace CarteleriaDigital.DAO
                 // Fill results to music list.
                 while (dr.Read())
                 {
-                    //listaCamp.Add(new Campania(dr.GetString(1), dr.GetInt32(0), dr. , ,));
+                    img.IdImagen = dr.GetInt32(0);
+                    img.IdCampaña = dr.GetInt32(1);
+                    img.RutaImagen = dr.GetString(2);
+                    img.Duracion = dr.GetInt16(3);
+                    listaImagenes.Add(img);
                 }
             }
             catch (NpgsqlException ex)
@@ -106,6 +109,6 @@ namespace CarteleriaDigital.DAO
             Connection.con.Close();
 
             return listaImagenes;
-        }
+        }  
     }
 }

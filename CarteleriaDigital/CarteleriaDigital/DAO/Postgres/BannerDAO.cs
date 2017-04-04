@@ -78,12 +78,12 @@ namespace CarteleriaDigital.DAO
         public BannerDTO BuscarPorNombre(String pNombre)
         {
 
-            iConexion.openConection();
+            Connection.con.Open();
             BannerDTO ban = new BannerDTO();
             try
             {
                 // Create select command.
-                NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM banner WHERE nombre = " + pNombre + "ORDER BY idbanner ASC", iConexion.connection);
+                NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM banner WHERE nombre = " + pNombre + "ORDER BY idbanner ASC", Connection.con);
 
                 // Prepare the command.
                 command.Prepare();
@@ -102,7 +102,7 @@ namespace CarteleriaDigital.DAO
 
             }
 
-            iConexion.closeConection();
+            Connection.con.Close();
 
             return ban;
         }
@@ -112,12 +112,12 @@ namespace CarteleriaDigital.DAO
             List<BannerDTO> listaBan = new List<BannerDTO>();
             BannerDTO ban = new BannerDTO();
 
-            iConexion.openConection();
+            Connection.con.Open();
 
             try
             {
                 // Create select command.
-                NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM banner WHERE activo = " + pActivo + "ORDER BY idbanner ASC", iConexion.connection);
+                NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM banner WHERE activo = " + pActivo + "ORDER BY idbanner ASC", Connection.con);
 
                 // Prepare the command.
                 command.Prepare();
@@ -140,7 +140,7 @@ namespace CarteleriaDigital.DAO
 
             }
 
-            iConexion.closeConection();
+            Connection.con.Close();
 
             return listaBan;
 
@@ -151,14 +151,14 @@ namespace CarteleriaDigital.DAO
             List<BannerDTO> listaBan = new List<BannerDTO>();
             BannerDTO ban = new BannerDTO();
 
-            iConexion.openConection();
+            Connection.con.Open();
 
             try
             {
                 // Create select command.
                 NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM banner, rango WHERE" +
                     "banner.idrango = rango.idrango and pFechaIni = rango.fechainicio and"
-                    + "pFechaFin = rango.fechafin ORDER BY idbanner ASC", iConexion.connection);
+                    + "pFechaFin = rango.fechafin ORDER BY idbanner ASC", Connection.con);
 
                 // Prepare the command.
                 command.Prepare();
@@ -181,7 +181,7 @@ namespace CarteleriaDigital.DAO
 
             }
 
-            iConexion.closeConection();
+            Connection.con.Close();
 
             return listaBan;
 

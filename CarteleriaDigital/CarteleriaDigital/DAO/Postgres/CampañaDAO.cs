@@ -183,7 +183,6 @@ namespace CarteleriaDigital.DAO
             Connection.con.Close();
 
             return listaCamp;
-
         }
     }
 }
