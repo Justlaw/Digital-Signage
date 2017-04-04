@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CarteleriaDigital.DTO;
+using CarteleriaDigital.Controladores;
 
 namespace CarteleriaDigital.Pantallas
 {
@@ -50,19 +51,20 @@ namespace CarteleriaDigital.Pantallas
             rngDTO.HoraInicio = dtpHoraInicio.Value;
             rngDTO.HoraFin = dtpHoraFin.Value;
 
-            BannerDTO bDTO = new BannerDTO();
-            bDTO.Nombre = txtNombre.Text;
-
             if (radioButton1.Checked)
             {
                 BannerSimpleDTO bsDTO = new BannerSimpleDTO();
+                bsDTO.Nombre = txtNombre.Text;
                 bsDTO.Texto = txtTexto.Text;
+                ControladorBanners.CrearBannerSimple(bsDTO, rngDTO);
             }
 
             if (radioButton2.Checked)
             {
                 BannerRSSDTO brssDTO = new BannerRSSDTO();
+                brssDTO.Nombre = txtNombre.Text;
                 brssDTO.FuenteRSS = txtURL.Text;
+                ControladorBanners.CrearBannerRSS(brssDTO, rngDTO);
             }
 
         }
