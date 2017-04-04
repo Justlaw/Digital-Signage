@@ -8,12 +8,16 @@ using System.Threading.Tasks;
 namespace CarteleriaDigital.DAO
 {
     interface IBanner 
-        //REEVER LOS TIPOS DE LOS RETURN Y DEMÁS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+       
     {
         void Insertar(BannerDTO ban);
 
         void Modificar(BannerDTO ban);
 
-        void Listar();
+        BannerDTO BuscarPorNombre(String pNombre);
+
+        List<BannerDTO> ListarPorActivo(Boolean pActivo);
+
+        List<BannerDTO> ListarPorFecha(DateTime pFechaIni, DateTime pFechaFin);
     }
 }

@@ -8,7 +8,7 @@ using CarteleriaDigital.DTO;
 
 namespace CarteleriaDigital.DAO
 {
-    class BannerSimpleDAO
+    class BannerSimpleDAO: IBannerSimple
     {
         public BannerSimpleDAO()
         {
@@ -72,8 +72,5 @@ namespace CarteleriaDigital.DAO
 
             Connection.con.Close();
         }
-
-
-
     }
 }

@@ -13,5 +13,8 @@ namespace CarteleriaDigital.DAO
 
         void Modificar(RangoDTO rangoDTO);
 
+        List<RangoDTO> RangosBanners();
+
+        List<RangoDTO> RangosCampañas();
     }
 }
