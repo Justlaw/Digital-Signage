@@ -8,7 +8,7 @@ using CarteleriaDigital.DTO;
 
 namespace CarteleriaDigital.DAO
 {
-    class CampañaDAO
+    class CampañaDAO: ICampania
     {
         private Conexion iConexion;
 
@@ -16,7 +16,7 @@ namespace CarteleriaDigital.DAO
         {
         }
 
-        public void insertar(CampañaDTO camDTO)
+        public void Insertar(CampañaDTO camDTO)
         {
             try
             {

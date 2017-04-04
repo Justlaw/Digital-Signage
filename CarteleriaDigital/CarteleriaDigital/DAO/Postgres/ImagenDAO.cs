@@ -75,7 +75,7 @@ namespace CarteleriaDigital.DAO
             Connection.con.Close();
         }
 
-        public List<ImagenDTO> Listar(int pIdCampaña)
+        public List<ImagenDTO> ListarPorCampaña(int pIdCampaña)
         {
             List<ImagenDTO> listaImagenes = new List<ImagenDTO>();
             ImagenDTO img = new ImagenDTO();

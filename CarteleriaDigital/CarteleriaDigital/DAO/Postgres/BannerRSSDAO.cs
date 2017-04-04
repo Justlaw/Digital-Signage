@@ -9,7 +9,7 @@ using CarteleriaDigital.DTO;
 
 namespace CarteleriaDigital.DAO
 {
-    class BannerRSSDAO
+    class BannerRSSDAO: IBannerRSS
     {
         public BannerRSSDAO()
         {

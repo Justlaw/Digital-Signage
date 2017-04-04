@@ -13,6 +13,6 @@ namespace CarteleriaDigital.DAO
 
         void Modificar(ImagenDTO imagenDTO);
 
-        List<ImagenDTO> Listar(String where);
+        List<ImagenDTO> ListarPorCampaña(int pIdCampaña);
     }
 }
