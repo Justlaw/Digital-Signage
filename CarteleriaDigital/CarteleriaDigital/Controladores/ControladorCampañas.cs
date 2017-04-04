@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CarteleriaDigital.DTO;
+
 
 namespace CarteleriaDigital.Controladores
 {
-    static class ControladorCampañas
+    public static class ControladorCampañas
     {
+        public static void CrearCampaña(RangoDTO camp_DTO, List<ImagenDTO> listImg) {
+
+        }
     }
 }
