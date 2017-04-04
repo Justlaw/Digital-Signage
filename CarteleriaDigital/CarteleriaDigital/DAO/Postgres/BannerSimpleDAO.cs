@@ -10,13 +10,12 @@ namespace CarteleriaDigital.DAO
 {
     class BannerSimpleDAO
     {
-
         public BannerSimpleDAO()
         {
 
         }
 
-        public void insertar(BannerSimpleDTO bsDTO)
+        public void Insertar(BannerSimpleDTO bsDTO)
         {
             try
             {

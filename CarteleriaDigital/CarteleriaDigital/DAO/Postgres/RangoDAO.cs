@@ -78,20 +78,22 @@ namespace CarteleriaDigital.DAO
 
             Connection.con.Close();
         }
-
-        public List<CampañaDTO> ListarPorFecha(DateTime pFechaIni, DateTime pFechaFin)
+        
+        /// <summary>
+        /// Este método devuelve los rangos ocupados por banner
+        /// </summary>
+        /// <returns></returns>
+        public List<RangoDTO> RangosBanners()
         {
-            List<CampañaDTO> listaCamp = new List<CampañaDTO>();
-            CampañaDTO camp = new CampañaDTO();
+            List<RangoDTO> listaRango = new List<RangoDTO>();
+            RangoDTO rang = new RangoDTO();
 
             Connection.con.Open();
 
             try
             {
                 // Create select command.
-                NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM campaña, rango WHERE " +
-                    "campaña.idrango = rango.idrango and " + pFechaIni.Year + "-" + pFechaIni.Month + "-" + pFechaIni.Day + " < rango.fechainicio and "
-                    + pFechaFin.Year + "-" + pFechaFin.Month + "-" + pFechaFin.Day + " > rango.fechafin ORDER BY idcampaña ASC", Connection.con);
+                NpgsqlCommand command = new NpgsqlCommand("SELECT fechainicio, fechafin, horainicio, horafin FROM rango, banner WHERE banner.idrango = rango.idrango and banner.activo = true ORDER BY rango.idrango ASC", Connection.con);
 
                 // Prepare the command.
                 command.Prepare();
@@ -102,11 +104,11 @@ namespace CarteleriaDigital.DAO
                 // Fill results to music list.
                 while (dr.Read())
                 {
-                    camp.IdCampaña = dr.GetInt32(0);
-                    camp.IdRango = dr.GetInt32(1);
-                    camp.Activo = dr.GetBoolean(2);
-                    camp.Nombre = dr.GetString(3);
-                    listaCamp.Add(camp);
+                    rang.FechaInicio = dr.GetDateTime(0);
+                    rang.FechaFin = dr.GetDateTime(1);
+                    rang.HoraInicio = dr.GetDateTime(2);
+                    rang.HoraFin = dr.GetDateTime(3);
+                    listaRango.Add(rang);
                 }
             }
             catch (NpgsqlException ex)
@@ -116,8 +118,49 @@ namespace CarteleriaDigital.DAO
 
             Connection.con.Close();
 
-            return listaCamp;
+            return listaRango;
         }
 
+        /// <summary>
+        /// Este método devuelve los rangos ocupados por campaña
+        /// </summary>
+        /// <returns></returns>
+        public List<RangoDTO> RangosCampañas()
+        {
+            List<RangoDTO> listaRango = new List<RangoDTO>();
+            RangoDTO rang = new RangoDTO();
+
+            Connection.con.Open();
+
+            try
+            {
+                // Create select command.
+                NpgsqlCommand command = new NpgsqlCommand("SELECT fechainicio, fechafin, horainicio, horafin FROM rango, campaña WHERE campaña.idrango = rango.idrango and campaña.activo = true ORDER BY campaña.idrango ASC", Connection.con);
+
+                // Prepare the command.
+                command.Prepare();
+
+                // Execute SQL command.
+                NpgsqlDataReader dr = command.ExecuteReader();
+
+                // Fill results to music list.
+                while (dr.Read())
+                {
+                    rang.FechaInicio = dr.GetDateTime(0);
+                    rang.FechaFin = dr.GetDateTime(1);
+                    rang.HoraInicio = dr.GetDateTime(2);
+                    rang.HoraFin = dr.GetDateTime(3);
+                    listaRango.Add(rang);
+                }
+            }
+            catch (NpgsqlException ex)
+            {
+
+            }
+
+            Connection.con.Close();
+
+            return listaRango;
+        }
     }
 }
