@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CarteleriaDigital.Controladores
 {
-    class ControladorBanners
+    static class ControladorBanners
     {
     }
 }

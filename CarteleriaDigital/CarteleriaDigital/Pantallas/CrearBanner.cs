@@ -65,7 +65,6 @@ namespace CarteleriaDigital.Pantallas
                 brssDTO.FuenteRSS = txtURL.Text;
             }
 
-
         }
     }
 }
