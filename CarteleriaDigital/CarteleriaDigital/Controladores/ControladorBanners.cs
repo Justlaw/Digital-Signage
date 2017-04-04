@@ -11,7 +11,9 @@ namespace CarteleriaDigital.Controladores
     {
         public static void CrearBannerSimple(BannerSimpleDTO bs_DTO, RangoDTO rng_DTO)
         {
-
+            Rango rng = new Rango(rng_DTO.FechaInicio, rng_DTO.FechaFin, rng_DTO.HoraInicio, rng_DTO.HoraFin);
+            BannerSimple bs = new BannerSimple(bs_DTO.Texto, true, bs_DTO.Nombre, rng);
+            bs.Guardar(bs_DTO, rng_DTO);
         }
 
         public static void CrearBannerRSS(BannerRSSDTO brss_DTO, RangoDTO rng_DTO)

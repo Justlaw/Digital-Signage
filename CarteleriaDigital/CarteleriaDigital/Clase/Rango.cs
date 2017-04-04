@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CarteleriaDigital.DAO;
+using CarteleriaDigital.DTO;
 
 namespace CarteleriaDigital
 {
@@ -21,6 +23,7 @@ namespace CarteleriaDigital
             this.iHoraFin = pHoraFin;
         }
 
+        #region Accesores
         public DateTime FechaInicio
         {
             get { return this.iFechaInicio; }
@@ -44,6 +47,26 @@ namespace CarteleriaDigital
             get { return this.iHoraFin; }
             set { iHoraFin = value; }
         }
+        #endregion 
 
+        public bool RangoDisponible()
+        {
+            bool result = true;
+            RangoDAO rng_DAO = new RangoDAO();
+            foreach (RangoDTO rango in rng_DAO.RangosBanners())
+            {
+                if (iFechaInicio >= rango.FechaInicio && iFechaInicio <= rango.FechaFin)
+                {
+                    if (iHoraInicio >= rango.HoraInicio && iHoraInicio <= rango.HoraFin)
+                    {
+                        result = false;
+                        return result;
+                    }
+                }
+            }
+
+            return result;
+
+        }
     }
 }

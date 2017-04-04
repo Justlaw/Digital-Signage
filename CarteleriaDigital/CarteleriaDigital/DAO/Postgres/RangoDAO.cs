@@ -162,5 +162,24 @@ namespace CarteleriaDigital.DAO
 
             return listaRango;
         }
+
+        /// <summary>
+        /// Éste método obtiene la úlima inserción en la tabla Rango de la base de datos
+        /// </summary>
+        public int ObtenerUltimoId()
+        {
+
+            Connection.con.Open();
+
+            NpgsqlCommand cmd = new NpgsqlCommand("SELECT * FROM rango ORDER BY idrango DESC LIMIT 1", Connection.con);
+            NpgsqlDataReader dr = cmd.ExecuteReader();
+
+            int id = 0;
+            while (dr.Read())
+            {
+                id = dr.GetInt32(0);
+            }
+            return id;
+        }
     }
 }

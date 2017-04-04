@@ -191,5 +191,20 @@ namespace CarteleriaDigital.DAO
         {
             throw new NotImplementedException();
         }
+
+        public int ObtenerUltimoId()
+        {
+            Connection.con.Open();
+
+            NpgsqlCommand cmd = new NpgsqlCommand("select id from banner order by idbanner DESC limit 1", Connection.con);
+            NpgsqlDataReader dr = cmd.ExecuteReader();
+
+            int id = 0;
+            while (dr.Read())
+            {
+                id = dr.GetInt32(0);
+            }
+            return id;
+        }
     }
 }
