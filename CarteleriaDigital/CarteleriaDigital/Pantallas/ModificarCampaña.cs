@@ -29,5 +29,17 @@ namespace CarteleriaDigital.Pantallas
             { button5.Enabled = true; }
             else { button5.Enabled = false; }
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("¿Está seguro que desea cancelar?", "Advertencia", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                //Cierra la ventana al presionar el boton Cancelar y abre la ventana anterior.
+                this.Close();
+
+                ListarCampaña abrir = new ListarCampaña();
+                abrir.Show();
+            }
+        }
     }
 }
