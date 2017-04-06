@@ -45,5 +45,15 @@ namespace CarteleriaDigital.Pantallas
             abrir.Show();
             this.SetVisibleCore(false);
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            PanBanner cerrar = new PanBanner();
+            cerrar.Hide();
+            this.SetVisibleCore(false);
+
+            ListarBanner abrir = new ListarBanner();
+            abrir.Show();
+        }
     }
 }
