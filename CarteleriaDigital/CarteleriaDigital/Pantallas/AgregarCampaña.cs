@@ -201,8 +201,7 @@ namespace CarteleriaDigital.Pantallas
             }
         }
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-           
+        {           
             {   //Al seleccionar una imagen se activa el boton Borrar.
                 if (listView1.SelectedIndices.Count != 0)
                 { button5.Enabled = true; }
