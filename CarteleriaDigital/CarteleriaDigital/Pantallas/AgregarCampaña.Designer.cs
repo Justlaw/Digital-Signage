@@ -165,7 +165,7 @@
             this.dateTimePicker3.Size = new System.Drawing.Size(105, 20);
             this.dateTimePicker3.TabIndex = 6;
             this.dateTimePicker3.Value = new System.DateTime(2017, 4, 18, 9, 32, 0, 0);
-            this.dateTimePicker3.ValueChanged += new System.EventHandler(this.dateTimePicker3_ValueChanged);
+            //this.dateTimePicker3.ValueChanged += new System.EventHandler(this.dateTimePicker3_ValueChanged);
             // 
             // label6
             // 
