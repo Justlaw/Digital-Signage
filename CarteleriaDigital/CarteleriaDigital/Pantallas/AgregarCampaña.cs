@@ -218,5 +218,10 @@ namespace CarteleriaDigital.Pantallas
                 listView1.Clear();
             }
         }
+
+        private void dateTimePicker3_ValueChanged(object sender, EventArgs e)
+        {
+           
+        }
     }
 }
