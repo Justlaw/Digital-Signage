@@ -114,3 +114,8 @@ C:\Users\Gastón\Source\Repos\Digital-Signage2\CarteleriaDigital\CarteleriaDigit
 C:\Users\Gastón\Source\Repos\Digital-Signage2\CarteleriaDigital\CarteleriaDigital\obj\Debug\CarteleriaDigital.csproj.GenerateResource.Cache
 C:\Users\Gastón\Source\Repos\Digital-Signage2\CarteleriaDigital\CarteleriaDigital\obj\Debug\CarteleriaDigital.exe
 C:\Users\Gastón\Source\Repos\Digital-Signage2\CarteleriaDigital\CarteleriaDigital\obj\Debug\CarteleriaDigital.pdb
+C:\Users\Gastón\Source\Repos\Digital-Signage2\CarteleriaDigital\CarteleriaDigital\bin\Debug\CarteleriaDigital.exe.config
+C:\Users\Gastón\Source\Repos\Digital-Signage2\CarteleriaDigital\CarteleriaDigital\bin\Debug\CarteleriaDigital.exe
+C:\Users\Gastón\Source\Repos\Digital-Signage2\CarteleriaDigital\CarteleriaDigital\bin\Debug\CarteleriaDigital.pdb
+C:\Users\Gastón\Source\Repos\Digital-Signage2\CarteleriaDigital\CarteleriaDigital\bin\Debug\Npgsql.pdb
+C:\Users\Gastón\Source\Repos\Digital-Signage2\CarteleriaDigital\CarteleriaDigital\bin\Debug\Npgsql.xml

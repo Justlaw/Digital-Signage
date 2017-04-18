@@ -99,6 +99,13 @@ namespace CarteleriaDigital.Pantallas
                     }
             }
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Pantallas.ModificarBanner abrir = new Pantallas.ModificarBanner();
+            abrir.Show();
+            this.SetVisibleCore(false);
+        }
     }
     }
 
