@@ -265,6 +265,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtNombre);
             this.Name = "ModificarBanner";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ModificarBanner";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

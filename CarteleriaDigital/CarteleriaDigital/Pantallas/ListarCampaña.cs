@@ -63,7 +63,9 @@ namespace CarteleriaDigital.Pantallas
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            Pantallas.ModificarCampaña abrir = new Pantallas.ModificarCampaña();
+            abrir.Show();
+            this.SetVisibleCore(false);
         }
 
         private void button2_Click(object sender, EventArgs e) {
