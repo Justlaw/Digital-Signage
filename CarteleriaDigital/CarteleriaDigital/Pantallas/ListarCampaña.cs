@@ -48,25 +48,30 @@ namespace CarteleriaDigital.Pantallas
 
         }
 
-<<<<<<< HEAD
+
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-=======
-        private void groupBox1_Enter(object sender, EventArgs e)
->>>>>>> 663012958028760dad803578d1dc93a14286aca7
         {
 
         }
 
-<<<<<<< HEAD
+        private void groupBox1_Enter(object sender, EventArgs e)
+
+        {
+
+        }
+
+
         private void button3_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
-=======
+        private void button2_Click(object sender, EventArgs e) {
+
+        }
+
         private void ListarCampaña_Load(object sender, EventArgs e)
->>>>>>> 663012958028760dad803578d1dc93a14286aca7
+
         {
 
         }

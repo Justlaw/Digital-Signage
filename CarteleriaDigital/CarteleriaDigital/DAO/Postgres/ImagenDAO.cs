@@ -22,8 +22,7 @@ namespace CarteleriaDigital.DAO
             {
                 Connection.con.Open();
                 // Create insert command.
-                NpgsqlCommand command = new NpgsqlCommand("INSERT INTO " +
-                    "imagen(idcampaña, rutaimagen, duracion) VALUES(:idcampaña, :rutaimagen, :duracion)", Connection.con);
+                NpgsqlCommand command = new NpgsqlCommand("INSERT INTO imagen(idcampaña, rutaimagen, duracion) VALUES(:idcampaña, :rutaimagen, :duracion)", Connection.con);
 
                 command.Parameters.AddWithValue("@idcampaña", imagenDTO.IdCampaña);
                 command.Parameters.AddWithValue("@rutaimagen", imagenDTO.RutaImagen);
