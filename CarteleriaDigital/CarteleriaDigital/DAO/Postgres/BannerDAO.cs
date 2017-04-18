@@ -18,10 +18,11 @@ namespace CarteleriaDigital.DAO
 
         public void Insertar(BannerDTO ban)
         {
+
+            Connection.con.Close();
+            Connection.con.Open();
             try
             {
-                Connection.con.Open();
-                
                 // Create insert command.
                 NpgsqlCommand command = new NpgsqlCommand("INSERT INTO " +
                     "banner(idRango, nombre, activo) VALUES(: idRango, :nombre, :activo)", Connection.con);
@@ -196,7 +197,7 @@ namespace CarteleriaDigital.DAO
         {
             Connection.con.Open();
 
-            NpgsqlCommand cmd = new NpgsqlCommand("select id from banner order by idbanner DESC limit 1", Connection.con);
+            NpgsqlCommand cmd = new NpgsqlCommand("select idbanner from banner order by idbanner DESC limit 1", Connection.con);
             NpgsqlDataReader dr = cmd.ExecuteReader();
 
             int id = 0;
@@ -204,6 +205,7 @@ namespace CarteleriaDigital.DAO
             {
                 id = dr.GetInt32(0);
             }
+            Connection.con.Close();
             return id;
         }
     }

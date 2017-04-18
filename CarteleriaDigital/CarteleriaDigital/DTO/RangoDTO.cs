@@ -14,7 +14,8 @@ namespace CarteleriaDigital.DTO
         private DateTime fechaFin;
         private DateTime horaInicio;
         private DateTime horaFin;
-        #endregion
+
+            #endregion
 
         #region Constructores
         public RangoDTO() { }

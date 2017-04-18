@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CarteleriaDigital.DTO;
 using CarteleriaDigital.Controladores;
+using CarteleriaDigital.DAO;
 
 namespace CarteleriaDigital.Pantallas
 {
@@ -50,7 +51,7 @@ namespace CarteleriaDigital.Pantallas
             rngDTO.FechaFin = dtpFechaFin.Value;
             rngDTO.HoraInicio = dtpHoraInicio.Value;
             rngDTO.HoraFin = dtpHoraFin.Value;
-
+            
             if (radioButton1.Checked)
             {
                 BannerSimpleDTO bsDTO = new BannerSimpleDTO();

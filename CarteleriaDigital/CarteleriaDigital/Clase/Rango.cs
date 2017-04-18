@@ -8,7 +8,7 @@ using CarteleriaDigital.DTO;
 
 namespace CarteleriaDigital
 {
-    class Rango
+    public class Rango
     {
         private DateTime iFechaInicio;
         private DateTime iFechaFin;
@@ -53,7 +53,8 @@ namespace CarteleriaDigital
         {
             bool result = true;
             RangoDAO rng_DAO = new RangoDAO();
-            foreach (RangoDTO rango in rng_DAO.RangosBanners())
+            List<RangoDTO> lista = rng_DAO.RangosBanners();
+            foreach (RangoDTO rango in lista)
             {
                 if (iFechaInicio >= rango.FechaInicio && iFechaInicio <= rango.FechaFin)
                 {
