@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CarteleriaDigital
 {
-    class Campaña
+    public class Campaña
     {
         private Boolean iActivo;
         private String iNombre;
@@ -29,7 +29,7 @@ namespace CarteleriaDigital
 
         public String Nombre
         {
-            get { return this.Nombre; }
+            get { return this.iNombre; }
             set { this.iNombre = value; }
         }
 

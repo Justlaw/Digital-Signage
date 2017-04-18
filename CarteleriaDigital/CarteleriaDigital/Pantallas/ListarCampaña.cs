@@ -33,20 +33,27 @@ namespace CarteleriaDigital.Pantallas
         }
 
         private void button1_Click(object sender, EventArgs e)
-        {
-            
+        {            
             {   
                 //Carga el datasource con las campañas cuyas fechas se encuentren en el intervalo.
                 List<CampañaDTO> campañasFecha = new List<CampañaDTO>();
                 campañasFecha = camp.ListarPorFecha(dateTimePicker1.Value, dateTimePicker2.Value);
                 
-
-
                 dataGridView1.DataSource = campañasFecha;
             }
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ListarCampaña_Load(object sender, EventArgs e)
         {
 
         }

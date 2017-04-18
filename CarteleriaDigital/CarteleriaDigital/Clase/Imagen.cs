@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CarteleriaDigital
 {
-    class Imagen
+    public class Imagen
     {
         private String iRutaImagen;
         private Int16 iDuracion;

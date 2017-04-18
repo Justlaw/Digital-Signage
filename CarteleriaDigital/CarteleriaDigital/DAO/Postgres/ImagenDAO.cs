@@ -13,7 +13,7 @@ namespace CarteleriaDigital.DAO
 
         public ImagenDAO()
         {
-            
+                  
         }
 
         public void Insertar(ImagenDTO imagenDTO)
@@ -23,12 +23,12 @@ namespace CarteleriaDigital.DAO
                 Connection.con.Open();
                 // Create insert command.
                 NpgsqlCommand command = new NpgsqlCommand("INSERT INTO " +
-                    "rango(idcampaña, duracion, rutaimagen) VALUES(:idcampaña, :duracion, :rutaimagen)",Connection.con);
+                    "imagen(idcampaña, rutaimagen, duracion) VALUES(:idcampaña, :rutaimagen, :duracion)", Connection.con);
 
                 command.Parameters.AddWithValue("@idcampaña", imagenDTO.IdCampaña);
-                command.Parameters.AddWithValue("@duracion", imagenDTO.Duracion);
                 command.Parameters.AddWithValue("@rutaimagen", imagenDTO.RutaImagen);
-
+                command.Parameters.AddWithValue("@duracion", imagenDTO.Duracion);
+                
                 // Execute SQL command.
                 Int32 recordAffected = command.ExecuteNonQuery();
                 if (Convert.ToBoolean(recordAffected))
@@ -73,6 +73,35 @@ namespace CarteleriaDigital.DAO
             }
 
             Connection.con.Close();
+        }
+
+        public ImagenDTO BuscarImagenPorID(int id_Img)
+        {
+            ImagenDAO img_DAO = new ImagenDAO();
+            ImagenDTO img_DTO = new ImagenDTO();
+
+            Connection.con.Open();
+
+            try
+            {
+                NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM rango WHERE + " + id_Img + " = idRango", Connection.con);
+
+                command.Prepare();
+
+                NpgsqlDataReader dr = command.ExecuteReader();
+
+                img_DTO.IdImagen = dr.GetInt16(0);
+                img_DTO.IdCampaña = dr.GetInt16(1);
+                img_DTO.RutaImagen = dr.GetString(2);
+                img_DTO.Duracion = dr.GetInt16(3);
+
+            }
+            catch (NpgsqlException ex)
+            {
+
+            }
+
+            return img_DTO;
         }
 
         public List<ImagenDTO> ListarPorCampaña(int pIdCampaña)

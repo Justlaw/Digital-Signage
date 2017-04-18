@@ -10,13 +10,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CarteleriaDigital.DTO;
+using CarteleriaDigital.Controladores;
 
 namespace CarteleriaDigital.Pantallas
 {
     public partial class AgregarCampaña : Form
     {
-        List<ImagenDTO> ListIMG = new List<ImagenDTO>();
+        List<Imagen> ListIMG = new List<Imagen>();
         OpenFileDialog Img = new OpenFileDialog();
+        private DateTime fInicio;
+        private DateTime fFin;
+        private DateTime hIni;
+        private DateTime hFin;
+        private String n_Camp;
+
         public AgregarCampaña()
         {
             InitializeComponent();         
@@ -45,8 +52,18 @@ namespace CarteleriaDigital.Pantallas
             }
 
           else
-            {             
-          
+            {
+                fInicio = dateTimePicker1.Value;
+                fFin = dateTimePicker2.Value;
+                hIni = dateTimePicker3.Value;
+                hFin = dateTimePicker4.Value;
+                Rango rng = new Rango(fInicio, fFin, hIni, hFin);
+
+                n_Camp = textBox1.Text;
+                Campaña camp = new Campaña(true, n_Camp, ListIMG, rng);
+
+                ControladorCampañas.CrearCampaña(camp,rng,ListIMG);
+
                 MessageBox.Show("La campaña ha sido agregada exitosamente", "Atención", MessageBoxButtons.OK);
 
                 this.Close();
@@ -134,7 +151,7 @@ namespace CarteleriaDigital.Pantallas
                         this.listView1.LargeImageList = imageList1;
                      
                         //Carga el objeto de tipo imagen con los datos del usuario.
-                        ImagenDTO imagen1 = new ImagenDTO();                  
+                        Imagen imagen1 = new Imagen();                  
                         imagen1.Duracion = Convert.ToInt16(textBox2.Text);
                         imagen1.RutaImagen = Img.FileName;
                         openFileDialog1.FileName = "";
@@ -201,8 +218,7 @@ namespace CarteleriaDigital.Pantallas
             }
         }
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-           
+        {           
             {   //Al seleccionar una imagen se activa el boton Borrar.
                 if (listView1.SelectedIndices.Count != 0)
                 { button5.Enabled = true; }
@@ -218,6 +234,16 @@ namespace CarteleriaDigital.Pantallas
                 listView1.LargeImageList = null;
                 listView1.Clear();
             }
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }

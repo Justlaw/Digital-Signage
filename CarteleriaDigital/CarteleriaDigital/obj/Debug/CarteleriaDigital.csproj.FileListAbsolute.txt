@@ -94,3 +94,5 @@ C:\Users\Jona\Source\Repos\Digital-Signage\CarteleriaDigital\CarteleriaDigital\o
 C:\Users\Jona\Source\Repos\Digital-Signage\CarteleriaDigital\CarteleriaDigital\obj\Debug\CarteleriaDigital.PantallaInicio.resources
 C:\Users\Jona\Source\Repos\Digital-Signage\CarteleriaDigital\CarteleriaDigital\obj\Debug\CarteleriaDigital.Properties.Resources.resources
 C:\Users\Jona\Source\Repos\Digital-Signage\CarteleriaDigital\CarteleriaDigital\obj\Debug\CarteleriaDigital.csproj.GenerateResource.Cache
+C:\Users\Jenifer\Source\Repos\Digital-Signage\CarteleriaDigital\CarteleriaDigital\obj\Debug\CarteleriaDigital.Pantallas.ModificarBanner.resources
+C:\Users\Jenifer\Source\Repos\Digital-Signage\CarteleriaDigital\CarteleriaDigital\obj\Debug\CarteleriaDigital.Pantallas.ModificarCampaña.resources
