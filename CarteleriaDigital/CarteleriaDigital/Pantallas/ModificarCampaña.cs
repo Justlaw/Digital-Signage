@@ -41,5 +41,10 @@ namespace CarteleriaDigital.Pantallas
                 abrir.Show();
             }
         }
+
+        private void dateTimePicker3_ValueChanged(object sender, EventArgs e)
+        {
+            
+        }
     }
 }
