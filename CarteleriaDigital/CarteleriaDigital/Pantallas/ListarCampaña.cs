@@ -47,5 +47,15 @@ namespace CarteleriaDigital.Pantallas
         {
 
         }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ListarCampaña_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

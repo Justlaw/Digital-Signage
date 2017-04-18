@@ -38,6 +38,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
@@ -107,6 +108,12 @@
     <Compile Include="Pantallas\Eliminar.Designer.cs">
       <DependentUpon>Eliminar.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pantallas\ListarBanner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\ListarBanner.Designer.cs">
+      <DependentUpon>ListarBanner.cs</DependentUpon>
+    </Compile>
     <Compile Include="Pantallas\ListarCampaña.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -173,6 +180,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Pantallas\AgregarCampaña.resx">
       <DependentUpon>AgregarCampaña.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\ListarBanner.resx">
+      <DependentUpon>ListarBanner.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pantallas\ListarCampaña.resx">
       <DependentUpon>ListarCampaña.cs</DependentUpon>
