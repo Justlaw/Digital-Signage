@@ -99,5 +99,10 @@ namespace CarteleriaDigital.Pantallas
             Pantallas.AcercaDe abrir = new Pantallas.AcercaDe();
             abrir.Show();
         }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
     }
 }

@@ -187,6 +187,7 @@
             this.dtpHoraInicio.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.dtpHoraInicio.Location = new System.Drawing.Point(133, 29);
             this.dtpHoraInicio.Name = "dtpHoraInicio";
+            this.dtpHoraInicio.ShowUpDown = true;
             this.dtpHoraInicio.Size = new System.Drawing.Size(68, 20);
             this.dtpHoraInicio.TabIndex = 14;
             // 
@@ -196,6 +197,7 @@
             this.dtpHoraFin.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.dtpHoraFin.Location = new System.Drawing.Point(357, 29);
             this.dtpHoraFin.Name = "dtpHoraFin";
+            this.dtpHoraFin.ShowUpDown = true;
             this.dtpHoraFin.Size = new System.Drawing.Size(68, 20);
             this.dtpHoraFin.TabIndex = 15;
             // 
