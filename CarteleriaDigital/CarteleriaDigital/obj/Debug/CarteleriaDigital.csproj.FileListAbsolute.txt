@@ -114,3 +114,4 @@ C:\Users\Gastón\Source\Repos\Digital-Signage2\CarteleriaDigital\CarteleriaDigit
 C:\Users\Gastón\Source\Repos\Digital-Signage2\CarteleriaDigital\CarteleriaDigital\obj\Debug\CarteleriaDigital.csproj.GenerateResource.Cache
 C:\Users\Gastón\Source\Repos\Digital-Signage2\CarteleriaDigital\CarteleriaDigital\obj\Debug\CarteleriaDigital.exe
 C:\Users\Gastón\Source\Repos\Digital-Signage2\CarteleriaDigital\CarteleriaDigital\obj\Debug\CarteleriaDigital.pdb
+C:\Users\Jenifer\Source\Repos\Digital-Signage\CarteleriaDigital\CarteleriaDigital\obj\Debug\CarteleriaDigital.Pantallas.ListarBanner.resources
