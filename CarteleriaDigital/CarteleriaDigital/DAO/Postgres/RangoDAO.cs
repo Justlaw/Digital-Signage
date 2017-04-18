@@ -78,7 +78,38 @@ namespace CarteleriaDigital.DAO
 
             Connection.con.Close();
         }
-        
+
+        public RangoDTO BuscarRangoPorID(int id_Rng)
+        {
+            RangoDAO rng_DAO = new RangoDAO();
+            RangoDTO rng_DTO = new RangoDTO();
+
+            Connection.con.Open();
+
+            try {
+                NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM rango WHERE + " + id_Rng + " = idRango", Connection.con);
+
+                command.Prepare();
+
+                NpgsqlDataReader dr = command.ExecuteReader();
+
+                rng_DTO.FechaInicio = dr.GetDateTime(0);
+                rng_DTO.FechaFin = dr.GetDateTime(1);
+                rng_DTO.HoraInicio = dr.GetDateTime(2);
+                rng_DTO.HoraFin = dr.GetDateTime(3);
+
+                
+            }
+            catch (NpgsqlException ex)
+            {
+
+            }
+
+            Connection.con.Close();
+
+            return rng_DTO;
+        }
+
         /// <summary>
         /// Este método devuelve los rangos ocupados por banner
         /// </summary>
@@ -127,10 +158,11 @@ namespace CarteleriaDigital.DAO
         /// <returns></returns>
         public List<RangoDTO> RangosCampañas()
         {
+            Connection.con.Open();
+
             List<RangoDTO> listaRango = new List<RangoDTO>();
             RangoDTO rang = new RangoDTO();
-
-            Connection.con.Open();
+            
 
             try
             {
@@ -179,7 +211,28 @@ namespace CarteleriaDigital.DAO
             {
                 id = dr.GetInt32(0);
             }
+            Connection.con.Close();
+
             return id;
+        }
+
+        public bool RangoDisponible(RangoDTO rng)
+        {
+            bool result = true;
+            RangoDAO rng_DAO = new RangoDAO();
+            foreach (RangoDTO rango in rng_DAO.RangosCampañas())
+            {
+                if (rng.FechaInicio >= rango.FechaInicio && rng.FechaInicio <= rango.FechaFin)
+                {
+                    if (rng.HoraInicio >= rango.HoraInicio && rng.HoraInicio <= rango.HoraFin)
+                    {
+                        result = false;
+                        return result;
+                    }
+                }
+            }
+            return result;
+
         }
     }
 }

@@ -38,6 +38,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
@@ -50,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Controladores\ControladorBanners.cs" />
     <Compile Include="Controladores\ControladorCampañas.cs" />
+    <Compile Include="Controladores\ControladorServiciosCampaña.cs" />
     <Compile Include="DAO\Postgres\Connection.cs" />
     <Compile Include="DAO\IBanner.cs" />
     <Compile Include="DAO\IBannerRSS.cs" />
@@ -105,6 +107,12 @@
     </Compile>
     <Compile Include="Pantallas\Eliminar.Designer.cs">
       <DependentUpon>Eliminar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas\ListarBanner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\ListarBanner.Designer.cs">
+      <DependentUpon>ListarBanner.cs</DependentUpon>
     </Compile>
     <Compile Include="Pantallas\ListarCampaña.cs">
       <SubType>Form</SubType>
@@ -172,6 +180,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Pantallas\AgregarCampaña.resx">
       <DependentUpon>AgregarCampaña.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\ListarBanner.resx">
+      <DependentUpon>ListarBanner.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pantallas\ListarCampaña.resx">
       <DependentUpon>ListarCampaña.cs</DependentUpon>

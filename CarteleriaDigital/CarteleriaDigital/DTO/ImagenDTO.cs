@@ -12,7 +12,7 @@ namespace CarteleriaDigital.DTO
         private int? idImagen;
         private int? idCampaña;
         private string rutaImagen;
-        private short duracion;
+        private Int16 duracion;
         #endregion
 
         #region Constructores
