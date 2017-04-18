@@ -10,8 +10,6 @@ namespace CarteleriaDigital.DAO
 {
     class CampañaDAO: ICampania
     {
-        private Conexion iConexion;
-
         public CampañaDAO()
         {
         }
@@ -23,11 +21,11 @@ namespace CarteleriaDigital.DAO
                 Connection.con.Open();
                 // Create insert command.
                 NpgsqlCommand command = new NpgsqlCommand("INSERT INTO " +
-                    "campaña(nombre, activo, listaimagenes) VALUES(:nombre, :activo, :listaimagenes)", Connection.con);
+                    "campaña(idrango, nombre, activo)VALUES (:idrango, :nombre, :activo)", Connection.con);
 
-                command.Parameters.AddWithValue("@idcampaña", camDTO.Nombre);
-                command.Parameters.AddWithValue("@duracion", camDTO.Activo);
-                command.Parameters.AddWithValue("@rutaimagen", camDTO.IdRango);
+                command.Parameters.AddWithValue("@idrango", camDTO.IdRango);
+                command.Parameters.AddWithValue("@nombre", camDTO.Nombre);
+                command.Parameters.AddWithValue("@activo", camDTO.Activo);  
 
                 // Execute SQL command.
                 Int32 recordAffected = command.ExecuteNonQuery();
@@ -72,6 +70,36 @@ namespace CarteleriaDigital.DAO
             }
 
             Connection.con.Close();
+        }
+
+        public CampañaDTO BuscarCampañaPorID(int id_Camp)
+        {
+            CampañaDAO camp_DAO = new CampañaDAO();
+            CampañaDTO camp_DTO = new CampañaDTO();
+
+            Connection.con.Open();
+
+            try
+            {
+                NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM rango WHERE + " + id_Camp + " = idRango", Connection.con);
+
+                command.Prepare();
+
+                NpgsqlDataReader dr = command.ExecuteReader();
+
+                camp_DTO.IdCampaña = dr.GetInt16(0);
+                camp_DTO.IdRango = dr.GetInt16(1);
+                camp_DTO.Nombre = dr.GetString(2);
+                camp_DTO.Activo = dr.GetBoolean(3);
+
+
+            }
+            catch (NpgsqlException ex)
+            {
+
+            }
+
+            return camp_DTO;
         }
 
         public CampañaDTO BuscarPorNombre(String pNombre)
@@ -183,6 +211,24 @@ namespace CarteleriaDigital.DAO
             Connection.con.Close();
 
             return listaCamp;
+        }
+
+        public int ObtenerUltimoId()
+        {
+
+            Connection.con.Open();
+
+            NpgsqlCommand cmd = new NpgsqlCommand("SELECT * FROM Campaña ORDER BY idCampaña DESC LIMIT 1", Connection.con);
+            NpgsqlDataReader dr = cmd.ExecuteReader();
+
+            int id = 0;
+            while (dr.Read())
+            {
+                id = dr.GetInt32(0);
+            }
+            Connection.con.Close();
+
+            return id;
         }
     }
 }

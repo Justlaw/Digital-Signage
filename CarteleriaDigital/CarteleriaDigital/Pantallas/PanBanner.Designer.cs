@@ -65,7 +65,7 @@
             this.button4.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.button4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button4.BackgroundImage")));
             this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button4.Location = new System.Drawing.Point(168, 85);
+            this.button4.Location = new System.Drawing.Point(183, 85);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(102, 47);
             this.button4.TabIndex = 3;

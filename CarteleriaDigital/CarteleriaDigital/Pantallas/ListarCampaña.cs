@@ -33,15 +33,12 @@ namespace CarteleriaDigital.Pantallas
         }
 
         private void button1_Click(object sender, EventArgs e)
-        {
-            
+        {            
             {   
                 //Carga el datasource con las campañas cuyas fechas se encuentren en el intervalo.
                 List<CampañaDTO> campañasFecha = new List<CampañaDTO>();
                 campañasFecha = camp.ListarPorFecha(dateTimePicker1.Value, dateTimePicker2.Value);
                 
-
-
                 dataGridView1.DataSource = campañasFecha;
             }
         }
@@ -51,17 +48,25 @@ namespace CarteleriaDigital.Pantallas
 
         }
 
+<<<<<<< HEAD
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+=======
+        private void groupBox1_Enter(object sender, EventArgs e)
+>>>>>>> 663012958028760dad803578d1dc93a14286aca7
         {
 
         }
 
+<<<<<<< HEAD
         private void button3_Click(object sender, EventArgs e)
         {
 
         }
 
         private void button2_Click(object sender, EventArgs e)
+=======
+        private void ListarCampaña_Load(object sender, EventArgs e)
+>>>>>>> 663012958028760dad803578d1dc93a14286aca7
         {
 
         }
