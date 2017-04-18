@@ -57,7 +57,11 @@ namespace CarteleriaDigital.Pantallas
                 BannerSimpleDTO bsDTO = new BannerSimpleDTO();
                 bsDTO.Nombre = txtNombre.Text;
                 bsDTO.Texto = txtTexto.Text;
-                ControladorBanners.CrearBannerSimple(bsDTO, rngDTO);
+                bool result = ControladorBanners.CrearBannerSimple(bsDTO, rngDTO);
+                if (!result)
+                {
+                    MessageBox.Show("No se pudo guardar el nuevo banner");
+                }
             }
 
             if (radioButton2.Checked)

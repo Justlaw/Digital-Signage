@@ -48,7 +48,7 @@ namespace CarteleriaDigital
         }
         #endregion
 
-        public void Guardar(BannerSimpleDTO bs_DTO, RangoDTO rng_DTO)
+        public bool Guardar(BannerSimpleDTO bs_DTO, RangoDTO rng_DTO)
         {
             BannerSimpleDAO bs_DAO = new BannerSimpleDAO();
             BannerDAO b_DAO = new BannerDAO();
@@ -70,6 +70,12 @@ namespace CarteleriaDigital
 
                 bs_DTO.IdBanner = b_DAO.ObtenerUltimoId();
                 bs_DAO.Insertar(bs_DTO);
+
+                return true;
+            }
+            else
+            {
+                return false;
             }
 
         }
