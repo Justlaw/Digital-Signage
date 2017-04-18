@@ -22,6 +22,7 @@ C:\Users\Gastón\Source\Repos\Digital-Signage\CarteleriaDigital\CarteleriaDigita
 C:\Users\Gastón\Source\Repos\Digital-Signage\CarteleriaDigital\CarteleriaDigital\obj\Debug\CarteleriaDigital.pdb
 C:\Users\Gastón\Source\Repos\Digital-Signage\CarteleriaDigital\CarteleriaDigital\bin\Debug\CarteleriaDigital.exe
 C:\Users\Gastón\Source\Repos\Digital-Signage\CarteleriaDigital\CarteleriaDigital\bin\Debug\CarteleriaDigital.pdb
+C:\Users\Gastón\Source\Repos\Digital-Signage\CarteleriaDigital\CarteleriaDigital\bin\Debug\Npgsql.dll
 C:\Users\Gastón\Source\Repos\Digital-Signage\CarteleriaDigital\CarteleriaDigital\bin\Debug\Npgsql.pdb
 C:\Users\Gastón\Source\Repos\Digital-Signage\CarteleriaDigital\CarteleriaDigital\bin\Debug\Npgsql.xml
 C:\Users\Gastón\Source\Repos\Digital-Signage\CarteleriaDigital\CarteleriaDigital\obj\Debug\CarteleriaDigital.csprojResolveAssemblyReference.cache
@@ -93,5 +94,5 @@ C:\Users\Jona\Source\Repos\Digital-Signage\CarteleriaDigital\CarteleriaDigital\o
 C:\Users\Jona\Source\Repos\Digital-Signage\CarteleriaDigital\CarteleriaDigital\obj\Debug\CarteleriaDigital.PantallaInicio.resources
 C:\Users\Jona\Source\Repos\Digital-Signage\CarteleriaDigital\CarteleriaDigital\obj\Debug\CarteleriaDigital.Properties.Resources.resources
 C:\Users\Jona\Source\Repos\Digital-Signage\CarteleriaDigital\CarteleriaDigital\obj\Debug\CarteleriaDigital.csproj.GenerateResource.Cache
-C:\Users\Gastón\Source\Repos\Digital-Signage\CarteleriaDigital\CarteleriaDigital\obj\Debug\CarteleriaDigital.Pantallas.ListarCampaña.resources
-C:\Users\Gastón\Source\Repos\Digital-Signage\CarteleriaDigital\CarteleriaDigital\obj\Debug\CarteleriaDigital.Pantallas.ListarBanner.resources
+C:\Users\Jenifer\Source\Repos\Digital-Signage\CarteleriaDigital\CarteleriaDigital\obj\Debug\CarteleriaDigital.Pantallas.ModificarBanner.resources
+C:\Users\Jenifer\Source\Repos\Digital-Signage\CarteleriaDigital\CarteleriaDigital\obj\Debug\CarteleriaDigital.Pantallas.ModificarCampaña.resources
