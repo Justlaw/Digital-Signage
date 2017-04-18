@@ -32,8 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AgregarCampaña));
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -77,33 +75,15 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(90, 23);
+            this.textBox1.Location = new System.Drawing.Point(90, 30);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(419, 20);
             this.textBox1.TabIndex = 1;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.label2.Location = new System.Drawing.Point(5, 63);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(66, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Descripción:";
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Location = new System.Drawing.Point(90, 63);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(420, 72);
-            this.richTextBox1.TabIndex = 3;
-            this.richTextBox1.Text = "";
-            // 
             // button2
             // 
             this.button2.ForeColor = System.Drawing.Color.Teal;
-            this.button2.Location = new System.Drawing.Point(476, 636);
+            this.button2.Location = new System.Drawing.Point(475, 536);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(78, 33);
             this.button2.TabIndex = 7;
@@ -114,7 +94,7 @@
             // button3
             // 
             this.button3.ForeColor = System.Drawing.Color.Teal;
-            this.button3.Location = new System.Drawing.Point(370, 636);
+            this.button3.Location = new System.Drawing.Point(369, 536);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(81, 33);
             this.button3.TabIndex = 8;
@@ -129,14 +109,12 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.richTextBox1);
-            this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.textBox1);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.ForeColor = System.Drawing.Color.MidnightBlue;
             this.groupBox2.Location = new System.Drawing.Point(16, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(538, 157);
+            this.groupBox2.Size = new System.Drawing.Size(538, 69);
             this.groupBox2.TabIndex = 12;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Detalles";
@@ -161,7 +139,7 @@
             this.groupBox1.Controls.Add(this.dateTimePicker1);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.groupBox1.Location = new System.Drawing.Point(16, 192);
+            this.groupBox1.Location = new System.Drawing.Point(16, 87);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(538, 109);
             this.groupBox1.TabIndex = 13;
@@ -245,7 +223,7 @@
             this.groupBox3.Controls.Add(this.button1);
             this.groupBox3.Controls.Add(this.pictureBox1);
             this.groupBox3.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.groupBox3.Location = new System.Drawing.Point(16, 314);
+            this.groupBox3.Location = new System.Drawing.Point(16, 215);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(538, 299);
             this.groupBox3.TabIndex = 14;
@@ -255,7 +233,7 @@
             // button6
             // 
             this.button6.ForeColor = System.Drawing.Color.Teal;
-            this.button6.Location = new System.Drawing.Point(131, 256);
+            this.button6.Location = new System.Drawing.Point(131, 223);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(87, 27);
             this.button6.TabIndex = 7;
@@ -266,7 +244,7 @@
             // button5
             // 
             this.button5.ForeColor = System.Drawing.Color.Teal;
-            this.button5.Location = new System.Drawing.Point(131, 214);
+            this.button5.Location = new System.Drawing.Point(131, 181);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(87, 27);
             this.button5.TabIndex = 6;
@@ -286,7 +264,7 @@
             // button4
             // 
             this.button4.ForeColor = System.Drawing.Color.Teal;
-            this.button4.Location = new System.Drawing.Point(131, 133);
+            this.button4.Location = new System.Drawing.Point(131, 100);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(87, 27);
             this.button4.TabIndex = 4;
@@ -314,7 +292,7 @@
             // button1
             // 
             this.button1.ForeColor = System.Drawing.Color.Teal;
-            this.button1.Location = new System.Drawing.Point(131, 84);
+            this.button1.Location = new System.Drawing.Point(131, 51);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(87, 27);
             this.button1.TabIndex = 1;
@@ -343,7 +321,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(579, 681);
+            this.ClientSize = new System.Drawing.Size(579, 581);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
@@ -369,8 +347,6 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
