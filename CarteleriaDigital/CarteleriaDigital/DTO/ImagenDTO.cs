@@ -61,7 +61,7 @@ namespace CarteleriaDigital.DTO
             }
         }
 
-        public short Duracion
+        public Int16 Duracion
         {
             get
             {
