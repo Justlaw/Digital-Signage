@@ -86,14 +86,21 @@ namespace CarteleriaDigital.Controladores
             if (listImg_DTO != null)
             {
                 Boolean encontrada;
+                //En esta parte se trata de insertar las imagenes que no estan en la lista o bien modificar si cierto DTO de la lista fue modificado
                 foreach (ImagenDTO img_DTO in listImg_DTO)
                 {
                     encontrada = false;
                     foreach (ImagenDTO img_DTO2 in listImgV_DTO)
                     {
-                        if (img_DTO.IdImagen == img_DTO2.IdImagen)
+                        if (img_DTO.Equals(img_DTO2))
                         {
                             encontrada = true;
+                            break;
+                        }
+                        else if ((img_DTO.IdImagen == img_DTO2.IdImagen) && !img_DTO.Equals(img_DTO2))
+                        {
+                            encontrada = true;
+                            Img_DAO.Modificar(img_DTO);
                             break;
                         }
                     }
@@ -102,12 +109,13 @@ namespace CarteleriaDigital.Controladores
                         Img_DAO.Insertar(img_DTO);
                     }
                 }
+                // En esta parte se encuentra si la imagen necesita ser eliminada debido a que el usuario la elimino de la lista
                 foreach (ImagenDTO img in listImgV_DTO)
                 {
                     encontrada = false;
                     foreach (ImagenDTO img2 in listImg_DTO)
                     {
-                        if (img.IdImagen == img2.IdImagen)
+                        if (img.IdImagen == img2.IdImagen) //Ver si esta comparación es válida.
                         {
                             encontrada = true;
                             break;
