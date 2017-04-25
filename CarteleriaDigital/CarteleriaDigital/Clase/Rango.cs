@@ -49,11 +49,32 @@ namespace CarteleriaDigital
         }
         #endregion 
 
-        public bool RangoDisponible()
+        public bool RangoDisponibleBanner()
         {
             bool result = true;
             RangoDAO rng_DAO = new RangoDAO();
             List<RangoDTO> lista = rng_DAO.RangosBanners();
+            foreach (RangoDTO rango in lista)
+            {
+                if (iFechaInicio >= rango.FechaInicio && iFechaInicio <= rango.FechaFin)
+                {
+                    if (iHoraInicio >= rango.HoraInicio && iHoraInicio <= rango.HoraFin)
+                    {
+                        result = false;
+                        return result;
+                    }
+                }
+            }
+
+            return result;
+
+        }
+
+        public bool RangoDisponibleCampaña()
+        {
+            bool result = true;
+            RangoDAO rng_DAO = new RangoDAO();
+            List<RangoDTO> lista = rng_DAO.RangosCampañas();
             foreach (RangoDTO rango in lista)
             {
                 if (iFechaInicio >= rango.FechaInicio && iFechaInicio <= rango.FechaFin)

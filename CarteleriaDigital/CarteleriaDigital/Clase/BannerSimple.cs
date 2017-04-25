@@ -60,7 +60,7 @@ namespace CarteleriaDigital
             Rango rng = new Rango(rng_DTO.FechaInicio, rng_DTO.FechaFin, rng_DTO.HoraInicio, rng_DTO.HoraFin);
 
             //Se controla que el rango esté disponible
-            if (rng.RangoDisponible())
+            if (rng.RangoDisponibleBanner())
             {
                 rng_DAO.Insertar(rng_DTO);
 
