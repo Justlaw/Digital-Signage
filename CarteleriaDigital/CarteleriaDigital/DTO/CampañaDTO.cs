@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CarteleriaDigital.DTO
 {
-    class CampañaDTO
+    public class CampañaDTO
     {
         #region Atributos
         private int? idCampaña;

@@ -165,7 +165,6 @@
             this.dateTimePicker3.Size = new System.Drawing.Size(105, 20);
             this.dateTimePicker3.TabIndex = 6;
             this.dateTimePicker3.Value = new System.DateTime(2017, 4, 18, 9, 32, 0, 0);
-    //        this.dateTimePicker3.ValueChanged += new System.EventHandler(this.dateTimePicker3_ValueChanged);
             // 
             // label6
             // 
@@ -235,6 +234,7 @@
             this.groupBox3.TabIndex = 14;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Imágenes";
+            this.groupBox3.Enter += new System.EventHandler(this.groupBox3_Enter);
             // 
             // button6
             // 

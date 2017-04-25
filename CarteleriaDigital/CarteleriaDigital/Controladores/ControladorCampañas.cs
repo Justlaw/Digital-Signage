@@ -10,7 +10,7 @@ namespace CarteleriaDigital.Controladores
 {
     public static class ControladorCampañas
     {
-        public static void CrearCampaña(Campaña camp, Rango rng, List<Imagen> listImg) {
+        public static void CrearCampaña(CampañaDTO camp, RangoDTO rng, List<ImagenDTO> listImg) {
             ControladorServiciosCampaña cSC = new ControladorServiciosCampaña();
             cSC.Guardar(camp,rng,listImg);
         }
