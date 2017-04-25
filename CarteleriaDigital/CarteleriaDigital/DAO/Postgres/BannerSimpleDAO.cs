@@ -22,10 +22,10 @@ namespace CarteleriaDigital.DAO
                 Connection.con.Open();
                 // Create insert command.
                 NpgsqlCommand command = new NpgsqlCommand("INSERT INTO " +
-                    "bannersimple(idbanner, text) VALUES(:idbanner, :text)", Connection.con);
+                    "bannersimple(idbanner, texto) VALUES(:idbanner, :texto)", Connection.con);
 
                 command.Parameters.AddWithValue("@idbanner", bsDTO.IdBanner);
-                command.Parameters.AddWithValue("@text", bsDTO.Texto);
+                command.Parameters.AddWithValue("@texto", bsDTO.Texto);
 
                 // Execute SQL command.
                 Int32 recordAffected = command.ExecuteNonQuery();

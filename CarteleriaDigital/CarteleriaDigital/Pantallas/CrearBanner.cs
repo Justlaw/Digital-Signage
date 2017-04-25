@@ -18,6 +18,7 @@ namespace CarteleriaDigital.Pantallas
         public CrearBanner()
         {
             InitializeComponent();
+            radioButton1.Checked = true;
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
@@ -62,6 +63,11 @@ namespace CarteleriaDigital.Pantallas
                 {
                     MessageBox.Show("No se pudo guardar el nuevo banner");
                 }
+                else
+                {
+                    MessageBox.Show("Agregado con éxito!");
+                }
+
             }
 
             if (radioButton2.Checked)
@@ -73,5 +79,6 @@ namespace CarteleriaDigital.Pantallas
             }
 
         }
+
     }
 }

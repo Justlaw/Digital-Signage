@@ -18,17 +18,14 @@ namespace CarteleriaDigital.DAO
 
         public void Insertar(BannerDTO ban)
         {
-
-            Connection.con.Close();
             Connection.con.Open();
             try
             {
                 // Create insert command.
                 NpgsqlCommand command = new NpgsqlCommand("INSERT INTO " +
-                    "banner(idRango, nombre, activo) VALUES(: idRango, :nombre, :activo)", Connection.con);
+                    "banner(idRango, nombre) VALUES(:idRango, :nombre)", Connection.con);
                 // Add paramaters.
                 command.Parameters.AddWithValue("@nombre", ban.Nombre);
-                command.Parameters.AddWithValue("@Activo", ban.Activo);
                 command.Parameters.AddWithValue("@idRango", ban.IdRango);
 
                 // Execute SQL command.
