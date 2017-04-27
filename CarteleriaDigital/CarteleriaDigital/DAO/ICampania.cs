@@ -13,6 +13,8 @@ namespace CarteleriaDigital.DAO
 
         void Modificar(CampañaDTO camDTO);
 
+        CampañaDTO BuscarCampañaPorID(int id_Camp);
+
         CampañaDTO BuscarPorNombre(String pNombre);
 
         List<CampañaDTO> ListarPorActivo(Boolean pActivo);
