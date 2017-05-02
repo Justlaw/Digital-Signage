@@ -17,10 +17,6 @@ namespace CarteleriaDigital
             this.iRutaImagen = pRutaImagen;
         }
 
-        public Imagen()
-        {
-        }
-
         public Int16 Duracion
         {
             set { iDuracion = value; }

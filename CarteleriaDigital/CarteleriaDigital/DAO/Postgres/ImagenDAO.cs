@@ -138,6 +138,36 @@ namespace CarteleriaDigital.DAO
             Connection.con.Close();
 
             return listaImagenes;
-        }  
+        }
+
+        public void Eliminar(int idImagen)
+        {
+            Connection.con.Open();
+
+                try
+                {
+                // Create update command.
+                NpgsqlCommand command = new NpgsqlCommand("DELETE FROM " +
+                        "imagen WHERE idimagen = :idimagen", Connection.con);
+
+                command.Parameters.AddWithValue("@idimagen", idImagen);
+
+                // Add value to the paramater.
+                command.Parameters[0].Value = idImagen;
+
+                    // Execute SQL command.
+                    int recordAffected = command.ExecuteNonQuery();
+                    if (Convert.ToBoolean(recordAffected))
+                    {
+                        //showInformation("Data successfully deleted!");
+                    }
+                }
+                catch (NpgsqlException ex)
+                {
+                    
+                }
+
+                Connection.con.Close();
+        }
     }
 }
