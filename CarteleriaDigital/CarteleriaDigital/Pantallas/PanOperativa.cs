@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Threading;
 using CarteleriaDigital.DTO;
+using CarteleriaDigital.DAO;
 
 
 
@@ -18,6 +19,7 @@ namespace CarteleriaDigital.Pantallas
     public partial class PanOperativa : Form
     {   //Defino variables globales
         bool verCursor = false;
+        CampañaDAO camp = new CampañaDAO();
         bool detener = false;
         Thread thread1;
         Thread thread2;
@@ -92,12 +94,21 @@ namespace CarteleriaDigital.Pantallas
         }
 
         //Metodo asincrono correspondiente a la visualizacion de Campañas.
-        private async void SliderCampaña(CampañaDTO campDTO, RangoDTO rangoDTO, List<ImagenDTO> listDTO)
+        private async void SliderCampaña() //(CampañaDTO campDTO, RangoDTO rangoDTO, List<ImagenDTO> listDTO)
 
 
         {
-                    
-
+            List<CampañaDTO> campList = camp.CampañasDelDía(DateTime.Now, DateTime.Today.TimeOfDay);
+            ImagenDAO img_DAO = new ImagenDAO();
+            List <ImagenDTO> listDTO = new List<ImagenDTO>();
+            List<ImagenDTO> listImg_DTO = new List<ImagenDTO>();
+            foreach (CampañaDTO campaña in campList) {
+                listImg_DTO = img_DAO.ListarPorCampaña(campaña.IdCampaña);
+                foreach (ImagenDTO img_DTO in listImg_DTO) {
+                    listDTO.Add(img_DTO);
+                }               
+            }
+            
             //Se le solicitan todas las campañas a la clase Controlador
             
             //Se itera sobre la lista de imagenes y se las va cargando periodicamente a un picturebox
