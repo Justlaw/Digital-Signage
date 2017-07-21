@@ -104,5 +104,10 @@ namespace CarteleriaDigital.Pantallas
         {
 
         }
+
+        private void nosotrosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
