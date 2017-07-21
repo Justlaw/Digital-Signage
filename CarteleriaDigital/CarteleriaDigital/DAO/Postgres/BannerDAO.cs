@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Npgsql;
 using CarteleriaDigital.DTO;
+using System.Data;
 
 namespace CarteleriaDigital.DAO
 {
@@ -18,17 +19,14 @@ namespace CarteleriaDigital.DAO
 
         public void Insertar(BannerDTO ban)
         {
-
-            Connection.con.Close();
             Connection.con.Open();
             try
             {
                 // Create insert command.
                 NpgsqlCommand command = new NpgsqlCommand("INSERT INTO " +
-                    "banner(idRango, nombre, activo) VALUES(: idRango, :nombre, :activo)", Connection.con);
+                    "banner(idRango, nombre) VALUES(:idRango, :nombre)", Connection.con);
                 // Add paramaters.
                 command.Parameters.AddWithValue("@nombre", ban.Nombre);
-                command.Parameters.AddWithValue("@Activo", ban.Activo);
                 command.Parameters.AddWithValue("@idRango", ban.IdRango);
 
                 // Execute SQL command.
@@ -186,6 +184,33 @@ namespace CarteleriaDigital.DAO
 
             return listaBan;
 
+        }
+
+        public DataTable SelectBannersConRango()
+        {
+            //Creando el DataTable donde almacenaremos la respuessta de la consulta SQL y luego se devolverá
+            DataTable dt = new DataTable();
+            dt.Columns.Add("IdBanner");
+            dt.Columns.Add("IdRango");
+            dt.Columns.Add("Nombre");
+            dt.Columns.Add("Tipo");
+            dt.Columns.Add("Activo");
+            dt.Columns.Add("FechaInicio");
+            dt.Columns.Add("FechaFin");
+            dt.Columns.Add("HoraInicio");
+            dt.Columns.Add("HoraFin");
+
+            Connection.con.Open();
+
+            NpgsqlCommand cmd = new NpgsqlCommand("select idbanner, banner.idrango, nombre, tipo, activo, fechainicio, fechafin, horainicio, horafin " +
+                                                  "from banner, rango where banner.idrango = rango.idrango", Connection.con);
+
+            NpgsqlDataAdapter da = new NpgsqlDataAdapter(cmd);
+
+            da.Fill(dt);
+
+            Connection.con.Close();
+            return dt;
         }
 
         public void Listar()

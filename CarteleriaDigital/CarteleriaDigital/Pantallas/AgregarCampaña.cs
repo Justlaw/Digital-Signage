@@ -16,7 +16,7 @@ namespace CarteleriaDigital.Pantallas
 {
     public partial class AgregarCampaña : Form
     {
-        List<Imagen> ListIMG = new List<Imagen>();
+        List<ImagenDTO> ListIMG = new List<ImagenDTO>();
         OpenFileDialog Img = new OpenFileDialog();
         private DateTime fInicio;
         private DateTime fFin;
@@ -53,14 +53,15 @@ namespace CarteleriaDigital.Pantallas
 
           else
             {
-                fInicio = dateTimePicker1.Value;
-                fFin = dateTimePicker2.Value;
-                hIni = dateTimePicker3.Value;
-                hFin = dateTimePicker4.Value;
-                Rango rng = new Rango(fInicio, fFin, hIni, hFin);
-
-                n_Camp = textBox1.Text;
-                Campaña camp = new Campaña(true, n_Camp, ListIMG, rng);
+                CampañaDTO camp = new CampañaDTO();
+                RangoDTO rng = new RangoDTO();
+                rng.FechaInicio = dateTimePicker1.Value;
+                rng.FechaFin = dateTimePicker2.Value;
+                rng.HoraInicio = dateTimePicker3.Value;
+                rng.HoraFin = dateTimePicker4.Value;
+                camp.Activo = true;
+                camp.Nombre = textBox1.Text;
+               
 
                 ControladorCampañas.CrearCampaña(camp,rng,ListIMG);
 
@@ -151,7 +152,7 @@ namespace CarteleriaDigital.Pantallas
                         this.listView1.LargeImageList = imageList1;
                      
                         //Carga el objeto de tipo imagen con los datos del usuario.
-                        Imagen imagen1 = new Imagen();                  
+                        ImagenDTO imagen1 = new ImagenDTO();                  
                         imagen1.Duracion = Convert.ToInt16(textBox2.Text);
                         imagen1.RutaImagen = Img.FileName;
                         openFileDialog1.FileName = "";
@@ -244,6 +245,11 @@ namespace CarteleriaDigital.Pantallas
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             
+        }
+
+        private void groupBox3_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

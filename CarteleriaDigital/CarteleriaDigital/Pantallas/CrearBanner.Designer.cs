@@ -82,9 +82,9 @@
             this.label2.ForeColor = System.Drawing.Color.MidnightBlue;
             this.label2.Location = new System.Drawing.Point(31, 91);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(47, 13);
+            this.label2.Size = new System.Drawing.Size(37, 13);
             this.label2.TabIndex = 3;
-            this.label2.Text = "Nombre:";
+            this.label2.Text = "Texto:";
             // 
             // label3
             // 

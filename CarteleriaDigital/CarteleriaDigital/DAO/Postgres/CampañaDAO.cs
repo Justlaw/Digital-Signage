@@ -230,5 +230,46 @@ namespace CarteleriaDigital.DAO
 
             return id;
         }
+
+        public List<CampañaDTO> CampañasDelDía(DateTime pFechaIni, TimeSpan horaIni)
+        {
+            List<CampañaDTO> listaCamp = new List<CampañaDTO>();
+            CampañaDTO camp = new CampañaDTO();
+
+            Connection.con.Open();
+
+            try
+            {
+                // Create select command.
+                NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM campaña, rango WHERE " +
+                    "campaña.idrango = rango.idrango and " + pFechaIni.Year + "-" + pFechaIni.Month + "-" + pFechaIni.Day + " >= rango.fechainicio or "
+                    + pFechaIni.Year + " - " + pFechaIni.Month + " - " + pFechaIni.Day + "<= rango.fechafin and " + horaIni +" >= rango.horainicio ORDER BY idcampaña ASC", Connection.con);
+
+                // Prepare the command.
+                command.Prepare();
+
+                // Execute SQL command.
+                NpgsqlDataReader dr = command.ExecuteReader();
+
+                // Fill results to music list.
+                while (dr.Read())
+                {
+                    camp.IdCampaña = dr.GetInt32(0);
+                    camp.IdRango = dr.GetInt32(1);
+                    camp.Activo = dr.GetBoolean(2);
+                    camp.Nombre = dr.GetString(3);
+                    listaCamp.Add(camp);
+                }
+            }
+            catch (NpgsqlException ex)
+            {
+
+            }
+
+            Connection.con.Close();
+
+            return listaCamp;
+        }
+
     }
 }
