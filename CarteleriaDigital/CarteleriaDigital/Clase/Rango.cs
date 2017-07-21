@@ -49,6 +49,10 @@ namespace CarteleriaDigital
         }
         #endregion 
 
+        /// <summary>
+        /// Devuelve verdadero o falso según el rango esté disponible para agregar un banner
+        /// </summary>
+        /// <returns></returns>
         public bool RangoDisponibleBanner()
         {
             bool result = true;
@@ -70,6 +74,10 @@ namespace CarteleriaDigital
 
         }
 
+        /// <summary>
+        /// Devuelve verdadero o falso según el rango esté disponible para agregar un banner
+        /// </summary>
+        /// <returns></returns>
         public bool RangoDisponibleCampaña()
         {
             bool result = true;
