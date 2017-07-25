@@ -25,12 +25,15 @@ namespace CarteleriaDigital.DAO
                 Connection.con.Open();
                 // Create insert command.
                 NpgsqlCommand command = new NpgsqlCommand("INSERT INTO " +
-                    "rango(fechainicio, fechafin, horainicio, horafin) VALUES(:fechainicio, :fechafin, :horainicio, :horafin)", Connection.con);
+                    "rango(fechainicio, fechafin, horainicio, minutoinicio, horafin, minutofin) VALUES(:fechainicio, :fechafin, :horainicio, :minutoinicio, :horafin, :minutofin)", Connection.con);
 
                 command.Parameters.AddWithValue("@fechainicio", ranDTO.FechaInicio);
                 command.Parameters.AddWithValue("@fechafin", ranDTO.FechaFin);
                 command.Parameters.AddWithValue("@horainicio", ranDTO.HoraInicio);
+                command.Parameters.AddWithValue("@minutoinicio", ranDTO.MinutoInicio);
                 command.Parameters.AddWithValue("@horafin", ranDTO.HoraFin);
+                command.Parameters.AddWithValue("@minutofin", ranDTO.MinutoFin);
+
 
 
                 // Execute SQL command.
@@ -56,13 +59,15 @@ namespace CarteleriaDigital.DAO
             {
                 // Create update command.
                 NpgsqlCommand command = new NpgsqlCommand(@"UPDATE rango " +
-                    "SET fechainicio = @fechainicio, fechafin = @fechafin, horainicio = @horainicio, horafin = @horafin WHERE idRango = " + ranDTO.IdRango, Connection.con);
+                    "SET fechainicio = @fechainicio, fechafin = @fechafin, horainicio = @horainicio, minutoinicio = @minutoinicio, horafin = @horafin, minutofin = @minutofin WHERE idRango = " + ranDTO.IdRango, Connection.con);
 
                 // Add paramaters.
                 command.Parameters.AddWithValue("@fechainicio", ranDTO.FechaInicio);
                 command.Parameters.AddWithValue("@fechafin", ranDTO.FechaFin);
                 command.Parameters.AddWithValue("@horainicio", ranDTO.HoraInicio);
+                command.Parameters.AddWithValue("@minutoinicio", ranDTO.MinutoInicio);
                 command.Parameters.AddWithValue("@horafin", ranDTO.HoraFin);
+                command.Parameters.AddWithValue("@minutofin", ranDTO.MinutoFin);
 
                 // Execute SQL command.
                 int recordAffected = command.ExecuteNonQuery();
@@ -95,8 +100,10 @@ namespace CarteleriaDigital.DAO
 
                 rng_DTO.FechaInicio = dr.GetDateTime(0);
                 rng_DTO.FechaFin = dr.GetDateTime(1);
-                rng_DTO.HoraInicio = dr.GetDateTime(2);
-                rng_DTO.HoraFin = dr.GetDateTime(3);
+                rng_DTO.HoraInicio = dr.GetInt16(2);
+                rng_DTO.MinutoInicio = dr.GetInt16(3);
+                rng_DTO.HoraFin = dr.GetInt16(4);
+                rng_DTO.MinutoFin = dr.GetInt16(5);
 
                 
             }
@@ -124,7 +131,7 @@ namespace CarteleriaDigital.DAO
             try
             {
                 // Create select command.
-                NpgsqlCommand command = new NpgsqlCommand("SELECT fechainicio, fechafin, horainicio, horafin FROM rango, banner WHERE banner.idrango = rango.idrango and banner.activo = true ORDER BY rango.idrango ASC", Connection.con);
+                NpgsqlCommand command = new NpgsqlCommand("SELECT fechainicio, fechafin, horainicio, minutoinicio, horafin, minutofin FROM rango, banner WHERE banner.idrango = rango.idrango and banner.activo = true ORDER BY rango.idrango ASC", Connection.con);
 
                 // Prepare the command.
                 command.Prepare();
@@ -137,8 +144,10 @@ namespace CarteleriaDigital.DAO
                 {
                     rang.FechaInicio = dr.GetDateTime(0);
                     rang.FechaFin = dr.GetDateTime(1);
-                    rang.HoraInicio = dr.GetDateTime(2);
-                    rang.HoraFin = dr.GetDateTime(3);
+                    rang.HoraInicio = dr.GetInt16(2);
+                    rang.MinutoInicio = dr.GetInt16(3);
+                    rang.HoraFin = dr.GetInt16(4);
+                    rang.MinutoFin = dr.GetInt16(5);
                     listaRango.Add(rang);
                 }
             }
@@ -167,7 +176,7 @@ namespace CarteleriaDigital.DAO
             try
             {
                 // Create select command.
-                NpgsqlCommand command = new NpgsqlCommand("SELECT fechainicio, fechafin, horainicio, horafin FROM rango, campaña WHERE campaña.idrango = rango.idrango and campaña.activo = true ORDER BY campaña.idrango ASC", Connection.con);
+                NpgsqlCommand command = new NpgsqlCommand("SELECT fechainicio, fechafin, horainicio, minutoinicio, horafin, minutofin FROM rango, campaña WHERE campaña.idrango = rango.idrango and campaña.activo = true ORDER BY campaña.idrango ASC", Connection.con);
 
                 // Prepare the command.
                 command.Prepare();
@@ -180,8 +189,10 @@ namespace CarteleriaDigital.DAO
                 {
                     rang.FechaInicio = dr.GetDateTime(0);
                     rang.FechaFin = dr.GetDateTime(1);
-                    rang.HoraInicio = dr.GetDateTime(2);
-                    rang.HoraFin = dr.GetDateTime(3);
+                    rang.HoraInicio = dr.GetInt16(2);
+                    rang.MinutoInicio = dr.GetInt16(3);
+                    rang.HoraFin = dr.GetInt16(4);
+                    rang.MinutoFin = dr.GetInt16(5);
                     listaRango.Add(rang);
                 }
             }

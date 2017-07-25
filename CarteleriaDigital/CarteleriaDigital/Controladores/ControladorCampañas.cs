@@ -16,7 +16,7 @@ namespace CarteleriaDigital.Controladores
                 Imagen img = new Imagen(imgDTO.RutaImagen, imgDTO.Duracion);
                 listImg.Add(img);
             }
-            Rango rng = new Rango(rng_DTO.FechaInicio, rng_DTO.FechaFin, rng_DTO.HoraInicio, rng_DTO.HoraFin);
+            Rango rng = new Rango(rng_DTO.FechaInicio, rng_DTO.FechaFin, rng_DTO.HoraInicio, rng_DTO.MinutoInicio, rng_DTO.HoraFin, rng_DTO.MinutoFin);
             Campaña camp = new Campaña(camp_DTO.Activo,camp_DTO.Nombre,listImg,rng);
             camp.Guardar(camp_DTO,rng_DTO,listImg_DTO);
         }
@@ -28,7 +28,7 @@ namespace CarteleriaDigital.Controladores
                 Imagen img = new Imagen(imgDTO.RutaImagen, imgDTO.Duracion);
                 listImg.Add(img);
             }
-            Rango rng = new Rango(rng_DTO.FechaInicio, rng_DTO.FechaFin, rng_DTO.HoraInicio, rng_DTO.HoraFin);
+            Rango rng = new Rango(rng_DTO.FechaInicio, rng_DTO.FechaFin, rng_DTO.HoraInicio, rng_DTO.MinutoInicio, rng_DTO.HoraFin, rng_DTO.MinutoFin);
             Campaña camp = new Campaña(camp_DTO.Activo, camp_DTO.Nombre, listImg, rng);
             camp.Modificar(camp_DTO, rng_DTO, listImg_DTO, listImgV_DTO);
         }

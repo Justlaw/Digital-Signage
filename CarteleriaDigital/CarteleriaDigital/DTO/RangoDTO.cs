@@ -12,8 +12,10 @@ namespace CarteleriaDigital.DTO
         private int? idRango;
         private DateTime fechaInicio;
         private DateTime fechaFin;
-        private DateTime horaInicio;
-        private DateTime horaFin;
+        private short horaInicio;
+        private short minutoInicio;
+        private short horaFin;
+        private short minutoFin;
 
             #endregion
 
@@ -62,29 +64,51 @@ namespace CarteleriaDigital.DTO
             }
         }
 
-        public DateTime HoraInicio
+        public short HoraInicio
         {
             get
             {
                 return horaInicio;
             }
-
             set
             {
                 horaInicio = value;
             }
         }
 
-        public DateTime HoraFin
+        public short MinutoInicio
+        {
+            get
+            {
+                return minutoInicio;
+            }
+            set
+            {
+                minutoInicio = value;
+            }
+        }
+
+        public short HoraFin
         {
             get
             {
                 return horaFin;
             }
-
             set
             {
                 horaFin = value;
+            }
+        }
+
+        public short MinutoFin
+        {
+            get
+            {
+                return minutoFin;
+            }
+            set
+            {
+                minutoFin = value;
             }
         }
 

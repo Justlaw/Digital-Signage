@@ -87,7 +87,7 @@ namespace CarteleriaDigital
             ImagenDAO Img_DAO = new ImagenDAO();
             RangoDAO rng_DAO = new RangoDAO();
 
-            Rango rng = new Rango(rng_DTO.FechaInicio, rng_DTO.FechaFin, rng_DTO.HoraInicio, rng_DTO.HoraFin);
+            Rango rng = new Rango(rng_DTO.FechaInicio, rng_DTO.FechaFin, rng_DTO.HoraInicio, rng_DTO.MinutoInicio, rng_DTO.HoraFin, rng_DTO.MinutoFin);
 
             if (rng_DTO != null)
             {

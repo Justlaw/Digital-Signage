@@ -12,15 +12,19 @@ namespace CarteleriaDigital
     {
         private DateTime iFechaInicio;
         private DateTime iFechaFin;
-        private DateTime iHoraInicio;
-        private DateTime iHoraFin;
+        private short iHoraInicio;
+        private short iMinutoInicio;
+        private short iHoraFin;
+        private short iMinutoFin;
 
-        public Rango(DateTime pFechaInicio, DateTime pFechaFin, DateTime pHoraInicio, DateTime pHoraFin)
+        public Rango(DateTime pFechaInicio, DateTime pFechaFin, short pHoraInicio, short pMinutoInico, short pHoraFin, short pMinutoFin)
         {
             this.iFechaInicio = pFechaInicio;
             this.iFechaFin = pFechaFin;
             this.iHoraInicio = pHoraInicio;
+            this.iMinutoInicio = pMinutoInico;
             this.iHoraFin = pHoraFin;
+            this.iMinutoFin = pMinutoFin;
         }
 
         #region Accesores
@@ -36,16 +40,28 @@ namespace CarteleriaDigital
             set { iFechaFin = value; }
         }
 
-        public DateTime HoraInicio
+        public short HoraInicio
         {
             get { return this.iHoraInicio; }
             set { iHoraInicio = value; }
         }
 
-        public DateTime HoraFin
+        public short MinutoInicio
+        {
+            get { return this.iMinutoInicio; }
+            set { iMinutoInicio = value; }
+        }
+
+        public short HoraFin
         {
             get { return this.iHoraFin; }
             set { iHoraFin = value; }
+        }
+
+        public short MinutoFin
+        {
+            get { return this.iMinutoFin; }
+            set { iMinutoFin = value; }
         }
         #endregion 
 
@@ -62,7 +78,10 @@ namespace CarteleriaDigital
             {
                 if (iFechaInicio >= rango.FechaInicio && iFechaInicio <= rango.FechaFin)
                 {
-                    if (iHoraInicio >= rango.HoraInicio && iHoraInicio <= rango.HoraFin)
+                    if (
+                        iHoraInicio >= rango.HoraInicio && iHoraInicio <= rango.HoraFin
+                        && iMinutoInicio >= rango.MinutoInicio && iMinutoInicio <= rango.MinutoFin
+                        )
                     {
                         result = false;
                         return result;
@@ -75,7 +94,7 @@ namespace CarteleriaDigital
         }
 
         /// <summary>
-        /// Devuelve verdadero o falso según el rango esté disponible para agregar un banner
+        /// Devuelve verdadero o falso según el rango esté disponible para agregar una campña
         /// </summary>
         /// <returns></returns>
         public bool RangoDisponibleCampaña()
@@ -87,7 +106,10 @@ namespace CarteleriaDigital
             {
                 if (iFechaInicio >= rango.FechaInicio && iFechaInicio <= rango.FechaFin)
                 {
-                    if (iHoraInicio >= rango.HoraInicio && iHoraInicio <= rango.HoraFin)
+                    if (
+                        iHoraInicio >= rango.HoraInicio && iHoraInicio <= rango.HoraFin
+                        && iMinutoInicio >= rango.MinutoInicio && iMinutoInicio <= rango.MinutoFin
+                        )
                     {
                         result = false;
                         return result;

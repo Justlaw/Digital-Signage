@@ -50,8 +50,10 @@ namespace CarteleriaDigital.Pantallas
             RangoDTO rngDTO = new RangoDTO();
             rngDTO.FechaInicio = dtpFechaInicio.Value;
             rngDTO.FechaFin = dtpFechaFin.Value;
-            rngDTO.HoraInicio = dtpHoraInicio.Value;
-            rngDTO.HoraFin = dtpHoraFin.Value;
+            rngDTO.HoraInicio = Int16.Parse(txtHoraInicio.Text);
+            rngDTO.MinutoInicio = Int16.Parse(txtMinutoInicio.Text);
+            rngDTO.HoraFin = Int16.Parse(txtHoraFin.Text);
+            rngDTO.MinutoFin = Int16.Parse(txtMinutoFin.Text);
             
             if (radioButton1.Checked)
             {

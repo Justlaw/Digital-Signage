@@ -120,3 +120,11 @@ C:\Users\Gastón\Source\Repos\Digital-Signage2\CarteleriaDigital\CarteleriaDigit
 C:\Users\Gastón\Source\Repos\Digital-Signage2\CarteleriaDigital\CarteleriaDigital\bin\Debug\CarteleriaDigital.pdb
 C:\Users\Gastón\Source\Repos\Digital-Signage2\CarteleriaDigital\CarteleriaDigital\bin\Debug\Npgsql.pdb
 C:\Users\Gastón\Source\Repos\Digital-Signage2\CarteleriaDigital\CarteleriaDigital\bin\Debug\Npgsql.xml
+C:\Users\Jona\Source\Repos\Digital-Signage\CarteleriaDigital\CarteleriaDigital\bin\Debug\CarteleriaDigital.exe
+C:\Users\Jona\Source\Repos\Digital-Signage\CarteleriaDigital\CarteleriaDigital\bin\Debug\CarteleriaDigital.pdb
+C:\Users\Jona\Source\Repos\Digital-Signage\CarteleriaDigital\CarteleriaDigital\bin\Debug\Npgsql.dll
+C:\Users\Jona\Source\Repos\Digital-Signage\CarteleriaDigital\CarteleriaDigital\bin\Debug\Npgsql.pdb
+C:\Users\Jona\Source\Repos\Digital-Signage\CarteleriaDigital\CarteleriaDigital\bin\Debug\Npgsql.xml
+C:\Users\Jona\Source\Repos\Digital-Signage\CarteleriaDigital\CarteleriaDigital\obj\Debug\CarteleriaDigital.Pantallas.ListarBanner.resources
+C:\Users\Jona\Source\Repos\Digital-Signage\CarteleriaDigital\CarteleriaDigital\obj\Debug\CarteleriaDigital.Pantallas.ModificarBanner.resources
+C:\Users\Jona\Source\Repos\Digital-Signage\CarteleriaDigital\CarteleriaDigital\obj\Debug\CarteleriaDigital.Pantallas.ModificarCampaña.resources

@@ -38,18 +38,24 @@
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.dtpFechaInicio = new System.Windows.Forms.DateTimePicker();
             this.dtpFechaFin = new System.Windows.Forms.DateTimePicker();
-            this.dtpHoraInicio = new System.Windows.Forms.DateTimePicker();
-            this.dtpHoraFin = new System.Windows.Forms.DateTimePicker();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.txtHoraInicio = new System.Windows.Forms.TextBox();
+            this.txtMinutoInicio = new System.Windows.Forms.TextBox();
+            this.txtMinutoFin = new System.Windows.Forms.TextBox();
+            this.txtHoraFin = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtNombre
@@ -145,23 +151,14 @@
             this.label5.TabIndex = 9;
             this.label5.Text = "Fecha de Fin:";
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(47, 34);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(76, 13);
-            this.label6.TabIndex = 10;
-            this.label6.Text = "Hora de Inicio:";
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(278, 35);
+            this.label7.Location = new System.Drawing.Point(40, 22);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(65, 13);
+            this.label7.Size = new System.Drawing.Size(10, 13);
             this.label7.TabIndex = 11;
-            this.label7.Text = "Hora de Fin:";
+            this.label7.Text = ":";
             // 
             // dtpFechaInicio
             // 
@@ -181,26 +178,6 @@
             this.dtpFechaFin.Size = new System.Drawing.Size(97, 20);
             this.dtpFechaFin.TabIndex = 13;
             // 
-            // dtpHoraInicio
-            // 
-            this.dtpHoraInicio.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dtpHoraInicio.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dtpHoraInicio.Location = new System.Drawing.Point(133, 29);
-            this.dtpHoraInicio.Name = "dtpHoraInicio";
-            this.dtpHoraInicio.ShowUpDown = true;
-            this.dtpHoraInicio.Size = new System.Drawing.Size(68, 20);
-            this.dtpHoraInicio.TabIndex = 14;
-            // 
-            // dtpHoraFin
-            // 
-            this.dtpHoraFin.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dtpHoraFin.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dtpHoraFin.Location = new System.Drawing.Point(357, 29);
-            this.dtpHoraFin.Name = "dtpHoraFin";
-            this.dtpHoraFin.ShowUpDown = true;
-            this.dtpHoraFin.Size = new System.Drawing.Size(68, 20);
-            this.dtpHoraFin.TabIndex = 15;
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.dtpFechaInicio);
@@ -217,10 +194,8 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.dtpHoraInicio);
-            this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Controls.Add(this.dtpHoraFin);
-            this.groupBox2.Controls.Add(this.label7);
+            this.groupBox2.Controls.Add(this.groupBox4);
+            this.groupBox2.Controls.Add(this.groupBox3);
             this.groupBox2.ForeColor = System.Drawing.Color.MidnightBlue;
             this.groupBox2.Location = new System.Drawing.Point(34, 253);
             this.groupBox2.Name = "groupBox2";
@@ -251,6 +226,67 @@
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.txtMinutoInicio);
+            this.groupBox3.Controls.Add(this.txtHoraInicio);
+            this.groupBox3.Controls.Add(this.label7);
+            this.groupBox3.Location = new System.Drawing.Point(133, 16);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(90, 49);
+            this.groupBox3.TabIndex = 12;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Inicio";
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.txtMinutoFin);
+            this.groupBox4.Controls.Add(this.txtHoraFin);
+            this.groupBox4.Controls.Add(this.label6);
+            this.groupBox4.Location = new System.Drawing.Point(357, 16);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(90, 49);
+            this.groupBox4.TabIndex = 13;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Fin";
+            // 
+            // txtHoraInicio
+            // 
+            this.txtHoraInicio.Location = new System.Drawing.Point(13, 19);
+            this.txtHoraInicio.Name = "txtHoraInicio";
+            this.txtHoraInicio.Size = new System.Drawing.Size(21, 20);
+            this.txtHoraInicio.TabIndex = 0;
+            // 
+            // txtMinutoInicio
+            // 
+            this.txtMinutoInicio.Location = new System.Drawing.Point(56, 19);
+            this.txtMinutoInicio.Name = "txtMinutoInicio";
+            this.txtMinutoInicio.Size = new System.Drawing.Size(21, 20);
+            this.txtMinutoInicio.TabIndex = 11;
+            // 
+            // txtMinutoFin
+            // 
+            this.txtMinutoFin.Location = new System.Drawing.Point(57, 19);
+            this.txtMinutoFin.Name = "txtMinutoFin";
+            this.txtMinutoFin.Size = new System.Drawing.Size(21, 20);
+            this.txtMinutoFin.TabIndex = 13;
+            // 
+            // txtHoraFin
+            // 
+            this.txtHoraFin.Location = new System.Drawing.Point(14, 19);
+            this.txtHoraFin.Name = "txtHoraFin";
+            this.txtHoraFin.Size = new System.Drawing.Size(21, 20);
+            this.txtHoraFin.TabIndex = 12;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(41, 22);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(10, 13);
+            this.label6.TabIndex = 14;
+            this.label6.Text = ":";
+            // 
             // CrearBanner
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -274,7 +310,10 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -292,15 +331,19 @@
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.DateTimePicker dtpFechaInicio;
         private System.Windows.Forms.DateTimePicker dtpFechaFin;
-        private System.Windows.Forms.DateTimePicker dtpHoraInicio;
-        private System.Windows.Forms.DateTimePicker dtpHoraFin;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.TextBox txtMinutoFin;
+        private System.Windows.Forms.TextBox txtHoraFin;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.TextBox txtMinutoInicio;
+        private System.Windows.Forms.TextBox txtHoraInicio;
     }
 }
