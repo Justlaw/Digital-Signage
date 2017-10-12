@@ -39,9 +39,9 @@ namespace CarteleriaDigital.DAO
                 command.Parameters.AddWithValue("@idbanner",bsDTO.IdBanner);
                 command.ExecuteNonQuery();
             }
-            catch (NpgsqlException ex)
+            catch (NpgsqlException e)
             {
-                //Mostrar error
+                
             }
 
             Connection.con.Close();
@@ -76,5 +76,32 @@ namespace CarteleriaDigital.DAO
 
             Connection.con.Close();
         }
+
+        /// <summary>
+        /// Busca el banner simple por el id
+        /// </summary>
+        /// <param name="id">El id debe ser el perteneciente a la clase padre Banner</param>
+        /// <returns></returns>
+        public BannerSimpleDTO BuscarPorId(int id)
+        {
+            Connection.con.Open();
+
+                String query = "select b.nombre, bs.texto, bs.idbannersimple, b.idbanner, b.idrango from banner b, bannersimple bs where b.idbanner = "+id+" and b.idbanner = bs.idbanner";
+                NpgsqlCommand cmd = new NpgsqlCommand(query, Connection.con);
+            //cmd.Parameters.AddWithValue("@id", id);
+            NpgsqlDataReader dr = cmd.ExecuteReader();
+
+                dr.Read();
+                BannerSimpleDTO bsDTO = new BannerSimpleDTO();
+                bsDTO.Nombre = dr.GetString(0);
+                bsDTO.Texto = dr.GetString(1);
+                bsDTO.IdBannerSimple = dr.GetInt32(2);
+                bsDTO.IdBanner = dr.GetInt32(3);
+                bsDTO.IdRango = dr.GetInt32(4);
+
+            Connection.con.Close();
+            return bsDTO;
+        }
+
     }
 }

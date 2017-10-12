@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CarteleriaDigital.DTO;
+using CarteleriaDigital.DAO;
 
 namespace CarteleriaDigital.Controladores
 {
@@ -20,6 +21,24 @@ namespace CarteleriaDigital.Controladores
         public static void CrearBannerRSS(BannerRSSDTO brss_DTO, RangoDTO rng_DTO)
         {
 
+        }
+
+        public static BannerSimpleDTO BuscarBannerSimple(int id)
+        {
+            BannerSimpleDAO bsDAO = new BannerSimpleDAO();
+            return bsDAO.BuscarPorId(id);
+        }
+
+        public static BannerRSSDTO BuscarBannerRSS(int id)
+        {
+            BannerRSSDAO brssDAO = new BannerRSSDAO();
+            return brssDAO.BuscarPorId(id);
+        }
+
+        public static RangoDTO BuscarRangoPorId(int id)
+        {
+            RangoDAO rngDAO = new RangoDAO();
+            return rngDAO.BuscarRangoPorID(id);
         }
     }
 }

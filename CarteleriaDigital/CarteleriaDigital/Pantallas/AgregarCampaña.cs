@@ -57,8 +57,8 @@ namespace CarteleriaDigital.Pantallas
                 RangoDTO rng = new RangoDTO();
                 rng.FechaInicio = dateTimePicker1.Value;
                 rng.FechaFin = dateTimePicker2.Value;
-                rng.HoraInicio = dateTimePicker3.Value;
-                rng.HoraFin = dateTimePicker4.Value;
+                //rng.HoraInicio = dateTimePicker3.Value;
+                //rng.HoraFin = dateTimePicker4.Value;
                 camp.Activo = true;
                 camp.Nombre = textBox1.Text;
                

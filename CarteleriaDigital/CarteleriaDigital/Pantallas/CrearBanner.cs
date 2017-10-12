@@ -50,36 +50,44 @@ namespace CarteleriaDigital.Pantallas
             RangoDTO rngDTO = new RangoDTO();
             rngDTO.FechaInicio = dtpFechaInicio.Value;
             rngDTO.FechaFin = dtpFechaFin.Value;
-            rngDTO.HoraInicio = Int16.Parse(txtHoraInicio.Text);
-            rngDTO.MinutoInicio = Int16.Parse(txtMinutoInicio.Text);
-            rngDTO.HoraFin = Int16.Parse(txtHoraFin.Text);
-            rngDTO.MinutoFin = Int16.Parse(txtMinutoFin.Text);
-            
-            if (radioButton1.Checked)
-            {
-                BannerSimpleDTO bsDTO = new BannerSimpleDTO();
-                bsDTO.Nombre = txtNombre.Text;
-                bsDTO.Texto = txtTexto.Text;
-                bool result = ControladorBanners.CrearBannerSimple(bsDTO, rngDTO);
-                if (!result)
-                {
-                    MessageBox.Show("No se pudo guardar el nuevo banner");
-                }
-                else
-                {
-                    MessageBox.Show("Agregado con éxito!");
-                }
 
+            if (horaInicio.Text == "" || horaFin.Text == "" | minInicio.Text == "" || minFin.Text == "")
+            {
+                MessageBox.Show("Debe hacer click en los horarios que elija", "Ups", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
-            if (radioButton2.Checked)
+            else
             {
-                BannerRSSDTO brssDTO = new BannerRSSDTO();
-                brssDTO.Nombre = txtNombre.Text;
-                brssDTO.FuenteRSS = txtURL.Text;
-                ControladorBanners.CrearBannerRSS(brssDTO, rngDTO);
-            }
+                rngDTO.HoraInicio = Int16.Parse(horaInicio.Text);
+                rngDTO.MinutoInicio = Int16.Parse(minInicio.Text);
+                rngDTO.HoraFin = Int16.Parse(horaFin.Text);
+                rngDTO.MinutoFin = Int16.Parse(minFin.Text);
 
+                if (radioButton1.Checked)
+                {
+                    BannerSimpleDTO bsDTO = new BannerSimpleDTO();
+                    bsDTO.Nombre = txtNombre.Text;
+                    bsDTO.Texto = txtTexto.Text;
+                    bool result = ControladorBanners.CrearBannerSimple(bsDTO, rngDTO);
+                    if (!result)
+                    {
+                        MessageBox.Show("No se pudo guardar el nuevo banner");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Agregado con éxito!");
+                    }
+
+                }
+
+                if (radioButton2.Checked)
+                {
+                    BannerRSSDTO brssDTO = new BannerRSSDTO();
+                    brssDTO.Nombre = txtNombre.Text;
+                    brssDTO.FuenteRSS = txtURL.Text;
+                    ControladorBanners.CrearBannerRSS(brssDTO, rngDTO);
+                }
+            }
         }
 
     }

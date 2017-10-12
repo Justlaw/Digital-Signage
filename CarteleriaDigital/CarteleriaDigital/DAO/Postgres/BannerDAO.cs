@@ -155,9 +155,9 @@ namespace CarteleriaDigital.DAO
             try
             {
                 // Create select command.
-                NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM banner, rango WHERE" +
-                    "banner.idrango = rango.idrango and pFechaIni = rango.fechainicio and"
-                    + "pFechaFin = rango.fechafin ORDER BY idbanner ASC", Connection.con);
+                NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM banner, rango WHERE " +
+                    "banner.idrango = rango.idrango and " + pFechaIni + " = rango.fechainicio and "
+                    + pFechaFin +" = rango.fechafin ORDER BY idbanner ASC", Connection.con);
 
                 // Prepare the command.
                 command.Prepare();
@@ -197,12 +197,14 @@ namespace CarteleriaDigital.DAO
             dt.Columns.Add("Activo");
             dt.Columns.Add("FechaInicio");
             dt.Columns.Add("FechaFin");
-            dt.Columns.Add("HoraInicio");
-            dt.Columns.Add("HoraFin");
+            dt.Columns.Add("hhI");
+            dt.Columns.Add("minI");
+            dt.Columns.Add("hhF");
+            dt.Columns.Add("minF");
 
             Connection.con.Open();
 
-            NpgsqlCommand cmd = new NpgsqlCommand("select idbanner, banner.idrango, nombre, tipo, activo, fechainicio, fechafin, horainicio, horafin " +
+            NpgsqlCommand cmd = new NpgsqlCommand("select idbanner, banner.idrango, nombre, tipo, activo, fechainicio, fechafin, horainicio as hhI, minutoinicio as minI, horafin as hhF, minutofin as minF " +
                                                   "from banner, rango where banner.idrango = rango.idrango", Connection.con);
 
             NpgsqlDataAdapter da = new NpgsqlDataAdapter(cmd);
@@ -213,10 +215,6 @@ namespace CarteleriaDigital.DAO
             return dt;
         }
 
-        public void Listar()
-        {
-            throw new NotImplementedException();
-        }
 
         public int ObtenerUltimoId()
         {

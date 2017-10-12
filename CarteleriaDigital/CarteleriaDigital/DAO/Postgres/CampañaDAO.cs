@@ -74,7 +74,6 @@ namespace CarteleriaDigital.DAO
 
         public CampañaDTO BuscarCampañaPorID(int id_Camp)
         {
-            CampañaDAO camp_DAO = new CampañaDAO();
             CampañaDTO camp_DTO = new CampañaDTO();
 
             Connection.con.Open();

@@ -78,5 +78,30 @@ namespace CarteleriaDigital.DAO
 
             Connection.con.Close();
         }
+
+        /// <summary>
+        /// Busca un banner RSS por el id
+        /// </summary>
+        /// <param name="id">debe ser el de la clase banner padre</param>
+        /// <returns></returns>
+        public BannerRSSDTO BuscarPorId (int id)
+        {
+            Connection.con.Open();
+
+            NpgsqlCommand cmd = new NpgsqlCommand("SELECT nombre, fuenterss, idbannersimple, idbanner, idrango FROM banner b, bannerrss brss " +
+                                                    "WHERE b.idbanner = brss.idbanner and b.idbanner = " + id, Connection.con);
+
+            NpgsqlDataReader dr = cmd.ExecuteReader();
+            
+            BannerRSSDTO brssDTO = new BannerRSSDTO();
+            brssDTO.IdBanner = dr.GetInt16(3);
+            brssDTO.IdBannerRSS = dr.GetInt16(2);
+            brssDTO.Nombre = dr.GetString(0);
+            brssDTO.FuenteRSS = dr.GetString(1);
+            brssDTO.IdRango = dr.GetInt16(4);
+
+            Connection.con.Close();
+            return brssDTO;
+        }
     }
 }

@@ -62,7 +62,6 @@
     <Compile Include="DAO\Postgres\BannerRSSDAO.cs" />
     <Compile Include="DAO\Postgres\BannerSimpleDAO.cs" />
     <Compile Include="DAO\Postgres\CampañaDAO.cs" />
-    <Compile Include="DAO\Conexion.cs" />
     <Compile Include="DAO\Postgres\ImagenDAO.cs" />
     <Compile Include="DAO\Postgres\RangoDAO.cs" />
     <Compile Include="DTO\BannerDTO.cs" />

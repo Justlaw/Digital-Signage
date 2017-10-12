@@ -18,13 +18,48 @@ namespace CarteleriaDigital.Pantallas
 
             DAO.BannerDAO bd = new DAO.BannerDAO();
             DataTable dt = bd.SelectBannersConRango();
+
+            formatearTabla(dt);
+        }
+
+
+        private void formatearTabla(DataTable dt)
+        {
             dataGridView1.DataSource = dt;
             dataGridView1.Columns[0].Visible = false;
             dataGridView1.Columns[1].Visible = false;
             dataGridView1.Columns[3].Visible = false;
             rbPorNombre.Checked = true;
-        }
 
+            //Formateando ancho de las columnas
+            //Columna ID banner
+            dataGridView1.Columns[1].Width = 30;
+            //Columna de Activo
+            dataGridView1.Columns[4].Width = 45;
+            // Columnas de las horas de inicio y fin
+            dataGridView1.Columns[7].Width = 25;
+            dataGridView1.Columns[8].Width = 25;
+            dataGridView1.Columns[9].Width = 25;
+            dataGridView1.Columns[10].Width = 25;
+
+            int filas = dataGridView1.Rows.Count;
+
+            for (int i = 0; i <= filas - 1; i++)
+            {
+                dataGridView1[5, i].Value = dataGridView1[5, i].Value.ToString().Remove(11);
+                dataGridView1[6, i].Value = dataGridView1[6, i].Value.ToString().Remove(11);
+                if (dataGridView1[4, i].Value.ToString() == "False")
+                {
+                    dataGridView1[4, i].Value = "No";
+                }
+                else
+                {
+                    dataGridView1[4, i].Value = "Sí";
+                }
+
+            }
+           
+        }
 
         private void button4_Click(object sender, EventArgs e)
         {
@@ -93,6 +128,21 @@ namespace CarteleriaDigital.Pantallas
             }
         }
 
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Debe seleccionar el renglón completo haciendo click en la flechita a la izquierda", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            else
+            {
+                DataGridViewRow renglon = dataGridView1.CurrentRow;
+
+                ModificarBanner mb = new ModificarBanner(renglon);
+                mb.Show();
+            }
+        }
     }
     }
 

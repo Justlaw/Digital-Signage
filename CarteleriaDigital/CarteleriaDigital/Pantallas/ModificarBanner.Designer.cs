@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.rbRSS = new System.Windows.Forms.RadioButton();
+            this.rbBS = new System.Windows.Forms.RadioButton();
             this.label3 = new System.Windows.Forms.Label();
             this.txtURL = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -42,37 +42,41 @@
             this.label5 = new System.Windows.Forms.Label();
             this.dtpFechaFin = new System.Windows.Forms.DateTimePicker();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.dtpHoraInicio = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
-            this.dtpHoraFin = new System.Windows.Forms.DateTimePicker();
             this.label7 = new System.Windows.Forms.Label();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnAceptar = new System.Windows.Forms.Button();
+            this.minInicio = new System.Windows.Forms.ListBox();
+            this.horaInicio = new System.Windows.Forms.ListBox();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.listBox2 = new System.Windows.Forms.ListBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // radioButton2
+            // rbRSS
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(168, 65);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(84, 17);
-            this.radioButton2.TabIndex = 15;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Banner RSS";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.rbRSS.AutoSize = true;
+            this.rbRSS.Enabled = false;
+            this.rbRSS.Location = new System.Drawing.Point(168, 65);
+            this.rbRSS.Name = "rbRSS";
+            this.rbRSS.Size = new System.Drawing.Size(84, 17);
+            this.rbRSS.TabIndex = 15;
+            this.rbRSS.TabStop = true;
+            this.rbRSS.Text = "Banner RSS";
+            this.rbRSS.UseVisualStyleBackColor = true;
             // 
-            // radioButton1
+            // rbBS
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(77, 65);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(93, 17);
-            this.radioButton1.TabIndex = 14;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Banner Simple";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.rbBS.AutoSize = true;
+            this.rbBS.Enabled = false;
+            this.rbBS.Location = new System.Drawing.Point(77, 65);
+            this.rbBS.Name = "rbBS";
+            this.rbBS.Size = new System.Drawing.Size(93, 17);
+            this.rbBS.TabIndex = 14;
+            this.rbBS.TabStop = true;
+            this.rbBS.Text = "Banner Simple";
+            this.rbBS.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
@@ -97,9 +101,9 @@
             this.label2.ForeColor = System.Drawing.Color.MidnightBlue;
             this.label2.Location = new System.Drawing.Point(24, 91);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(47, 13);
+            this.label2.Size = new System.Drawing.Size(37, 13);
             this.label2.TabIndex = 11;
-            this.label2.Text = "Nombre:";
+            this.label2.Text = "Texto:";
             // 
             // txtTexto
             // 
@@ -177,9 +181,11 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.dtpHoraInicio);
+            this.groupBox2.Controls.Add(this.listBox1);
+            this.groupBox2.Controls.Add(this.listBox2);
+            this.groupBox2.Controls.Add(this.minInicio);
             this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Controls.Add(this.dtpHoraFin);
+            this.groupBox2.Controls.Add(this.horaInicio);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.ForeColor = System.Drawing.Color.MidnightBlue;
             this.groupBox2.Location = new System.Drawing.Point(27, 257);
@@ -189,16 +195,6 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Rango Horario";
             // 
-            // dtpHoraInicio
-            // 
-            this.dtpHoraInicio.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dtpHoraInicio.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dtpHoraInicio.Location = new System.Drawing.Point(133, 29);
-            this.dtpHoraInicio.Name = "dtpHoraInicio";
-            this.dtpHoraInicio.ShowUpDown = true;
-            this.dtpHoraInicio.Size = new System.Drawing.Size(68, 20);
-            this.dtpHoraInicio.TabIndex = 14;
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -207,16 +203,6 @@
             this.label6.Size = new System.Drawing.Size(76, 13);
             this.label6.TabIndex = 10;
             this.label6.Text = "Hora de Inicio:";
-            // 
-            // dtpHoraFin
-            // 
-            this.dtpHoraFin.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dtpHoraFin.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dtpHoraFin.Location = new System.Drawing.Point(357, 29);
-            this.dtpHoraFin.Name = "dtpHoraFin";
-            this.dtpHoraFin.ShowUpDown = true;
-            this.dtpHoraFin.Size = new System.Drawing.Size(68, 20);
-            this.dtpHoraFin.TabIndex = 15;
             // 
             // label7
             // 
@@ -247,17 +233,111 @@
             this.btnAceptar.Text = "Aceptar";
             this.btnAceptar.UseVisualStyleBackColor = true;
             // 
+            // minInicio
+            // 
+            this.minInicio.FormattingEnabled = true;
+            this.minInicio.Items.AddRange(new object[] {
+            "00",
+            "15",
+            "30",
+            "45"});
+            this.minInicio.Location = new System.Drawing.Point(183, 30);
+            this.minInicio.Name = "minInicio";
+            this.minInicio.Size = new System.Drawing.Size(38, 17);
+            this.minInicio.TabIndex = 17;
+            // 
+            // horaInicio
+            // 
+            this.horaInicio.FormatString = "N0";
+            this.horaInicio.FormattingEnabled = true;
+            this.horaInicio.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "23",
+            "24"});
+            this.horaInicio.Location = new System.Drawing.Point(129, 30);
+            this.horaInicio.Name = "horaInicio";
+            this.horaInicio.Size = new System.Drawing.Size(36, 17);
+            this.horaInicio.TabIndex = 16;
+            // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Items.AddRange(new object[] {
+            "00",
+            "15",
+            "30",
+            "45"});
+            this.listBox1.Location = new System.Drawing.Point(403, 30);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(38, 17);
+            this.listBox1.TabIndex = 19;
+            // 
+            // listBox2
+            // 
+            this.listBox2.FormatString = "N0";
+            this.listBox2.FormattingEnabled = true;
+            this.listBox2.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "23",
+            "24"});
+            this.listBox2.Location = new System.Drawing.Point(349, 30);
+            this.listBox2.Name = "listBox2";
+            this.listBox2.Size = new System.Drawing.Size(36, 17);
+            this.listBox2.TabIndex = 18;
+            // 
             // ModificarBanner
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(549, 415);
+            this.ClientSize = new System.Drawing.Size(554, 415);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.radioButton2);
-            this.Controls.Add(this.radioButton1);
+            this.Controls.Add(this.rbRSS);
+            this.Controls.Add(this.rbBS);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtURL);
             this.Controls.Add(this.label2);
@@ -278,8 +358,8 @@
 
         #endregion
 
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton rbRSS;
+        private System.Windows.Forms.RadioButton rbBS;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtURL;
         private System.Windows.Forms.Label label2;
@@ -292,11 +372,13 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DateTimePicker dtpFechaFin;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.DateTimePicker dtpHoraInicio;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.DateTimePicker dtpHoraFin;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Button btnAceptar;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox listBox2;
+        private System.Windows.Forms.ListBox minInicio;
+        private System.Windows.Forms.ListBox horaInicio;
     }
 }

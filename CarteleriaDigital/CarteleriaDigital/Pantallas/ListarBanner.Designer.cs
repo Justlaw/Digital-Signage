@@ -29,30 +29,30 @@
         private void InitializeComponent()
         {
             this.gb_BuscarPor = new System.Windows.Forms.GroupBox();
+            this.rbTipo = new System.Windows.Forms.RadioButton();
+            this.gpTipo = new System.Windows.Forms.GroupBox();
+            this.cbTipo = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.rbFechas = new System.Windows.Forms.RadioButton();
             this.rbPorNombre = new System.Windows.Forms.RadioButton();
             this.gpFechas = new System.Windows.Forms.GroupBox();
             this.dtpFechaInicio = new System.Windows.Forms.DateTimePicker();
-            this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.cbTipo = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.dtpFechaFin = new System.Windows.Forms.DateTimePicker();
             this.gpPorNombre = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.btnFiltrar = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnModificar = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button4 = new System.Windows.Forms.Button();
-            this.gpTipo = new System.Windows.Forms.GroupBox();
-            this.rbTipo = new System.Windows.Forms.RadioButton();
             this.gb_BuscarPor.SuspendLayout();
+            this.gpTipo.SuspendLayout();
             this.gpFechas.SuspendLayout();
             this.gpPorNombre.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.gpTipo.SuspendLayout();
             this.SuspendLayout();
             // 
             // gb_BuscarPor
@@ -71,6 +71,48 @@
             this.gb_BuscarPor.TabIndex = 0;
             this.gb_BuscarPor.TabStop = false;
             this.gb_BuscarPor.Text = "Buscar por...";
+            // 
+            // rbTipo
+            // 
+            this.rbTipo.AutoSize = true;
+            this.rbTipo.Location = new System.Drawing.Point(18, 120);
+            this.rbTipo.Name = "rbTipo";
+            this.rbTipo.Size = new System.Drawing.Size(14, 13);
+            this.rbTipo.TabIndex = 13;
+            this.rbTipo.TabStop = true;
+            this.rbTipo.UseVisualStyleBackColor = true;
+            this.rbTipo.CheckedChanged += new System.EventHandler(this.rbTipo_CheckedChanged);
+            // 
+            // gpTipo
+            // 
+            this.gpTipo.Controls.Add(this.cbTipo);
+            this.gpTipo.Controls.Add(this.label4);
+            this.gpTipo.Location = new System.Drawing.Point(36, 96);
+            this.gpTipo.Name = "gpTipo";
+            this.gpTipo.Size = new System.Drawing.Size(209, 55);
+            this.gpTipo.TabIndex = 10;
+            this.gpTipo.TabStop = false;
+            // 
+            // cbTipo
+            // 
+            this.cbTipo.FormattingEnabled = true;
+            this.cbTipo.Items.AddRange(new object[] {
+            "Todos",
+            "Simple",
+            "RSS"});
+            this.cbTipo.Location = new System.Drawing.Point(73, 18);
+            this.cbTipo.Name = "cbTipo";
+            this.cbTipo.Size = new System.Drawing.Size(121, 21);
+            this.cbTipo.TabIndex = 7;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 21);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(31, 13);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Tipo:";
             // 
             // rbFechas
             // 
@@ -114,15 +156,6 @@
             this.dtpFechaInicio.Size = new System.Drawing.Size(121, 20);
             this.dtpFechaInicio.TabIndex = 3;
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 21);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(31, 13);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Tipo:";
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -131,18 +164,6 @@
             this.label2.Size = new System.Drawing.Size(41, 13);
             this.label2.TabIndex = 2;
             this.label2.Text = "Desde:";
-            // 
-            // cbTipo
-            // 
-            this.cbTipo.FormattingEnabled = true;
-            this.cbTipo.Items.AddRange(new object[] {
-            "Todos",
-            "Simple",
-            "RSS"});
-            this.cbTipo.Location = new System.Drawing.Point(73, 18);
-            this.cbTipo.Name = "cbTipo";
-            this.cbTipo.Size = new System.Drawing.Size(121, 21);
-            this.cbTipo.TabIndex = 7;
             // 
             // label3
             // 
@@ -198,15 +219,16 @@
             this.btnFiltrar.UseVisualStyleBackColor = true;
             this.btnFiltrar.Click += new System.EventHandler(this.btnFiltrar_Click);
             // 
-            // button2
+            // btnModificar
             // 
-            this.button2.ForeColor = System.Drawing.Color.Teal;
-            this.button2.Location = new System.Drawing.Point(112, 307);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Modificar";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnModificar.ForeColor = System.Drawing.Color.Teal;
+            this.btnModificar.Location = new System.Drawing.Point(112, 307);
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(75, 23);
+            this.btnModificar.TabIndex = 1;
+            this.btnModificar.Text = "Modificar";
+            this.btnModificar.UseVisualStyleBackColor = true;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
             // button3
             // 
@@ -225,7 +247,9 @@
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(269, 19);
+            this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(519, 311);
             this.dataGridView1.TabIndex = 3;
             // 
@@ -240,27 +264,6 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // gpTipo
-            // 
-            this.gpTipo.Controls.Add(this.cbTipo);
-            this.gpTipo.Controls.Add(this.label4);
-            this.gpTipo.Location = new System.Drawing.Point(36, 96);
-            this.gpTipo.Name = "gpTipo";
-            this.gpTipo.Size = new System.Drawing.Size(209, 55);
-            this.gpTipo.TabIndex = 10;
-            this.gpTipo.TabStop = false;
-            // 
-            // rbTipo
-            // 
-            this.rbTipo.AutoSize = true;
-            this.rbTipo.Location = new System.Drawing.Point(18, 120);
-            this.rbTipo.Name = "rbTipo";
-            this.rbTipo.Size = new System.Drawing.Size(14, 13);
-            this.rbTipo.TabIndex = 13;
-            this.rbTipo.TabStop = true;
-            this.rbTipo.UseVisualStyleBackColor = true;
-            this.rbTipo.CheckedChanged += new System.EventHandler(this.rbTipo_CheckedChanged);
-            // 
             // ListarBanner
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -269,20 +272,20 @@
             this.Controls.Add(this.button4);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.gb_BuscarPor);
             this.Name = "ListarBanner";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ListarBanner";
             this.gb_BuscarPor.ResumeLayout(false);
             this.gb_BuscarPor.PerformLayout();
+            this.gpTipo.ResumeLayout(false);
+            this.gpTipo.PerformLayout();
             this.gpFechas.ResumeLayout(false);
             this.gpFechas.PerformLayout();
             this.gpPorNombre.ResumeLayout(false);
             this.gpPorNombre.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.gpTipo.ResumeLayout(false);
-            this.gpTipo.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -296,7 +299,7 @@
         private System.Windows.Forms.DateTimePicker dtpFechaFin;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnFiltrar;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnModificar;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button button4;

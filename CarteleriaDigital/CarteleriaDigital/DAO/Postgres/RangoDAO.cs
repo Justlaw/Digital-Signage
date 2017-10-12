@@ -97,13 +97,14 @@ namespace CarteleriaDigital.DAO
                 command.Prepare();
 
                 NpgsqlDataReader dr = command.ExecuteReader();
+                dr.Read();
 
-                rng_DTO.FechaInicio = dr.GetDateTime(0);
-                rng_DTO.FechaFin = dr.GetDateTime(1);
-                rng_DTO.HoraInicio = dr.GetInt16(2);
-                rng_DTO.MinutoInicio = dr.GetInt16(3);
-                rng_DTO.HoraFin = dr.GetInt16(4);
-                rng_DTO.MinutoFin = dr.GetInt16(5);
+                rng_DTO.FechaInicio = dr.GetDateTime(1);
+                rng_DTO.FechaFin = dr.GetDateTime(2);
+                rng_DTO.HoraInicio = dr.GetInt16(3);
+                rng_DTO.MinutoInicio = dr.GetInt16(4);
+                rng_DTO.HoraFin = dr.GetInt16(5);
+                rng_DTO.MinutoFin = dr.GetInt16(6);
 
                 
             }
