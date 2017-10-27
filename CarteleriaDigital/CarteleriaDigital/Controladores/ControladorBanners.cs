@@ -18,9 +18,11 @@ namespace CarteleriaDigital.Controladores
             
         }
 
-        public static void CrearBannerRSS(BannerRSSDTO brss_DTO, RangoDTO rng_DTO)
+        public static bool CrearBannerRSS(BannerRSSDTO brss_DTO, RangoDTO rng_DTO)
         {
-
+            Rango rng = new Rango(rng_DTO.FechaInicio, rng_DTO.FechaFin, rng_DTO.HoraInicio, rng_DTO.MinutoInicio, rng_DTO.HoraFin, rng_DTO.MinutoFin);
+            BannerRSS brss = new BannerRSS(brss_DTO.FuenteRSS, true, brss_DTO.Nombre, rng);
+            return brss.Guardar(brss_DTO, rng_DTO);
         }
 
         public static BannerSimpleDTO BuscarBannerSimple(int id)
@@ -39,6 +41,16 @@ namespace CarteleriaDigital.Controladores
         {
             RangoDAO rngDAO = new RangoDAO();
             return rngDAO.BuscarRangoPorID(id);
+        }
+
+        public static bool ModificarBannerSimple(String pNombre, String pTexto, Rango pRango)
+        {
+            return true;
+        }
+
+        public static bool ModificarBannerRSS()
+        {
+            return true;
         }
     }
 }

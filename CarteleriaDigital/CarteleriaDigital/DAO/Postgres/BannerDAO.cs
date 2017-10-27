@@ -51,13 +51,12 @@ namespace CarteleriaDigital.DAO
             try
             {
                 // Create update command.
-                NpgsqlCommand command = new NpgsqlCommand(@"UPDATE Banner " +
-                    "SET idRango = @idRango, Nombre = @Nombre, Activo = @Activo WHERE idBanner = " + ban.IdBanner , Connection.con);
+                NpgsqlCommand command = new NpgsqlCommand(@"UPDATE banner " +
+                    "SET nombre = @nombre, activo = @activo WHERE idBanner = " + ban.IdBanner , Connection.con);
 
                 // Add paramaters.
-                command.Parameters.AddWithValue("@Nombre", ban.Nombre);
-                command.Parameters.AddWithValue("@Activo", ban.Activo);
-                command.Parameters.AddWithValue("@idRango", ban.Activo);
+                command.Parameters.AddWithValue("@nombre", ban.Nombre);
+                command.Parameters.AddWithValue("@activo", ban.Activo);
 
                 // Execute SQL command.
                 int recordAffected = command.ExecuteNonQuery();

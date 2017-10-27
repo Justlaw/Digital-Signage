@@ -17,14 +17,24 @@ namespace CarteleriaDigital
         private short iHoraFin;
         private short iMinutoFin;
 
-        public Rango(DateTime pFechaInicio, DateTime pFechaFin, short pHoraInicio, short pMinutoInico, short pHoraFin, short pMinutoFin)
+        public Rango(DateTime pFechaInicio, DateTime pFechaFin, short pHoraInicio, short pMinutoInicio, short pHoraFin, short pMinutoFin)
         {
             this.iFechaInicio = pFechaInicio;
             this.iFechaFin = pFechaFin;
             this.iHoraInicio = pHoraInicio;
-            this.iMinutoInicio = pMinutoInico;
+            this.iMinutoInicio = pMinutoInicio;
             this.iHoraFin = pHoraFin;
             this.iMinutoFin = pMinutoFin;
+        }
+
+        public Rango(RangoDTO rngDTO)
+        {
+            this.iFechaInicio = rngDTO.FechaInicio;
+            this.iFechaFin = rngDTO.FechaFin;
+            this.iHoraInicio = rngDTO.HoraInicio;
+            this.iMinutoInicio = rngDTO.MinutoInicio;
+            this.iHoraFin = rngDTO.HoraFin;
+            this.iMinutoFin = rngDTO.MinutoFin;
         }
 
         #region Accesores
@@ -71,7 +81,6 @@ namespace CarteleriaDigital
         /// <returns></returns>
         public bool RangoDisponibleBanner()
         {
-            bool result = true;
             RangoDAO rng_DAO = new RangoDAO();
             List<RangoDTO> lista = rng_DAO.RangosBanners();
             foreach (RangoDTO rango in lista)
@@ -83,13 +92,12 @@ namespace CarteleriaDigital
                         && iMinutoInicio >= rango.MinutoInicio && iMinutoInicio <= rango.MinutoFin
                         )
                     {
-                        result = false;
-                        return result;
+                        return false;
                     }
                 }
             }
 
-            return result;
+            return true;
 
         }
 

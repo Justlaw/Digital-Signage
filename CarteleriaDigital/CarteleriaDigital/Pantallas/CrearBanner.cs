@@ -63,6 +63,7 @@ namespace CarteleriaDigital.Pantallas
                 rngDTO.HoraFin = Int16.Parse(horaFin.Text);
                 rngDTO.MinutoFin = Int16.Parse(minFin.Text);
 
+                bool resultado = false;
                 if (radioButton1.Checked)
                 {
                     BannerSimpleDTO bsDTO = new BannerSimpleDTO();
@@ -80,12 +81,12 @@ namespace CarteleriaDigital.Pantallas
 
                 }
 
-                if (radioButton2.Checked)
+                else
                 {
                     BannerRSSDTO brssDTO = new BannerRSSDTO();
                     brssDTO.Nombre = txtNombre.Text;
                     brssDTO.FuenteRSS = txtURL.Text;
-                    ControladorBanners.CrearBannerRSS(brssDTO, rngDTO);
+                    bool result = ControladorBanners.CrearBannerRSS(brssDTO, rngDTO);
                 }
             }
         }

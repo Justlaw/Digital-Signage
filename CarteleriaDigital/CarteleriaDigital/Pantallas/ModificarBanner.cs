@@ -14,34 +14,63 @@ namespace CarteleriaDigital.Pantallas
 {
     public partial class ModificarBanner : Form
     {
+        int idrango;
+        int idbanner;
         public ModificarBanner(DataGridViewRow renglonBanner)
         {
             InitializeComponent();
-            int id = 0;
+            idbanner = Int16.Parse(renglonBanner.Cells["idbanner"].Value.ToString());
+ 
 
             txtNombre.Text = renglonBanner.Cells["Nombre"].Value.ToString();
             if (renglonBanner.Cells["Tipo"].Value.ToString() == "simple")
             {
                 rbBS.Checked = true;
                 txtURL.Enabled = false;
-                BannerSimpleDTO bsDTO = ControladorBanners.BuscarBannerSimple(Int16.Parse(renglonBanner.Cells["idbanner"].Value.ToString()));
+                BannerSimpleDTO bsDTO = ControladorBanners.BuscarBannerSimple(idbanner);
                 txtTexto.Text = bsDTO.Texto;
-                id = bsDTO.IdRango.Value;
+                idrango = bsDTO.IdRango.Value;
 
             }
             else
             {
                 rbRSS.Checked = true;
                 txtTexto.Enabled = false;
-                BannerRSSDTO brssDTO = ControladorBanners.BuscarBannerRSS(Int16.Parse(renglonBanner.Cells["idbanner"].Value.ToString()));
+                BannerRSSDTO brssDTO = ControladorBanners.BuscarBannerRSS(idbanner);
                 txtURL.Text = brssDTO.FuenteRSS;
-                id = brssDTO.IdRango.Value;
+                idrango = brssDTO.IdRango.Value;
             }
 
-            RangoDTO rngDTO = ControladorBanners.BuscarRangoPorId(id);
+            RangoDTO rngDTO = ControladorBanners.BuscarRangoPorId(idrango);
             dtpFechaInicio.Value = rngDTO.FechaInicio;
             dtpFechaFin.Value = rngDTO.FechaFin;
 
+        }
+
+        private void btnAceptar_Click(object sender, EventArgs e)
+        {
+            RangoDTO rngDTO = new RangoDTO();
+            rngDTO.IdRango = idrango;
+            rngDTO.HoraInicio = Int16.Parse(horaInicio.SelectedText);
+            rngDTO.MinutoInicio = Int16.Parse(minutoInicio.SelectedText);
+            rngDTO.HoraFin = Int16.Parse(horaFin.SelectedText);
+            rngDTO.MinutoFin = Int16.Parse(minutoFin.SelectedText);
+
+            if (rbBS.Checked)
+            {
+                BannerSimpleDTO bsDTO= new BannerSimpleDTO();
+//                bsDTO
+
+                //ControladorBanners.ModificarBannerSimple(bsDTO, rngDTO);
+            }
+
+            if (rbRSS.Checked)
+            {
+
+            }
+
+
+           
         }
     }
 

@@ -276,6 +276,7 @@
             // 
             this.horaInicio.FormatString = "N0";
             this.horaInicio.FormattingEnabled = true;
+            this.horaInicio.ImeMode = System.Windows.Forms.ImeMode.On;
             this.horaInicio.Items.AddRange(new object[] {
             "1",
             "2",

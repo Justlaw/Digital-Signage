@@ -46,10 +46,10 @@
             this.label7 = new System.Windows.Forms.Label();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnAceptar = new System.Windows.Forms.Button();
-            this.minInicio = new System.Windows.Forms.ListBox();
-            this.horaInicio = new System.Windows.Forms.ListBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.listBox2 = new System.Windows.Forms.ListBox();
+            this.horaInicio = new System.Windows.Forms.ComboBox();
+            this.horaFin = new System.Windows.Forms.ComboBox();
+            this.minutoInicio = new System.Windows.Forms.ComboBox();
+            this.minutoFin = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -181,11 +181,11 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.listBox1);
-            this.groupBox2.Controls.Add(this.listBox2);
-            this.groupBox2.Controls.Add(this.minInicio);
-            this.groupBox2.Controls.Add(this.label6);
+            this.groupBox2.Controls.Add(this.minutoFin);
+            this.groupBox2.Controls.Add(this.minutoInicio);
+            this.groupBox2.Controls.Add(this.horaFin);
             this.groupBox2.Controls.Add(this.horaInicio);
+            this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.ForeColor = System.Drawing.Color.MidnightBlue;
             this.groupBox2.Location = new System.Drawing.Point(27, 257);
@@ -232,34 +232,23 @@
             this.btnAceptar.TabIndex = 20;
             this.btnAceptar.Text = "Aceptar";
             this.btnAceptar.UseVisualStyleBackColor = true;
-            // 
-            // minInicio
-            // 
-            this.minInicio.FormattingEnabled = true;
-            this.minInicio.Items.AddRange(new object[] {
-            "00",
-            "15",
-            "30",
-            "45"});
-            this.minInicio.Location = new System.Drawing.Point(183, 30);
-            this.minInicio.Name = "minInicio";
-            this.minInicio.Size = new System.Drawing.Size(38, 17);
-            this.minInicio.TabIndex = 17;
+            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
             // horaInicio
             // 
-            this.horaInicio.FormatString = "N0";
+            this.horaInicio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.horaInicio.FormattingEnabled = true;
             this.horaInicio.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
+            "00",
+            "01",
+            "02",
+            "03",
+            "04",
+            "05",
+            "06",
+            "07",
+            "08",
+            "09",
             "10",
             "11",
             "12",
@@ -273,59 +262,73 @@
             "20",
             "21",
             "22",
-            "23",
-            "24"});
-            this.horaInicio.Location = new System.Drawing.Point(129, 30);
+            "23"});
+            this.horaInicio.Location = new System.Drawing.Point(129, 31);
             this.horaInicio.Name = "horaInicio";
-            this.horaInicio.Size = new System.Drawing.Size(36, 17);
-            this.horaInicio.TabIndex = 16;
+            this.horaInicio.Size = new System.Drawing.Size(43, 21);
+            this.horaInicio.TabIndex = 22;
             // 
-            // listBox1
+            // horaFin
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Items.AddRange(new object[] {
+            this.horaFin.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.horaFin.FormattingEnabled = true;
+            this.horaFin.Items.AddRange(new object[] {
+            "00",
+            "01",
+            "02",
+            "03",
+            "04",
+            "05",
+            "06",
+            "07",
+            "08",
+            "09",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "23"});
+            this.horaFin.Location = new System.Drawing.Point(349, 31);
+            this.horaFin.Name = "horaFin";
+            this.horaFin.Size = new System.Drawing.Size(50, 21);
+            this.horaFin.TabIndex = 23;
+            // 
+            // minutoInicio
+            // 
+            this.minutoInicio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.minutoInicio.FormattingEnabled = true;
+            this.minutoInicio.Items.AddRange(new object[] {
             "00",
             "15",
             "30",
             "45"});
-            this.listBox1.Location = new System.Drawing.Point(403, 30);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(38, 17);
-            this.listBox1.TabIndex = 19;
+            this.minutoInicio.Location = new System.Drawing.Point(178, 31);
+            this.minutoInicio.Name = "minutoInicio";
+            this.minutoInicio.Size = new System.Drawing.Size(47, 21);
+            this.minutoInicio.TabIndex = 24;
             // 
-            // listBox2
+            // minutoFin
             // 
-            this.listBox2.FormatString = "N0";
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10",
-            "11",
-            "12",
-            "13",
-            "14",
+            this.minutoFin.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.minutoFin.FormattingEnabled = true;
+            this.minutoFin.Items.AddRange(new object[] {
+            "00",
             "15",
-            "16",
-            "17",
-            "18",
-            "19",
-            "20",
-            "21",
-            "22",
-            "23",
-            "24"});
-            this.listBox2.Location = new System.Drawing.Point(349, 30);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(36, 17);
-            this.listBox2.TabIndex = 18;
+            "30",
+            "45"});
+            this.minutoFin.Location = new System.Drawing.Point(407, 31);
+            this.minutoFin.Name = "minutoFin";
+            this.minutoFin.Size = new System.Drawing.Size(47, 21);
+            this.minutoFin.TabIndex = 25;
             // 
             // ModificarBanner
             // 
@@ -376,9 +379,9 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Button btnAceptar;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.ListBox listBox2;
-        private System.Windows.Forms.ListBox minInicio;
-        private System.Windows.Forms.ListBox horaInicio;
+        private System.Windows.Forms.ComboBox minutoFin;
+        private System.Windows.Forms.ComboBox minutoInicio;
+        private System.Windows.Forms.ComboBox horaFin;
+        private System.Windows.Forms.ComboBox horaInicio;
     }
 }
