@@ -51,22 +51,29 @@ namespace CarteleriaDigital.Pantallas
         {
             RangoDTO rngDTO = new RangoDTO();
             rngDTO.IdRango = idrango;
-            rngDTO.HoraInicio = Int16.Parse(horaInicio.SelectedText);
-            rngDTO.MinutoInicio = Int16.Parse(minutoInicio.SelectedText);
-            rngDTO.HoraFin = Int16.Parse(horaFin.SelectedText);
-            rngDTO.MinutoFin = Int16.Parse(minutoFin.SelectedText);
+            rngDTO.HoraInicio = Int16.Parse(cbHoraInicio.Text);
+            rngDTO.MinutoFin = Int16.Parse(cbMinutoInicio.Text);
+            rngDTO.HoraFin = Int16.Parse(cbHoraFin.Text);
+            rngDTO.MinutoFin = Int16.Parse(cbMinutoFin.Text);
 
             if (rbBS.Checked)
             {
-                BannerSimpleDTO bsDTO= new BannerSimpleDTO();
-//                bsDTO
+                BannerSimpleDTO bsDTO = new BannerSimpleDTO();
+                bsDTO.IdBanner = idbanner;
+                bsDTO.Nombre = txtNombre.Text;
+                bsDTO.Texto = txtTexto.Text;
 
-                //ControladorBanners.ModificarBannerSimple(bsDTO, rngDTO);
+                ControladorBanners.ModificarBannerSimple(bsDTO, rngDTO);
             }
 
             if (rbRSS.Checked)
             {
+                BannerRSSDTO brssDTO = new BannerRSSDTO();
+                brssDTO.IdBanner = idbanner;
+                brssDTO.Nombre = txtNombre.Text;
+                brssDTO.FuenteRSS = txtURL.Text;
 
+                ControladorBanners.ModificarBannerRSS(brssDTO, rngDTO);
             }
 
 

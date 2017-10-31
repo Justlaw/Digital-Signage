@@ -43,12 +43,12 @@ namespace CarteleriaDigital.Controladores
             return rngDAO.BuscarRangoPorID(id);
         }
 
-        public static bool ModificarBannerSimple(String pNombre, String pTexto, Rango pRango)
+        public static bool ModificarBannerSimple(BannerSimpleDTO bsDTO, RangoDTO rngDTO)
         {
             return true;
         }
 
-        public static bool ModificarBannerRSS()
+        public static bool ModificarBannerRSS(BannerRSSDTO brssDTO, RangoDTO rngDTO)
         {
             return true;
         }
