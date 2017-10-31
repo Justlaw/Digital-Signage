@@ -113,7 +113,7 @@ namespace CarteleriaDigital.Pantallas
                 int tam = dataGridView1.Rows.Count - 1;
                 for (int i = tam; i >= 0; i--)
                 {
-                    if (dataGridView1.Rows[i].Cells[""].Value.ToString() != txtNombre.Text)
+                    if (dataGridView1.Rows[i].Cells["Tipo"].Value.ToString() != cbTipo.Text)
                     {
                         dataGridView1.Rows.RemoveAt(i);
                     }
