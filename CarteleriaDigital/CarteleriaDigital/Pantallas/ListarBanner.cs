@@ -139,7 +139,7 @@ namespace CarteleriaDigital.Pantallas
             {
                 DataGridViewRow renglon = dataGridView1.CurrentRow;
 
-                ModificarBanner mb = new ModificarBanner(renglon);
+                PanModificarBanner mb = new PanModificarBanner(renglon);
                 mb.Show();
             }
         }

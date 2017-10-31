@@ -82,11 +82,11 @@
     <Compile Include="Pantallas\Campaña_OR_Banner.Designer.cs">
       <DependentUpon>Campaña_OR_Banner.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pantallas\CrearBanner.cs">
+    <Compile Include="Pantallas\PanCrearBanner.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Pantallas\CrearBanner.Designer.cs">
-      <DependentUpon>CrearBanner.cs</DependentUpon>
+    <Compile Include="Pantallas\PanCrearBanner.Designer.cs">
+      <DependentUpon>PanCrearBanner.cs</DependentUpon>
     </Compile>
     <Compile Include="Clase\Banner.cs" />
     <Compile Include="Clase\BannerRSS.cs" />
@@ -118,11 +118,11 @@
     <Compile Include="Pantallas\ListarCampaña.Designer.cs">
       <DependentUpon>ListarCampaña.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pantallas\ModificarBanner.cs">
+    <Compile Include="Pantallas\PanModificarBanner.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Pantallas\ModificarBanner.Designer.cs">
-      <DependentUpon>ModificarBanner.cs</DependentUpon>
+    <Compile Include="Pantallas\PanModificarBanner.Designer.cs">
+      <DependentUpon>PanModificarBanner.cs</DependentUpon>
     </Compile>
     <Compile Include="Pantallas\ModificarCampaña.cs">
       <SubType>Form</SubType>
@@ -173,8 +173,8 @@
     <EmbeddedResource Include="Pantallas\Campaña_OR_Banner.resx">
       <DependentUpon>Campaña_OR_Banner.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pantallas\CrearBanner.resx">
-      <DependentUpon>CrearBanner.cs</DependentUpon>
+    <EmbeddedResource Include="Pantallas\PanCrearBanner.resx">
+      <DependentUpon>PanCrearBanner.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pantallas\AgregarCampaña.resx">
       <DependentUpon>AgregarCampaña.cs</DependentUpon>
@@ -185,8 +185,8 @@
     <EmbeddedResource Include="Pantallas\ListarCampaña.resx">
       <DependentUpon>ListarCampaña.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pantallas\ModificarBanner.resx">
-      <DependentUpon>ModificarBanner.cs</DependentUpon>
+    <EmbeddedResource Include="Pantallas\PanModificarBanner.resx">
+      <DependentUpon>PanModificarBanner.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pantallas\ModificarCampaña.resx">
       <DependentUpon>ModificarCampaña.cs</DependentUpon>
