@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Npgsql;
 using CarteleriaDigital.DTO;
+using System.Data;
 
 namespace CarteleriaDigital.DAO
 {
@@ -183,8 +184,8 @@ namespace CarteleriaDigital.DAO
             {
                 // Create select command.
                 NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM campaña, rango WHERE "+ 
-                    "campaña.idrango = rango.idrango and " + pFechaIni.Year + "-" + pFechaIni.Month + "-" + pFechaIni.Day + " < rango.fechainicio and " 
-                    + pFechaFin.Year + "-" + pFechaFin.Month + "-" + pFechaFin.Day + " > rango.fechafin ORDER BY idcampaña ASC", Connection.con);
+                    "campaña.idrango = rango.idrango and '" + pFechaIni.Year + "-" + pFechaIni.Month + "-" + pFechaIni.Day + "' < rango.fechainicio and '" 
+                    + pFechaFin.Year + "-" + pFechaFin.Month + "-" + pFechaFin.Day + "' > rango.fechafin ORDER BY idcampaña ASC", Connection.con);
                 
                 // Prepare the command.
                 command.Prepare();
@@ -197,8 +198,8 @@ namespace CarteleriaDigital.DAO
                 {
                     camp.IdCampaña = dr.GetInt32(0);
                     camp.IdRango = dr.GetInt32(1);
-                    camp.Activo = dr.GetBoolean(2);
-                    camp.Nombre = dr.GetString(3);
+                    camp.Nombre = dr.GetString(2);
+                    camp.Activo = dr.GetBoolean(3);
                     listaCamp.Add(camp);
                 }
             }
@@ -228,6 +229,34 @@ namespace CarteleriaDigital.DAO
             Connection.con.Close();
 
             return id;
+        }
+
+        public DataTable filtrarCampañaPorFecha(DateTime pFechaIni, DateTime pFechaFin)
+        {
+            //Creando el DataTable donde almacenaremos la respuessta de la consulta SQL y luego se devolverá
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Nombre");
+            dt.Columns.Add("Tipo");
+            dt.Columns.Add("Activo");
+            dt.Columns.Add("FechaInicio");
+            dt.Columns.Add("FechaFin");
+            dt.Columns.Add("hhI");
+            dt.Columns.Add("minI");
+            dt.Columns.Add("hhF");
+            dt.Columns.Add("minF");
+
+            Connection.con.Open();
+
+            NpgsqlCommand cmd = new NpgsqlCommand("SELECT * FROM campaña, rango WHERE " + "campaña.idrango = rango.idrango and '" 
+                    + pFechaIni.Year + "-" + pFechaIni.Month + "-" + pFechaIni.Day + "' < rango.fechainicio and '"
+                    + pFechaFin.Year + "-" + pFechaFin.Month + "-" + pFechaFin.Day + "' > rango.fechafin ORDER BY idcampaña ASC", Connection.con);
+
+            NpgsqlDataAdapter da = new NpgsqlDataAdapter(cmd);
+
+            da.Fill(dt);
+
+            Connection.con.Close();
+            return dt;
         }
     }
 }

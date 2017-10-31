@@ -21,6 +21,7 @@ namespace CarteleriaDigital.Pantallas
             List<CampañaDTO> Campañas = new List<CampañaDTO>();
             InitializeComponent();
         }
+              
 
         private void button4_Click(object sender, EventArgs e)
         {
@@ -32,14 +33,18 @@ namespace CarteleriaDigital.Pantallas
             abrir.Show();
         }
 
+
+
         private void button1_Click(object sender, EventArgs e)
         {            
             {   
                 //Carga el datasource con las campañas cuyas fechas se encuentren en el intervalo.
-                List<CampañaDTO> campañasFecha = new List<CampañaDTO>();
-                campañasFecha = camp.ListarPorFecha(dateTimePicker1.Value, dateTimePicker2.Value);
-                
-                dataGridView1.DataSource = campañasFecha;
+                InitializeComponent();
+
+                CampañaDAO bd = new CampañaDAO();
+                DataTable dt = bd.filtrarCampañaPorFecha(dtDesde.Value, dtHasta.Value);
+
+                //corregir error en esta parte.
             }
         }
 
@@ -76,6 +81,18 @@ namespace CarteleriaDigital.Pantallas
 
         {
 
+        }
+
+        private void rbNombre_CheckedChanged(object sender, EventArgs e)
+        {
+            gpFecha.Enabled = false;
+            gpNombre.Enabled = true;
+        }
+
+        private void rbFecha_CheckedChanged(object sender, EventArgs e)
+        {
+            gpFecha.Enabled = true;
+            gpNombre.Enabled = false;
         }
     }
 }

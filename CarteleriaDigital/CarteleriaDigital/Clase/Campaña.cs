@@ -57,7 +57,6 @@ namespace CarteleriaDigital
             if (rng_DAO.RangoDisponible(rng_DTO))
             {
                 rng_DAO.Insertar(rng_DTO);
-
                 camp_DTO.IdRango = rng_DAO.ObtenerUltimoId();
                 camp_DAO.Insertar(camp_DTO);
 

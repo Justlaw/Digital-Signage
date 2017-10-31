@@ -46,23 +46,24 @@ namespace CarteleriaDigital.Pantallas
         private void button2_Click(object sender, EventArgs e)
         {
 
-            if ((textBox1.Text == ""))
+            if ((txtNombreCamp.Text == "" || cbHoraInicio.Text == "" || cbHoraFin.Text == "" || cbMinutoInicio.Text == "" || cbMinutoFin.Text == ""))
             {
-                MessageBox.Show("Falta ingresar el nombre de la campaña", "Advertencia");
+                MessageBox.Show("Falta ingresar el nombre, fecha o horarios de la campaña", "Advertencia");
             }
 
-          else
+            else
             {
                 CampañaDTO camp = new CampañaDTO();
                 RangoDTO rng = new RangoDTO();
-                rng.FechaInicio = dateTimePicker1.Value;
-                rng.FechaFin = dateTimePicker2.Value;
-                //rng.HoraInicio = dateTimePicker3.Value;
-                //rng.HoraFin = dateTimePicker4.Value;
+                rng.FechaInicio = dtpFechaInicio.Value;
+                rng.FechaFin = dtpFechaFin.Value;
+                rng.HoraInicio = Int16.Parse(cbHoraInicio.Text);
+                rng.HoraFin = Int16.Parse(cbHoraFin.Text);
+                rng.MinutoInicio = Int16.Parse(cbMinutoInicio.Text);
+                rng.MinutoFin = Int16.Parse(cbMinutoFin.Text);
                 camp.Activo = true;
-                camp.Nombre = textBox1.Text;
+                camp.Nombre = txtNombreCamp.Text;
                
-
                 ControladorCampañas.CrearCampaña(camp,rng,ListIMG);
 
                 MessageBox.Show("La campaña ha sido agregada exitosamente", "Atención", MessageBoxButtons.OK);
@@ -70,9 +71,7 @@ namespace CarteleriaDigital.Pantallas
                 this.Close();
                 PanCampaña abrir = new PanCampaña();
                 abrir.Show();              
-
             }            
-            
         }                 
         
 
