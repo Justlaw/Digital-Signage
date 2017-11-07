@@ -55,8 +55,10 @@ namespace CarteleriaDigital
             BannerDAO b_DAO = new BannerDAO();
             RangoDAO rng_DAO = new RangoDAO();
 
-            BannerDTO b_DTO = new BannerDTO();
-            b_DTO.Nombre = brss_DTO.Nombre;
+            BannerDTO b_DTO = new BannerDTO
+            {
+                Nombre = brss_DTO.Nombre
+            };
 
             Rango rng = new Rango(rng_DTO.FechaInicio, rng_DTO.FechaFin, rng_DTO.HoraInicio, rng_DTO.MinutoInicio, rng_DTO.HoraFin, rng_DTO.MinutoFin);
 
@@ -67,7 +69,6 @@ namespace CarteleriaDigital
 
                 b_DTO.IdRango = rng_DAO.ObtenerUltimoId();
                 b_DAO.Insertar(b_DTO);
-
 
                 brss_DTO.IdBanner = b_DAO.ObtenerUltimoId();
                 brss_DAO.Insertar(brss_DTO);

@@ -74,21 +74,20 @@ namespace CarteleriaDigital.Pantallas
                         Texto = txtTexto.Text
                     };
                     resultado = ControladorBanners.CrearBannerSimple(bsDTO, rngDTO);
-                }
-
-                else
+                } else
                 {
-                    BannerRSSDTO brssDTO = new BannerRSSDTO();
-                    brssDTO.Nombre = txtNombre.Text;
-                    brssDTO.FuenteRSS = txtURL.Text;
+                    BannerRSSDTO brssDTO = new BannerRSSDTO
+                    {
+                        Nombre = txtNombre.Text,
+                        FuenteRSS = txtURL.Text
+                    };
                     resultado = ControladorBanners.CrearBannerRSS(brssDTO, rngDTO);
                 }
 
                 if (!resultado)
                 {
                     MessageBox.Show("No se pudo guardar el nuevo banner");
-                }
-                else
+                } else
                 {
                     MessageBox.Show("Agregado con éxito!");
                 }
@@ -98,4 +97,4 @@ namespace CarteleriaDigital.Pantallas
         }
 
     }
-}
+

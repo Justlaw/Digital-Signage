@@ -96,12 +96,13 @@ namespace CarteleriaDigital.Pantallas
 
         private void btnFiltrar_Click(object sender, EventArgs e)
         {
+            int tam = dataGridView1.Rows.Count - 1;
+
             if (rbPorNombre.Checked)
             {
-                int tam = dataGridView1.Rows.Count -1;
                 for (int i = tam; i >= 0; i--)
                 {
-                    if (dataGridView1.Rows[i].Cells["Nombre"].Value.ToString() != txtNombre.Text)
+                    if (dataGridView1.Rows[i].Cells["Nombre"].Value.ToString().ToLower() != txtNombre.Text.ToLower())
                     {
                         dataGridView1.Rows.RemoveAt(i);
                     }
@@ -110,7 +111,6 @@ namespace CarteleriaDigital.Pantallas
 
             if (rbTipo.Checked)
             {
-                int tam = dataGridView1.Rows.Count - 1;
                 for (int i = tam; i >= 0; i--)
                 {
                     if (dataGridView1.Rows[i].Cells["Tipo"].Value.ToString() != cbTipo.Text)
@@ -123,8 +123,21 @@ namespace CarteleriaDigital.Pantallas
 
             if (rbFechas.Checked)
             {
-                
-                   
+
+                for (int i = tam; i >= 0; i--)
+                {
+                    DateTime inicio, fin;
+                    inicio = Convert.ToDateTime(dataGridView1.Rows[i].Cells[5].Value.ToString()).Date;
+                    fin = Convert.ToDateTime(dataGridView1.Rows[i].Cells[6].Value.ToString()).Date;
+
+                    //rangoI = Int16.Parse(dtpFechaInicio.Value.ToString());
+                    //rangoF = Int16.Parse(dtpFechaFin.Value.ToString());
+
+                    if (inicio > dtpFechaFin.Value|| fin < dtpFechaInicio.Value)
+                    {
+                        dataGridView1.Rows.RemoveAt(i);
+                    }
+                }
             }
         }
 

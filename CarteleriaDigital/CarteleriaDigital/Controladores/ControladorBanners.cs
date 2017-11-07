@@ -20,7 +20,7 @@ namespace CarteleriaDigital.Controladores
 
         public static bool CrearBannerRSS(BannerRSSDTO brss_DTO, RangoDTO rng_DTO)
         {
-            Rango rng = new Rango(rng_DTO.FechaInicio, rng_DTO.FechaFin, rng_DTO.HoraInicio, rng_DTO.MinutoInicio, rng_DTO.HoraFin, rng_DTO.MinutoFin);
+            Rango rng = new Rango(rng_DTO);
             BannerRSS brss = new BannerRSS(brss_DTO.FuenteRSS, true, brss_DTO.Nombre, rng);
             return brss.Guardar(brss_DTO, rng_DTO);
         }

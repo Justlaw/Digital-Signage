@@ -41,7 +41,7 @@ namespace CarteleriaDigital.DAO
             }
             catch (NpgsqlException e)
             {
-                
+                throw e;
             }
 
             Connection.con.Close();
