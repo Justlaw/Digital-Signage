@@ -149,7 +149,7 @@
             this.bEliminar.TabIndex = 7;
             this.bEliminar.Text = "Eliminar";
             this.bEliminar.UseVisualStyleBackColor = true;
-            this.bEliminar.Click += new System.EventHandler(this.button2_Click);
+            this.bEliminar.Click += new System.EventHandler(this.Button2_Click);
             // 
             // bModificar
             // 
@@ -172,7 +172,7 @@
             this.dgvVista.Name = "dgvVista";
             this.dgvVista.Size = new System.Drawing.Size(704, 324);
             this.dgvVista.TabIndex = 9;
-            this.dgvVista.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.dgvVista.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView1_CellContentClick);
             // 
             // bAtras
             // 

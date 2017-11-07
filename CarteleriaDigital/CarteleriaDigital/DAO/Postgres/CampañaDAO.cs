@@ -231,32 +231,35 @@ namespace CarteleriaDigital.DAO
             return id;
         }
 
-        public DataTable filtrarCampañaPorFecha(DateTime pFechaIni, DateTime pFechaFin)
+        public DataSet filtrarCampañaPorNombre(String pNombre)
         {
-            //Creando el DataTable donde almacenaremos la respuessta de la consulta SQL y luego se devolverá
-            DataTable dt = new DataTable();
-            dt.Columns.Add("Nombre");
-            dt.Columns.Add("Tipo");
-            dt.Columns.Add("Activo");
-            dt.Columns.Add("FechaInicio");
-            dt.Columns.Add("FechaFin");
-            dt.Columns.Add("hhI");
-            dt.Columns.Add("minI");
-            dt.Columns.Add("hhF");
-            dt.Columns.Add("minF");
-
             Connection.con.Open();
 
-            NpgsqlCommand cmd = new NpgsqlCommand("SELECT * FROM campaña, rango WHERE " + "campaña.idrango = rango.idrango and '" 
-                    + pFechaIni.Year + "-" + pFechaIni.Month + "-" + pFechaIni.Day + "' < rango.fechainicio and '"
+            NpgsqlCommand cmd = new NpgsqlCommand("SELECT * FROM campaña, rango WHERE " +
+                    "campaña.idrango = rango.idrango and '"+ pNombre +"' = campaña.nombre ORDER BY idcampaña ASC", Connection.con);
+
+            NpgsqlDataAdapter da = new NpgsqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+
+            Connection.con.Close();
+            return ds;
+        }
+
+        public DataSet filtrarCampañaPorFecha(DateTime pFechaIni, DateTime pFechaFin)
+        {
+            Connection.con.Open();
+
+            NpgsqlCommand cmd = new NpgsqlCommand("SELECT * FROM campaña, rango WHERE " +
+                    "campaña.idrango = rango.idrango and '" + pFechaIni.Year + "-" + pFechaIni.Month + "-" + pFechaIni.Day + "' < rango.fechainicio and '"
                     + pFechaFin.Year + "-" + pFechaFin.Month + "-" + pFechaFin.Day + "' > rango.fechafin ORDER BY idcampaña ASC", Connection.con);
 
             NpgsqlDataAdapter da = new NpgsqlDataAdapter(cmd);
-
-            da.Fill(dt);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
 
             Connection.con.Close();
-            return dt;
+            return ds;
         }
     }
 }
