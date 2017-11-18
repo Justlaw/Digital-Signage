@@ -88,12 +88,12 @@
     <Compile Include="Pantallas\PanCrearBanner.Designer.cs">
       <DependentUpon>PanCrearBanner.cs</DependentUpon>
     </Compile>
-    <Compile Include="Clase\Banner.cs" />
-    <Compile Include="Clase\BannerRSS.cs" />
-    <Compile Include="Clase\BannerSimple.cs" />
-    <Compile Include="Clase\Campaña.cs" />
-    <Compile Include="Clase\FuenteRSS.cs" />
-    <Compile Include="Clase\Imagen.cs" />
+    <Compile Include="Modelo\Banner.cs" />
+    <Compile Include="Modelo\BannerRSS.cs" />
+    <Compile Include="Modelo\BannerSimple.cs" />
+    <Compile Include="Modelo\Campaña.cs" />
+    <Compile Include="Modelo\FuenteRSS.cs" />
+    <Compile Include="Modelo\Imagen.cs" />
     <Compile Include="Pantallas\AgregarCampaña.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -156,7 +156,7 @@
       <DependentUpon>PantallaInicio.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Clase\Rango.cs" />
+    <Compile Include="Modelo\Rango.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

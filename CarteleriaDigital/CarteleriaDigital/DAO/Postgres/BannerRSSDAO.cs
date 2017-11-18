@@ -21,24 +21,19 @@ namespace CarteleriaDigital.DAO
             try
             {
                 Connection.con.Open();
-                // Create insert command.
+
                 NpgsqlCommand command = new NpgsqlCommand("INSERT INTO " +
                     "bannerrss(idbanner, fuenterss) VALUES(:idbanner, :fuenterss)", Connection.con);
 
                 command.Parameters.AddWithValue("@idrango", bRSSDTO.IdBanner);
                 command.Parameters.AddWithValue("@fuenterss", bRSSDTO.FuenteRSS);
 
-                // Execute SQL command.
-                Int32 recordAffected = command.ExecuteNonQuery();
-
-                Connection.con.Close();
-
-
-                Connection.con.Open();
-                command = new NpgsqlCommand("UPDATE banner set tipo='simple' where idbanner=@idbanner", Connection.con);
-                command.Parameters.AddWithValue("@idbanner", bRSSDTO.IdBanner);
                 command.ExecuteNonQuery();
 
+                NpgsqlCommand command2 = new NpgsqlCommand("UPDATE banner set tipo='rss' where idbanner=@idbanner", Connection.con);
+                command2.Parameters.AddWithValue("@idbanner", bRSSDTO.IdBanner);
+                Int32 rec = command2.ExecuteNonQuery();
+                Console.WriteLine(rec);
                 Connection.con.Close();
             }
             catch (NpgsqlException ex)

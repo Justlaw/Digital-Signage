@@ -40,31 +40,31 @@ namespace CarteleriaDigital.Pantallas
             {
                 this.Close();
 
-                PanBanner abrir = new PanBanner();
-                abrir.Show();
+                PanBanner panBanner = new PanBanner();
+                panBanner.Show();
             }                                        
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            if ((dtpFechaInicio.Value < DateTime.Today | dtpFechaFin.Value < dtpFechaInicio.Value) | 
-                (cbHoraFin.Text == cbHoraInicio.Text && cbMinutoInicio.Text == cbMinutoInicio.Text))      
+            RangoDTO rngDTO = new RangoDTO
+            {
+                FechaInicio = dtpFechaInicio.Value,
+                FechaFin = dtpFechaFin.Value,
+                HoraInicio = Int16.Parse(cbHoraInicio.Text),
+                MinutoInicio = Int16.Parse(cbMinutoInicio.Text),
+                HoraFin = Int16.Parse(cbHoraFin.Text),
+                MinutoFin = Int16.Parse(cbMinutoFin.Text)
+            };
+
+            if (!this.VerificarRango(rngDTO))      
             {
                 MessageBox.Show("Verifique la correctitud de las fechas y horas", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            else
+            } else if (txtNombre.Text == "" | (txtTexto.Text == "" & txtURL.Text == ""))
             {
-                RangoDTO rngDTO = new RangoDTO
-                {
-                    FechaInicio = dtpFechaInicio.Value,
-                    FechaFin = dtpFechaFin.Value,
-                    HoraInicio = Int16.Parse(cbHoraInicio.Text),
-                    MinutoInicio = Int16.Parse(cbMinutoInicio.Text),
-                    HoraFin = Int16.Parse(cbHoraFin.Text),
-                    MinutoFin = Int16.Parse(cbMinutoFin.Text)
-                };
-
+                MessageBox.Show("Complete todos los campos");
+            }else
+            {
                 bool resultado = false;
                 if (rbBannerSimple.Checked)
                 {
@@ -74,7 +74,8 @@ namespace CarteleriaDigital.Pantallas
                         Texto = txtTexto.Text
                     };
                     resultado = ControladorBanners.CrearBannerSimple(bsDTO, rngDTO);
-                } else
+                }
+                else
                 {
                     BannerRSSDTO brssDTO = new BannerRSSDTO
                     {
@@ -87,14 +88,40 @@ namespace CarteleriaDigital.Pantallas
                 if (!resultado)
                 {
                     MessageBox.Show("No se pudo guardar el nuevo banner");
-                } else
+                }
+                else
                 {
                     MessageBox.Show("Agregado con éxito!");
                 }
+
+                this.Close();
+                PantallaInicio pantallaInicio = new PantallaInicio();
+                pantallaInicio.Show();
             }
             
         }
+
+        private bool VerificarRango(RangoDTO rng)
+        {
+            bool resultado = false;
+            if (rng.FechaInicio <= rng.FechaFin)
+            {
+                if (rng.HoraInicio < rng.HoraFin)
+                {
+                    resultado = true;
+                }
+                else if (rng.HoraInicio == rng.HoraFin)
+                {
+                    if (rng.MinutoInicio < rng.MinutoFin)
+                    {
+                        resultado = true;
+                    }
+                }
+            }
+
+            return resultado;
         }
+    }
 
     }
 

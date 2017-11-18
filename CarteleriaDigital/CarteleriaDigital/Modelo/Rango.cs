@@ -98,7 +98,6 @@ namespace CarteleriaDigital
             }
 
             return true;
-
         }
 
         /// <summary>
@@ -126,7 +125,6 @@ namespace CarteleriaDigital
             }
 
             return result;
-
         }
     }
 }
