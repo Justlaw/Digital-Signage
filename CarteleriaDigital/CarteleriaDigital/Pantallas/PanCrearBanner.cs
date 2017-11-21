@@ -71,6 +71,7 @@ namespace CarteleriaDigital.Pantallas
                     BannerSimpleDTO bsDTO = new BannerSimpleDTO
                     {
                         Nombre = txtNombre.Text,
+                        Tipo = "simple",
                         Texto = txtTexto.Text
                     };
                     resultado = ControladorBanners.CrearBannerSimple(bsDTO, rngDTO);
@@ -80,6 +81,7 @@ namespace CarteleriaDigital.Pantallas
                     BannerRSSDTO brssDTO = new BannerRSSDTO
                     {
                         Nombre = txtNombre.Text,
+                        Tipo = "rss",
                         FuenteRSS = txtURL.Text
                     };
                     resultado = ControladorBanners.CrearBannerRSS(brssDTO, rngDTO);

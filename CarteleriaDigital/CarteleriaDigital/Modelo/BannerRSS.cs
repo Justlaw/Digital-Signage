@@ -13,6 +13,18 @@ namespace CarteleriaDigital
         private String iURL;
         public BannerRSS() { }
 
+
+        public BannerRSS(BannerRSSDTO brss, Rango rango)
+        {
+            this.Activo = true;
+            this.Nombre = brss.Nombre;
+            this.URL = brss.FuenteRSS;
+            this.Tipo = "rss";
+            this.Rango = rango;
+            
+
+        }
+        
         public BannerRSS(String pURL, Boolean pActivo, String pNombre, Rango pRango)
         {
             this.iActivo = pActivo;
@@ -57,10 +69,11 @@ namespace CarteleriaDigital
 
             BannerDTO b_DTO = new BannerDTO
             {
-                Nombre = brss_DTO.Nombre
+                Nombre = brss_DTO.Nombre,
+                Tipo = brss_DTO.Tipo
             };
 
-            Rango rng = new Rango(rng_DTO.FechaInicio, rng_DTO.FechaFin, rng_DTO.HoraInicio, rng_DTO.MinutoInicio, rng_DTO.HoraFin, rng_DTO.MinutoFin);
+            Rango rng = new Rango(rng_DTO);
 
             //Se controla que el rango esté disponible
             if (rng.RangoDisponibleBanner())

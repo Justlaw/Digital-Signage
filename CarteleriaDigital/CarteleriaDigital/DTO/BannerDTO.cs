@@ -14,6 +14,7 @@ namespace CarteleriaDigital.DTO
         private int? idRango;
         private bool activo;
         private string nombre;
+        private string tipo;
         #endregion
 
         #region Constructores
@@ -71,6 +72,19 @@ namespace CarteleriaDigital.DTO
             set
             {
                 nombre = value;
+            }
+        }
+
+        public string Tipo
+        {
+            get
+            {
+                return tipo;
+            }
+
+            set
+            {
+                tipo = value;
             }
         }
         #endregion

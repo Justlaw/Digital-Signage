@@ -12,6 +12,13 @@ namespace CarteleriaDigital
     {
         private String iText;
 
+        public BannerSimple(BannerSimpleDTO bsDTO, Rango rango)
+        {
+            this.iNombre = bsDTO.Nombre;
+            this.iText = bsDTO.Texto;
+            this.iRango = rango;
+        }
+
         public BannerSimple(String pText, Boolean pActivo, String pNombre, Rango pRango)
         {
             this.iActivo = pActivo;
@@ -56,8 +63,9 @@ namespace CarteleriaDigital
 
             BannerDTO b_DTO = new BannerDTO();
             b_DTO.Nombre = bs_DTO.Nombre;
+            b_DTO.Tipo = bs_DTO.Tipo;
 
-            Rango rng = new Rango(rng_DTO.FechaInicio, rng_DTO.FechaFin, rng_DTO.HoraInicio, rng_DTO.MinutoInicio, rng_DTO.HoraFin, rng_DTO.MinutoFin);
+            Rango rng = new Rango(rng_DTO);
 
             //Se controla que el rango esté disponible
             if (rng.RangoDisponibleBanner())

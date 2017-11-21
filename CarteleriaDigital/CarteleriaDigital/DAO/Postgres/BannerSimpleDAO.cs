@@ -30,14 +30,6 @@ namespace CarteleriaDigital.DAO
                 // Execute SQL command.
                 Int32 recordAffected = command.ExecuteNonQuery();
                 Connection.con.Close();
-                if (Convert.ToBoolean(recordAffected))
-                {
-                    //Mostrar
-                }
-                Connection.con.Open();
-                command = new NpgsqlCommand("UPDATE banner set tipo='simple' where idbanner=@idbanner",Connection.con);
-                command.Parameters.AddWithValue("@idbanner",bsDTO.IdBanner);
-                command.ExecuteNonQuery();
             }
             catch (NpgsqlException e)
             {

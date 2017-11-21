@@ -24,10 +24,11 @@ namespace CarteleriaDigital.DAO
             {
                 // Create insert command.
                 NpgsqlCommand command = new NpgsqlCommand("INSERT INTO " +
-                    "banner(idRango, nombre) VALUES(:idRango, :nombre)", Connection.con);
+                    "banner (idrango, nombre, tipo) VALUES (@idrango, @nombre, @tipo)", Connection.con);
                 // Add paramaters.
                 command.Parameters.AddWithValue("@nombre", ban.Nombre);
-                command.Parameters.AddWithValue("@idRango", ban.IdRango);
+                command.Parameters.AddWithValue("@idrango", ban.IdRango);
+                command.Parameters.AddWithValue("@tipo", ban.Tipo);
 
                 // Execute SQL command.
                 Int32 recordAffected = command.ExecuteNonQuery();
@@ -38,7 +39,7 @@ namespace CarteleriaDigital.DAO
             }
             catch (NpgsqlException ex)
             {
-                //Mostrar error
+                throw ex;
             }
 
             Connection.con.Close();
@@ -221,11 +222,10 @@ namespace CarteleriaDigital.DAO
 
             NpgsqlCommand cmd = new NpgsqlCommand("select idbanner from banner order by idbanner DESC limit 1", Connection.con);
             NpgsqlDataReader dr = cmd.ExecuteReader();
-
             int id = 0;
             while (dr.Read())
             {
-                id = dr.GetInt32(0);
+               id = dr.GetInt32(0);
             }
             Connection.con.Close();
             return id;
