@@ -22,9 +22,10 @@ namespace CarteleriaDigital.Pantallas
             InitializeComponent();
 
             DAO.CampañaDAO bd = new DAO.CampañaDAO();
-            DataSet ds = bd.filtrarCampañaPorFecha(dtDesde.Value,dtHasta.Value);
-            dgvVista.DataSource = ds.Tables[0];
-            
+            DataTable dt = bd.SelectCampaña();
+
+            formatearTabla(dt);
+
         }
 
         private void formatearTabla(DataTable dt)
@@ -50,19 +51,18 @@ namespace CarteleriaDigital.Pantallas
 
             for (int i = 0; i <= filas - 1; i++)
             {
+                dgvVista[4, i].Value = dgvVista[4, i].Value.ToString().Remove(11);
                 dgvVista[5, i].Value = dgvVista[5, i].Value.ToString().Remove(11);
-                dgvVista[6, i].Value = dgvVista[6, i].Value.ToString().Remove(11);
-                if (dgvVista[4, i].Value.ToString() == "False")
+                if (dgvVista[3, i].Value.ToString() == "False")
                 {
-                    dgvVista[4, i].Value = "No";
+                    dgvVista[3, i].Value = "No";
                 }
                 else
                 {
-                    dgvVista[4, i].Value = "Sí";
+                    dgvVista[3, i].Value = "Sí";
                 }
 
             }
-
         }
 
         // button4 es el bAtrás
@@ -80,11 +80,17 @@ namespace CarteleriaDigital.Pantallas
         //button1 es el bFiltrar
         private void button1_Click(object sender, EventArgs e)
         {
+            int tam = dgvVista.Rows.Count - 1;
+
             if (rbNombre.Checked)
             {
-                DAO.CampañaDAO bd = new DAO.CampañaDAO();
-                DataSet ds = bd.filtrarCampañaPorNombre(cbNombre.Text);
-                dgvVista.DataSource = ds.Tables[0];
+                for (int i = tam; i >= 0; i--)
+                {
+                    if (dgvVista.Rows[i].Cells["Nombre"].Value.ToString().ToLower() != cbNombre.Text.ToLower())
+                    {
+                        dgvVista.Rows.RemoveAt(i);
+                    }
+                }
             }
 
             if (rbFecha.Checked)
@@ -92,6 +98,21 @@ namespace CarteleriaDigital.Pantallas
                 DAO.CampañaDAO bd = new DAO.CampañaDAO();
                 DataSet ds = bd.filtrarCampañaPorFecha(dtDesde.Value, dtHasta.Value);
                 dgvVista.DataSource = ds.Tables[0];
+
+                for (int i = tam; i >= 0; i--)
+                {
+                    DateTime inicio, fin;
+                    inicio = Convert.ToDateTime(dgvVista.Rows[i].Cells[5].Value.ToString()).Date;
+                    fin = Convert.ToDateTime(dgvVista.Rows[i].Cells[6].Value.ToString()).Date;
+
+                    //rangoI = Int16.Parse(dtpFechaInicio.Value.ToString());
+                    //rangoF = Int16.Parse(dtpFechaFin.Value.ToString());
+
+                    if (inicio > dtHasta.Value || fin < dtDesde.Value)
+                    {
+                        dgvVista.Rows.RemoveAt(i);
+                    }
+                }
             }
         }
         //btDesde

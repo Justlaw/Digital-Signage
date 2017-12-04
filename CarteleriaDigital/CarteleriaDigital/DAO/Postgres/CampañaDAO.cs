@@ -261,5 +261,34 @@ namespace CarteleriaDigital.DAO
             Connection.con.Close();
             return ds;
         }
+
+        public DataTable SelectCampaña()
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("IdCampaña");
+            dt.Columns.Add("IdRango");
+            dt.Columns.Add("Nombre");
+            dt.Columns.Add("Activo");
+            dt.Columns.Add("FechaInicio");
+            dt.Columns.Add("FechaFin");
+            dt.Columns.Add("hhI");
+            dt.Columns.Add("minI");
+            dt.Columns.Add("hhF");
+            dt.Columns.Add("minF");
+
+            Connection.con.Open();
+
+            NpgsqlCommand cmd = new NpgsqlCommand("select idcampaña, campaña.idrango, nombre, activo, fechainicio, fechafin, horainicio as hhI, minutoinicio as minI, horafin as hhF, minutofin as minF " +
+                                                  "from campaña, rango where campaña.idrango = rango.idrango", Connection.con);
+
+            NpgsqlDataAdapter da = new NpgsqlDataAdapter(cmd);
+
+            da.Fill(dt);
+
+            Connection.con.Close();
+
+            return dt;
+        }
+
     }
 }
