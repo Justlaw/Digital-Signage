@@ -46,6 +46,7 @@ namespace CarteleriaDigital
             set { iRango = value; }
         }
 
+        //Permite Guardar una campaña
         public void Guardar(CampañaDTO camp_DTO, RangoDTO rng_DTO, List<ImagenDTO> listImgDTO)
         {
             CampañaDAO camp_DAO = new CampañaDAO();
@@ -68,18 +69,7 @@ namespace CarteleriaDigital
             }
         }
 
-        public void Baja()
-        {
-            CampañaDAO camp_DAO = new CampañaDAO();
-            CampañaDTO camp_DTO = new CampañaDTO();
-
-            camp_DTO = camp_DAO.BuscarPorNombre(iNombre);
-
-            camp_DTO.Activo = false;
-
-            camp_DAO.Modificar(camp_DTO);
-        }
-
+        //Este método permite modificar una campaña junto con su rango y lista de imagenes asociados a la misma
         public void Modificar(CampañaDTO camp_DTO, RangoDTO rng_DTO, List<ImagenDTO> listImg_DTO, List<ImagenDTO> listImgV_DTO)
         {
             CampañaDAO camp_DAO = new CampañaDAO();
@@ -143,6 +133,11 @@ namespace CarteleriaDigital
                     }
                 }
             }
+        }
+
+        public void EliminarCampaña()
+        {
+
         }
 
     }

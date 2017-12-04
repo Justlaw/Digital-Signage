@@ -15,11 +15,10 @@ namespace CarteleriaDigital.DAO
         {
 
         }
-
+        //Metodo para agregar un Banner del tipo RSS a la base de datos.
         public void Insertar(BannerRSSDTO bRSSDTO)
         {
-            try
-            {
+            
                 Connection.con.Open();
 
                 NpgsqlCommand command = new NpgsqlCommand("INSERT INTO " +
@@ -27,44 +26,38 @@ namespace CarteleriaDigital.DAO
 
                 command.Parameters.AddWithValue("@idbanner", bRSSDTO.IdBanner);
                 command.Parameters.AddWithValue("@fuenterss", bRSSDTO.FuenteRSS);
-
-                command.ExecuteNonQuery();
-
-                Connection.con.Close();
+            try
+            {
+                command.ExecuteNonQuery();   
             }
             catch (NpgsqlException ex)
             {
                 throw ex;
             }
 
+            Connection.con.Close();
 
         }
 
+        ////Metodo para modificar un banner RSS de la base de datos.
         public void Modificar(BannerRSSDTO bRSSDTO)
         {
             Connection.con.Open();
-
-            try
-            {
-                // Create update command.
-                NpgsqlCommand command = new NpgsqlCommand(@"UPDATE Banner " +
+                
+            NpgsqlCommand command = new NpgsqlCommand(@"UPDATE Banner " +
                     "SET idbanner = @idbanner, fuenterss = @fuenterss WHERE idbannerRSS = " + bRSSDTO.IdBannerRSS, Connection.con);
 
-                // Add paramaters.
-                command.Parameters.AddWithValue("@idbanner", bRSSDTO.IdBanner);
-                command.Parameters.AddWithValue("@fuenterss", bRSSDTO.FuenteRSS);
+                
+            command.Parameters.AddWithValue("@idbanner", bRSSDTO.IdBanner);
+            command.Parameters.AddWithValue("@fuenterss", bRSSDTO.FuenteRSS);
 
-
-                // Execute SQL command.
-                int recordAffected = command.ExecuteNonQuery();
-                if (Convert.ToBoolean(recordAffected))
-                {
-                    //showInformation("Data successfully updated!");
-                }
+            try
+            {  
+                command.ExecuteNonQuery();
             }
             catch (NpgsqlException ex)
             {
-                //showError(ex);
+                throw ex;
             }
 
             Connection.con.Close();
@@ -82,16 +75,16 @@ namespace CarteleriaDigital.DAO
             NpgsqlCommand cmd = new NpgsqlCommand("SELECT nombre, fuenterss, idbannersimple, idbanner, idrango FROM banner b, bannerrss brss " +
                                                     "WHERE b.idbanner = brss.idbanner and b.idbanner = " + id, Connection.con);
 
-            NpgsqlDataReader dr = cmd.ExecuteReader();
+                NpgsqlDataReader dr = cmd.ExecuteReader();
 
-            BannerRSSDTO brssDTO = new BannerRSSDTO
-            {
-                IdBanner = dr.GetInt16(3),
-                IdBannerRSS = dr.GetInt16(2),
-                Nombre = dr.GetString(0),
-                FuenteRSS = dr.GetString(1),
-                IdRango = dr.GetInt16(4)
-            };
+                BannerRSSDTO brssDTO = new BannerRSSDTO
+                {
+                    IdBanner = dr.GetInt16(3),
+                    IdBannerRSS = dr.GetInt16(2),
+                    Nombre = dr.GetString(0),
+                    FuenteRSS = dr.GetString(1),
+                    IdRango = dr.GetInt16(4)
+                };
 
             Connection.con.Close();
             return brssDTO;

@@ -13,9 +13,7 @@ using CarteleriaDigital.DAO;
 namespace CarteleriaDigital.Pantallas
 {
     public partial class ListarCampaña : Form
-    {
-        CampañaDAO camp = new CampañaDAO();
-        
+    {      
 
         public ListarCampaña()
         {
@@ -24,33 +22,32 @@ namespace CarteleriaDigital.Pantallas
             DAO.CampañaDAO bd = new DAO.CampañaDAO();
             DataTable dt = bd.SelectCampaña();
 
-            formatearTabla(dt);
+            formatearTablaC(dt);
 
         }
 
-        private void formatearTabla(DataTable dt)
+        private void formatearTablaC(DataTable dt)
         {
             dgvVista.DataSource = dt;
             dgvVista.Columns[0].Visible = false;
             dgvVista.Columns[1].Visible = false;
-            dgvVista.Columns[3].Visible = false;
             rbNombre.Checked = true;
-
             //Formateando ancho de las columnas
-            //Columna ID banner
-            dgvVista.Columns[1].Width = 30;
+            //Columna ID Campaña
+            dgvVista.Columns[0].Width = 75;
             //Columna de Activo
-            dgvVista.Columns[4].Width = 45;
+            dgvVista.Columns[3].Width = 50;
             // Columnas de las horas de inicio y fin
-            dgvVista.Columns[7].Width = 25;
-            dgvVista.Columns[8].Width = 25;
-            dgvVista.Columns[9].Width = 25;
-            dgvVista.Columns[10].Width = 25;
+            dgvVista.Columns[6].Width = 30;
+            dgvVista.Columns[7].Width = 30;
+            dgvVista.Columns[8].Width = 30;
+            dgvVista.Columns[9].Width = 30;
 
             int filas = dgvVista.Rows.Count;
 
             for (int i = 0; i <= filas - 1; i++)
             {
+
                 dgvVista[4, i].Value = dgvVista[4, i].Value.ToString().Remove(11);
                 dgvVista[5, i].Value = dgvVista[5, i].Value.ToString().Remove(11);
                 if (dgvVista[3, i].Value.ToString() == "False")
@@ -61,7 +58,6 @@ namespace CarteleriaDigital.Pantallas
                 {
                     dgvVista[3, i].Value = "Sí";
                 }
-
             }
         }
 
@@ -95,18 +91,11 @@ namespace CarteleriaDigital.Pantallas
 
             if (rbFecha.Checked)
             {
-                DAO.CampañaDAO bd = new DAO.CampañaDAO();
-                DataSet ds = bd.filtrarCampañaPorFecha(dtDesde.Value, dtHasta.Value);
-                dgvVista.DataSource = ds.Tables[0];
-
                 for (int i = tam; i >= 0; i--)
                 {
                     DateTime inicio, fin;
-                    inicio = Convert.ToDateTime(dgvVista.Rows[i].Cells[5].Value.ToString()).Date;
-                    fin = Convert.ToDateTime(dgvVista.Rows[i].Cells[6].Value.ToString()).Date;
-
-                    //rangoI = Int16.Parse(dtpFechaInicio.Value.ToString());
-                    //rangoF = Int16.Parse(dtpFechaFin.Value.ToString());
+                    inicio = Convert.ToDateTime(dgvVista.Rows[i].Cells[4].Value.ToString()).Date;
+                    fin = Convert.ToDateTime(dgvVista.Rows[i].Cells[5].Value.ToString()).Date;
 
                     if (inicio > dtHasta.Value || fin < dtDesde.Value)
                     {

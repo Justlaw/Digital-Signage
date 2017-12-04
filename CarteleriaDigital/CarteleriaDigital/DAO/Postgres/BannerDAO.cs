@@ -17,25 +17,22 @@ namespace CarteleriaDigital.DAO
 
         }
 
+        //Metodo para agregar un Banner a la base de datos.
         public void Insertar(BannerDTO ban)
         {
             Connection.con.Open();
-            try
-            {
-                // Create insert command.
+            
+                // Se crea el comando para la inserción.
                 NpgsqlCommand command = new NpgsqlCommand("INSERT INTO " +
                     "banner (idrango, nombre, tipo) VALUES (@idrango, @nombre, @tipo)", Connection.con);
-                // Add paramaters.
+                // Se agregan los parametros.
                 command.Parameters.AddWithValue("@nombre", ban.Nombre);
                 command.Parameters.AddWithValue("@idrango", ban.IdRango);
                 command.Parameters.AddWithValue("@tipo", ban.Tipo);
-
-                // Execute SQL command.
-                Int32 recordAffected = command.ExecuteNonQuery();
-                if (Convert.ToBoolean(recordAffected))
-                {
-                    //Mostrar error
-                }
+            try
+            {
+                // Se ejecuta la consulta SQL.
+                command.ExecuteNonQuery();
             }
             catch (NpgsqlException ex)
             {
@@ -45,49 +42,46 @@ namespace CarteleriaDigital.DAO
             Connection.con.Close();
         }
 
+        //Metodo para modificar un banner de la base de datos.
         public void Modificar(BannerDTO ban)
         {
             Connection.con.Open();
-
-            try
-            {
-                // Create update command.
+                     
+      
                 NpgsqlCommand command = new NpgsqlCommand(@"UPDATE banner " +
                     "SET nombre = @nombre, activo = @activo WHERE idBanner = " + ban.IdBanner , Connection.con);
 
-                // Add paramaters.
+                
                 command.Parameters.AddWithValue("@nombre", ban.Nombre);
                 command.Parameters.AddWithValue("@activo", ban.Activo);
-
-                // Execute SQL command.
-                int recordAffected = command.ExecuteNonQuery();
-                if (Convert.ToBoolean(recordAffected))
-                {
-                    //showInformation("Data successfully updated!");
-                }
+            try
+            {
+                
+                command.ExecuteNonQuery();
+                
             }
             catch (NpgsqlException ex)
             {
-                //showError(ex);
+                throw ex;
             }
 
             Connection.con.Close();
         }
 
+        //Método que permite buscar un banner mediante su nombre
         public BannerDTO BuscarPorNombre(String pNombre)
         {
 
             Connection.con.Open();
             BannerDTO ban = new BannerDTO();
+            
+            NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM banner WHERE nombre = " + pNombre + "ORDER BY idbanner ASC", Connection.con);
+
+
             try
             {
-                // Create select command.
-                NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM banner WHERE nombre = " + pNombre + "ORDER BY idbanner ASC", Connection.con);
-
-                // Prepare the command.
                 command.Prepare();
-
-                // Execute SQL command.
+                                
                 NpgsqlDataReader dr = command.ExecuteReader();
 
                 ban.IdBanner = dr.GetInt16(0);
@@ -98,7 +92,7 @@ namespace CarteleriaDigital.DAO
             }
             catch (NpgsqlException ex)
             {
-
+                throw ex;
             }
 
             Connection.con.Close();
@@ -106,6 +100,7 @@ namespace CarteleriaDigital.DAO
             return ban;
         }
 
+        //Metodo para listar los banner según si el mismo está activo o no
         public List<BannerDTO> ListarPorActivo(Boolean pActivo)
         {
             List<BannerDTO> listaBan = new List<BannerDTO>();
@@ -113,18 +108,16 @@ namespace CarteleriaDigital.DAO
 
             Connection.con.Open();
 
+            NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM banner WHERE activo = " + pActivo + "ORDER BY idbanner ASC", Connection.con);
+
+            command.Prepare();
+
             try
             {
-                // Create select command.
-                NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM banner WHERE activo = " + pActivo + "ORDER BY idbanner ASC", Connection.con);
-
-                // Prepare the command.
-                command.Prepare();
-
-                // Execute SQL command.
+                
                 NpgsqlDataReader dr = command.ExecuteReader();
 
-                // Fill results to music list.
+                // Completa la lista con los banners a listar.
                 while (dr.Read())
                 {
                     ban.IdBanner = dr.GetInt32(0);
@@ -136,7 +129,7 @@ namespace CarteleriaDigital.DAO
             }
             catch (NpgsqlException ex)
             {
-
+                throw ex;
             }
 
             Connection.con.Close();
@@ -145,6 +138,7 @@ namespace CarteleriaDigital.DAO
 
         }
 
+        //Metodo para listar los banner según si el mismo se encuentra entres las fechas establecidas
         public List<BannerDTO> ListarPorFecha(DateTime pFechaIni, DateTime pFechaFin)
         {
             List<BannerDTO> listaBan = new List<BannerDTO>();
@@ -152,20 +146,19 @@ namespace CarteleriaDigital.DAO
 
             Connection.con.Open();
 
-            try
-            {
-                // Create select command.
-                NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM banner, rango WHERE " +
+            
+            NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM banner, rango WHERE " +
                     "banner.idrango = rango.idrango and " + pFechaIni + " = rango.fechainicio and "
                     + pFechaFin +" = rango.fechafin ORDER BY idbanner ASC", Connection.con);
 
-                // Prepare the command.
-                command.Prepare();
-
-                // Execute SQL command.
+                
+            command.Prepare();
+            try
+            {
+                
                 NpgsqlDataReader dr = command.ExecuteReader();
 
-                // Fill results to music list.
+                // completa la lista de banners con los banners a listar encontrados.
                 while (dr.Read())
                 {
                     ban.IdBanner = dr.GetInt32(0);
@@ -177,7 +170,7 @@ namespace CarteleriaDigital.DAO
             }
             catch (NpgsqlException ex)
             {
-
+                throw ex;
             }
 
             Connection.con.Close();
@@ -186,6 +179,7 @@ namespace CarteleriaDigital.DAO
 
         }
 
+        //Este metodo busca todos los banners y los devuelve dentro de un DataTable
         public DataTable SelectBannersConRango()
         {
             //Creando el DataTable donde almacenaremos la respuessta de la consulta SQL y luego se devolverá
@@ -209,13 +203,18 @@ namespace CarteleriaDigital.DAO
 
             NpgsqlDataAdapter da = new NpgsqlDataAdapter(cmd);
 
-            da.Fill(dt);
-
+            try { 
+                da.Fill(dt);
+            }
+            catch (NpgsqlException ex){
+                throw ex;
+            }
+            
             Connection.con.Close();
             return dt;
         }
 
-
+        // Este método nos permite obtener el id del último banner creado
         public int ObtenerUltimoId()
         {
             Connection.con.Open();
@@ -223,10 +222,17 @@ namespace CarteleriaDigital.DAO
             NpgsqlCommand cmd = new NpgsqlCommand("select idbanner from banner order by idbanner DESC limit 1", Connection.con);
             NpgsqlDataReader dr = cmd.ExecuteReader();
             int id = 0;
-            while (dr.Read())
-            {
-               id = dr.GetInt32(0);
+            try { 
+                while (dr.Read())
+                {
+                    id = dr.GetInt32(0);
+                }
             }
+            catch (NpgsqlException ex)
+            {
+                throw ex;
+            }
+
             Connection.con.Close();
             return id;
         }

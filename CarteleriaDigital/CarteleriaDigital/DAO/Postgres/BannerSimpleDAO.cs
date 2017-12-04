@@ -15,21 +15,22 @@ namespace CarteleriaDigital.DAO
 
         }
 
+        //Metodo para agregar un Banner del tipo simple a la base de datos.
         public void Insertar(BannerSimpleDTO bsDTO)
         {
+            
+            Connection.con.Open();
+            // Create insert command.
+            NpgsqlCommand command = new NpgsqlCommand("INSERT INTO " +
+                "bannersimple(idbanner, texto) VALUES(:idbanner, :texto)", Connection.con);
+
+            command.Parameters.AddWithValue("@idbanner", bsDTO.IdBanner);
+            command.Parameters.AddWithValue("@texto", bsDTO.Texto);
+
             try
-            {
-                Connection.con.Open();
-                // Create insert command.
-                NpgsqlCommand command = new NpgsqlCommand("INSERT INTO " +
-                    "bannersimple(idbanner, texto) VALUES(:idbanner, :texto)", Connection.con);
-
-                command.Parameters.AddWithValue("@idbanner", bsDTO.IdBanner);
-                command.Parameters.AddWithValue("@texto", bsDTO.Texto);
-
-                // Execute SQL command.
-                Int32 recordAffected = command.ExecuteNonQuery();
-                Connection.con.Close();
+            {   // Execute SQL command.
+                command.ExecuteNonQuery();
+                
             }
             catch (NpgsqlException e)
             {
@@ -38,32 +39,25 @@ namespace CarteleriaDigital.DAO
 
             Connection.con.Close();
         }
-
+        
+        //Metodo para modificar un banner de la base de datos.
         public void Modificar(BannerSimpleDTO bsDTO)
         {
             Connection.con.Open();
 
+            NpgsqlCommand command = new NpgsqlCommand("UPDATE bannersimple " +
+                "SET texto = @texto WHERE idbannersimple = " + bsDTO.IdBannerSimple, Connection.con);
+
+            command.Parameters.AddWithValue("@idbanner", bsDTO.IdBanner);
+            command.Parameters.AddWithValue("@texto", bsDTO.Texto);
+
             try
             {
-                // Create update command.
-                NpgsqlCommand command = new NpgsqlCommand("UPDATE bannersimple " +
-                    "SET texto = @texto WHERE idbannersimple = " + bsDTO.IdBannerSimple, Connection.con);
-
-                // Add paramaters.
-                command.Parameters.AddWithValue("@idbanner", bsDTO.IdBanner);
-                command.Parameters.AddWithValue("@texto", bsDTO.Texto);
-                
-
-                // Execute SQL command.
-                int recordAffected = command.ExecuteNonQuery();
-                if (Convert.ToBoolean(recordAffected))
-                {
-                    //showInformation("Data successfully updated!");
-                }
+                command.ExecuteNonQuery();
             }
             catch (NpgsqlException ex)
             {
-                //showError(ex);
+                throw ex;
             }
 
             Connection.con.Close();
@@ -78,22 +72,20 @@ namespace CarteleriaDigital.DAO
         {
             Connection.con.Open();
 
-                String query = "select b.nombre, bs.texto, bs.idbannersimple, b.idbanner, b.idrango from banner b, bannersimple bs where b.idbanner = "+id+" and b.idbanner = bs.idbanner";
-                NpgsqlCommand cmd = new NpgsqlCommand(query, Connection.con);
-            //cmd.Parameters.AddWithValue("@id", id);
+            String query = "select b.nombre, bs.texto, bs.idbannersimple, b.idbanner, b.idrango from banner b, bannersimple bs where b.idbanner = "+id+" and b.idbanner = bs.idbanner";
+            NpgsqlCommand cmd = new NpgsqlCommand(query, Connection.con);
             NpgsqlDataReader dr = cmd.ExecuteReader();
 
-                dr.Read();
-                BannerSimpleDTO bsDTO = new BannerSimpleDTO();
-                bsDTO.Nombre = dr.GetString(0);
-                bsDTO.Texto = dr.GetString(1);
-                bsDTO.IdBannerSimple = dr.GetInt32(2);
-                bsDTO.IdBanner = dr.GetInt32(3);
-                bsDTO.IdRango = dr.GetInt32(4);
+            dr.Read();
+            BannerSimpleDTO bsDTO = new BannerSimpleDTO();
+            bsDTO.Nombre = dr.GetString(0);
+            bsDTO.Texto = dr.GetString(1);
+            bsDTO.IdBannerSimple = dr.GetInt32(2);
+            bsDTO.IdBanner = dr.GetInt32(3);
+            bsDTO.IdRango = dr.GetInt32(4);
 
             Connection.con.Close();
             return bsDTO;
         }
-
     }
 }

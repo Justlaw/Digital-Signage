@@ -264,6 +264,7 @@ namespace CarteleriaDigital.DAO
 
         public DataTable SelectCampaña()
         {
+            //Creando el DataTable donde almacenaremos la respuessta de la consulta SQL y luego se devolverá
             DataTable dt = new DataTable();
             dt.Columns.Add("IdCampaña");
             dt.Columns.Add("IdRango");
@@ -286,7 +287,6 @@ namespace CarteleriaDigital.DAO
             da.Fill(dt);
 
             Connection.con.Close();
-
             return dt;
         }
 
