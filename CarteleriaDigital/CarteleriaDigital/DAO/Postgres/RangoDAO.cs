@@ -17,13 +17,15 @@ namespace CarteleriaDigital.DAO
             
         }
 
-
+        /// <summary>
+        /// Crea un nuevo registro de un Rango en la base de datos 
+        /// </summary>
+        /// <param name="ranDTO"></param>
         public void Insertar(RangoDTO ranDTO)
         {
-            try
-            {
+
                 Connection.con.Open();
-                // Create insert command.
+
                 NpgsqlCommand command = new NpgsqlCommand("INSERT INTO " +
                     "rango(fechainicio, fechafin, horainicio, minutoinicio, horafin, minutofin) VALUES(:fechainicio, :fechafin, :horainicio, :minutoinicio, :horafin, :minutofin)", Connection.con);
 
@@ -34,34 +36,29 @@ namespace CarteleriaDigital.DAO
                 command.Parameters.AddWithValue("@horafin", ranDTO.HoraFin);
                 command.Parameters.AddWithValue("@minutofin", ranDTO.MinutoFin);
 
-
-
-                // Execute SQL command.
-                Int32 recordAffected = command.ExecuteNonQuery();
-                if (Convert.ToBoolean(recordAffected))
-                {
-                    //Mostrar error
-                }
+            try
+            {
+                command.ExecuteNonQuery();
             }
             catch (NpgsqlException ex)
             {
-                //Mostrar error
+                throw ex;
             }
-
+            
             Connection.con.Close();
         }
 
+        /// <summary>
+        /// Recibe un rango y reemplaza todos los valores de este en el original
+        /// </summary>
+        /// <param name="ranDTO">rango con los nuevos valores</param>
         public void Modificar(RangoDTO ranDTO)
         {
             Connection.con.Open();
 
-            try
-            {
-                // Create update command.
                 NpgsqlCommand command = new NpgsqlCommand(@"UPDATE rango " +
                     "SET fechainicio = @fechainicio, fechafin = @fechafin, horainicio = @horainicio, minutoinicio = @minutoinicio, horafin = @horafin, minutofin = @minutofin WHERE idRango = " + ranDTO.IdRango, Connection.con);
 
-                // Add paramaters.
                 command.Parameters.AddWithValue("@fechainicio", ranDTO.FechaInicio);
                 command.Parameters.AddWithValue("@fechafin", ranDTO.FechaFin);
                 command.Parameters.AddWithValue("@horainicio", ranDTO.HoraInicio);
@@ -69,21 +66,23 @@ namespace CarteleriaDigital.DAO
                 command.Parameters.AddWithValue("@horafin", ranDTO.HoraFin);
                 command.Parameters.AddWithValue("@minutofin", ranDTO.MinutoFin);
 
-                // Execute SQL command.
-                int recordAffected = command.ExecuteNonQuery();
-                if (Convert.ToBoolean(recordAffected))
-                {
-                    //showInformation("Data successfully updated!");
-                }
+            try
+            { 
+                command.ExecuteNonQuery();
             }
             catch (NpgsqlException ex)
             {
-                //showError(ex);
+                throw ex;
             }
 
             Connection.con.Close();
         }
 
+        /// <summary>
+        /// Devuelve un rango que coincida 
+        /// </summary>
+        /// <param name="id_Rng"></param>
+        /// <returns></returns>
         public RangoDTO BuscarRangoPorID(int id_Rng)
         {
             RangoDAO rng_DAO = new RangoDAO();
@@ -91,11 +90,12 @@ namespace CarteleriaDigital.DAO
 
             Connection.con.Open();
 
-            try {
+                //creando comando del select
                 NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM rango WHERE + " + id_Rng + " = idRango", Connection.con);
 
                 command.Prepare();
-
+            try
+            {
                 NpgsqlDataReader dr = command.ExecuteReader();
                 dr.Read();
 
@@ -105,12 +105,10 @@ namespace CarteleriaDigital.DAO
                 rng_DTO.MinutoInicio = dr.GetInt16(4);
                 rng_DTO.HoraFin = dr.GetInt16(5);
                 rng_DTO.MinutoFin = dr.GetInt16(6);
-
-                
             }
             catch (NpgsqlException ex)
             {
-
+                throw ex;
             }
 
             Connection.con.Close();
@@ -129,14 +127,15 @@ namespace CarteleriaDigital.DAO
 
             Connection.con.Open();
 
-            try
-            {
+
                 // Create select command.
                 NpgsqlCommand command = new NpgsqlCommand("SELECT fechainicio, fechafin, horainicio, minutoinicio, horafin, minutofin FROM rango, banner WHERE banner.idrango = rango.idrango and banner.activo = true ORDER BY rango.idrango ASC", Connection.con);
 
                 // Prepare the command.
                 command.Prepare();
 
+            try
+            {
                 // Execute SQL command.
                 NpgsqlDataReader dr = command.ExecuteReader();
 
@@ -154,7 +153,7 @@ namespace CarteleriaDigital.DAO
             }
             catch (NpgsqlException ex)
             {
-
+                throw ex;
             }
 
             Connection.con.Close();
@@ -173,19 +172,16 @@ namespace CarteleriaDigital.DAO
             List<RangoDTO> listaRango = new List<RangoDTO>();
             RangoDTO rang = new RangoDTO();
             
+                NpgsqlCommand command = new NpgsqlCommand("SELECT fechainicio, fechafin, horainicio, minutoinicio, horafin, minutofin FROM rango, campaña WHERE campaña.idrango = rango.idrango and campaña.activo = true ORDER BY campaña.idrango ASC", Connection.con);
+
+                command.Prepare();
+
 
             try
             {
-                // Create select command.
-                NpgsqlCommand command = new NpgsqlCommand("SELECT fechainicio, fechafin, horainicio, minutoinicio, horafin, minutofin FROM rango, campaña WHERE campaña.idrango = rango.idrango and campaña.activo = true ORDER BY campaña.idrango ASC", Connection.con);
-
-                // Prepare the command.
-                command.Prepare();
-
-                // Execute SQL command.
                 NpgsqlDataReader dr = command.ExecuteReader();
 
-                // Fill results to music list.
+                // Leyendo cada registro y agregándolo a la lista de rangos
                 while (dr.Read())
                 {
                     rang.FechaInicio = dr.GetDateTime(0);
@@ -199,7 +195,7 @@ namespace CarteleriaDigital.DAO
             }
             catch (NpgsqlException ex)
             {
-
+                throw ex;
             }
 
             Connection.con.Close();
@@ -216,35 +212,25 @@ namespace CarteleriaDigital.DAO
             Connection.con.Open();
 
             NpgsqlCommand cmd = new NpgsqlCommand("SELECT * FROM rango ORDER BY idrango DESC LIMIT 1", Connection.con);
-            NpgsqlDataReader dr = cmd.ExecuteReader();
 
             int id = 0;
-            while (dr.Read())
+            try
             {
-                id = dr.GetInt32(0);
+                NpgsqlDataReader dr = cmd.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    id = dr.GetInt32(0);
+                }
+            }
+            catch (NpgsqlException ex)
+            {
+                throw ex;
             }
             Connection.con.Close();
 
             return id;
         }
 
-        public bool RangoDisponible(RangoDTO rng)
-        {
-            bool result = true;
-            RangoDAO rng_DAO = new RangoDAO();
-            foreach (RangoDTO rango in rng_DAO.RangosCampañas())
-            {
-                if (rng.FechaInicio >= rango.FechaInicio && rng.FechaInicio <= rango.FechaFin)
-                {
-                    if (rng.HoraInicio >= rango.HoraInicio && rng.HoraInicio <= rango.HoraFin)
-                    {
-                        result = false;
-                        return result;
-                    }
-                }
-            }
-            return result;
-
-        }
     }
 }
