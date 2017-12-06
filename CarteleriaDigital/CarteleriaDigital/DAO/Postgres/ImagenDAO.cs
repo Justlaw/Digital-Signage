@@ -16,65 +16,64 @@ namespace CarteleriaDigital.DAO
                   
         }
 
+        /// <summary>
+        /// Crea un nuevo registro en la base de datos de la tabla Imagen
+        /// </summary>
+        /// <param name="imagenDTO"></param>
         public void Insertar(ImagenDTO imagenDTO)
         {
-            try
-            {
+           
                 Connection.con.Open();
-                // Create insert command.
+
                 NpgsqlCommand command = new NpgsqlCommand("INSERT INTO imagen (idcampaña, rutaimagen, duracion) VALUES ("+ imagenDTO.IdCampaña+", :rutaimagen, :duracion)", Connection.con);
 
-                //Se comenta el comando porque no funciona cuando debería.
-                //command.Parameters.AddWithValue("@idcampaña", imagenDTO.IdCampaña);
                 command.Parameters.AddWithValue("@rutaimagen", imagenDTO.RutaImagen);
                 command.Parameters.AddWithValue("@duracion", imagenDTO.Duracion);
-                
-                // Execute SQL command.
-                Int32 recordAffected = command.ExecuteNonQuery();
-                if (Convert.ToBoolean(recordAffected))
-                {
-                    //Mostrar error
-                }
+
+            try
+            {
+                command.ExecuteNonQuery();
             }
             catch (NpgsqlException ex)
             {
-                //Mostrar error
+                throw ex;
             }
 
             Connection.con.Close();
         }
 
+        /// <summary>
+        /// Recibe una nueva imagen y la reemplaza en la original
+        /// </summary>
+        /// <param name="imagenDTO"></param>
         public void Modificar(ImagenDTO imagenDTO)
         {
             Connection.con.Close();
 
-            try
-            {
-                // Create update command.
                 NpgsqlCommand command = new NpgsqlCommand(@"UPDATE rango " +
                     "SET idcampaña = @idcampaña, duracion = @duracion, rutaimagen = @rutaimagen WHERE idmagen = " + imagenDTO.IdImagen, Connection.con);
 
-                // Add paramaters.
                 command.Parameters.AddWithValue("@idimagen", imagenDTO.IdImagen);
                 command.Parameters.AddWithValue("@idcampaña", imagenDTO.IdCampaña);
                 command.Parameters.AddWithValue("@duracion", imagenDTO.Duracion);
                 command.Parameters.AddWithValue("@rutaimagen", imagenDTO.RutaImagen);
 
-                // Execute SQL command.
-                int recordAffected = command.ExecuteNonQuery();
-                if (Convert.ToBoolean(recordAffected))
-                {
-                    //showInformation("Data successfully updated!");
+            try { 
+                command.ExecuteNonQuery();
                 }
-            }
             catch (NpgsqlException ex)
             {
-                //showError(ex);
+                throw ex;
             }
 
             Connection.con.Close();
         }
 
+        /// <summary>
+        /// Devuelve una imagen que coincida con el código ingresado.
+        /// </summary>
+        /// <param name="id_Img"></param>
+        /// <returns></returns>
         public ImagenDTO BuscarImagenPorID(int id_Img)
         {
             ImagenDAO img_DAO = new ImagenDAO();
@@ -82,12 +81,12 @@ namespace CarteleriaDigital.DAO
 
             Connection.con.Open();
 
-            try
-            {
                 NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM rango WHERE + " + id_Img + " = idRango", Connection.con);
 
                 command.Prepare();
 
+            try
+            {
                 NpgsqlDataReader dr = command.ExecuteReader();
 
                 img_DTO.IdImagen = dr.GetInt16(0);
@@ -98,30 +97,31 @@ namespace CarteleriaDigital.DAO
             }
             catch (NpgsqlException ex)
             {
-
+                throw ex;     
             }
 
+            Connection.con.Close();
             return img_DTO;
         }
 
+        /// <summary>
+        /// Devuelve una lista con las imágenes pertenecientes a una campaña.
+        /// </summary>
+        /// <param name="pIdCampaña">ID de la campaña que contiene las imágenes</param>
+        /// <returns></returns>
         public List<ImagenDTO> ListarPorCampaña(int pIdCampaña)
         {
             List<ImagenDTO> listaImagenes = new List<ImagenDTO>();
             ImagenDTO img = new ImagenDTO();
             Connection.con.Open();
 
+                NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM imagen WHERE imagen.idcampaña = "+ pIdCampaña +" ORDER BY idimagen ASC", Connection.con);
+                command.Prepare();
             try
             {
-                // Create select command.
-                NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM imagen WHERE imagen.idcampaña = "+ pIdCampaña +" ORDER BY idimagen ASC", Connection.con);
-
-                // Prepare the command.
-                command.Prepare();
-
-                // Execute SQL command.
                 NpgsqlDataReader dr = command.ExecuteReader();
 
-                // Fill results to music list.
+                //Rellenando los datos de la imágen y agregándolos a la lista
                 while (dr.Read())
                 {
                     img.IdImagen = dr.GetInt32(0);
@@ -133,38 +133,36 @@ namespace CarteleriaDigital.DAO
             }
             catch (NpgsqlException ex)
             {
-
+                throw ex;
             }
             Connection.con.Close();
 
             return listaImagenes;
         }
 
+        /// <summary>
+        /// Elimina una imagen por su ID
+        /// </summary>
+        /// <param name="idImagen"></param>
         public void Eliminar(int idImagen)
         {
             Connection.con.Open();
 
-                try
-                {
+                
                 // Create update command.
                 NpgsqlCommand command = new NpgsqlCommand("DELETE FROM " +
                         "imagen WHERE idimagen = :idimagen", Connection.con);
 
                 command.Parameters.AddWithValue("@idimagen", idImagen);
 
-                // Add value to the paramater.
                 command.Parameters[0].Value = idImagen;
-
-                    // Execute SQL command.
-                    int recordAffected = command.ExecuteNonQuery();
-                    if (Convert.ToBoolean(recordAffected))
-                    {
-                        //showInformation("Data successfully deleted!");
-                    }
+                try
+                {
+                    command.ExecuteNonQuery();
                 }
                 catch (NpgsqlException ex)
                 {
-                    
+                    throw ex;
                 }
 
                 Connection.con.Close();

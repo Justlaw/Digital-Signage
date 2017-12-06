@@ -15,110 +15,111 @@ namespace CarteleriaDigital.DAO
         {
         }
 
+        /// <summary>
+        /// Crea un nuevo registro de una Campaña en la base de datos.
+        /// </summary>
+        /// <param name="camDTO"></param>
         public void Insertar(CampañaDTO camDTO)
         {
-            try
-            {
+            
                 Connection.con.Open();
-                // Create insert command.
+
                 NpgsqlCommand command = new NpgsqlCommand("INSERT INTO " +
                     "campaña(idrango, nombre, activo)VALUES (:idrango, :nombre, :activo)", Connection.con);
 
                 command.Parameters.AddWithValue("@idrango", camDTO.IdRango);
                 command.Parameters.AddWithValue("@nombre", camDTO.Nombre);
-                command.Parameters.AddWithValue("@activo", camDTO.Activo);  
-
-                // Execute SQL command.
-                Int32 recordAffected = command.ExecuteNonQuery();
-                if (Convert.ToBoolean(recordAffected))
-                {
-                    //Mostrar error
-                }
+                command.Parameters.AddWithValue("@activo", camDTO.Activo);
+            try
+            {
+                command.ExecuteNonQuery();
             }
             catch (NpgsqlException ex)
             {
-                //Mostrar error
+                throw ex;
             }
 
             Connection.con.Close();
         }
 
+        /// <summary>
+        /// Reemplaza todos los valores de un objeto CampañaDTO en las respectivas columnas de la campaña en la base de datos 
+        /// </summary>
+        /// <param name="camDTO"></param>
         public void Modificar(CampañaDTO camDTO)
         {
             Connection.con.Open();
 
-            try
-            {
-                // Create update command.
                 NpgsqlCommand command = new NpgsqlCommand(@"UPDATE campaña " +
                     "SET idrango = @idrango, activo = @activo, nombre = @nombre WHERE idcampaña = " + camDTO.IdCampaña, Connection.con);
 
-                // Add paramaters.
                 command.Parameters.AddWithValue("@idrango", camDTO.IdRango);
                 command.Parameters.AddWithValue("@activo", camDTO.Activo);
                 command.Parameters.AddWithValue("@nombre", camDTO.Nombre);
 
-                // Execute SQL command.
-                int recordAffected = command.ExecuteNonQuery();
-                if (Convert.ToBoolean(recordAffected))
-                {
-                    //showInformation("Data successfully updated!");
-                }
+            try
+            {
+                command.ExecuteNonQuery();
             }
             catch (NpgsqlException ex)
             {
-                //showError(ex);
+                throw ex;
             }
 
             Connection.con.Close();
         }
 
+        /// <summary>
+        /// Devuelve un objeto con los datos de una campaña que corresponda con el ID
+        /// </summary>
+        /// <param name="id_Camp">ID de la campaña</param>
+        /// <returns></returns>
         public CampañaDTO BuscarCampañaPorID(int id_Camp)
         {
             CampañaDTO camp_DTO = new CampañaDTO();
 
             Connection.con.Open();
 
-            try
-            {
                 NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM rango WHERE + " + id_Camp + " = idRango", Connection.con);
 
                 command.Prepare();
 
+            try
+            {
                 NpgsqlDataReader dr = command.ExecuteReader();
 
                 camp_DTO.IdCampaña = dr.GetInt16(0);
                 camp_DTO.IdRango = dr.GetInt16(1);
                 camp_DTO.Nombre = dr.GetString(2);
                 camp_DTO.Activo = dr.GetBoolean(3);
-
-
             }
             catch (NpgsqlException ex)
             {
-
+                throw ex;
             }
 
             return camp_DTO;
         }
 
+        /// <summary>
+        /// Devuelve un objeto con los datos de una campaña que corresponda con el nombre
+        /// </summary>
+        /// <param name="pNombre">Nombre de la campaña</param>
+        /// <returns></returns>
         public CampañaDTO BuscarPorNombre(String pNombre)
         {
 
             Connection.con.Open();
             CampañaDTO camp = new CampañaDTO();
-            try
-            {
-                // Create select command.
+
                 NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM campaña WHERE nombre = " + pNombre + "ORDER BY idcampaña ASC", Connection.con);
 
-                // Prepare the command.
                 command.Prepare();
 
-                // Execute SQL command.
+            try
+            {
                 NpgsqlDataReader dr = command.ExecuteReader();
 
-                
                 camp.IdCampaña = dr.GetInt32(0);
                 camp.IdRango = dr.GetInt32(1);
                 camp.Activo = dr.GetBoolean(2);
@@ -126,7 +127,7 @@ namespace CarteleriaDigital.DAO
             }
             catch (NpgsqlException ex)
             {
-
+                throw ex;
             }
 
             Connection.con.Close();
@@ -141,18 +142,14 @@ namespace CarteleriaDigital.DAO
 
             Connection.con.Open();
 
-            try
-            {
-                // Create select command.
                 NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM campaña WHERE activo = " + pActivo + "ORDER BY idcampaña ASC", Connection.con);
 
-                // Prepare the command.
                 command.Prepare();
-
-                // Execute SQL command.
+            try
+            {
                 NpgsqlDataReader dr = command.ExecuteReader();
 
-                // Fill results to music list.
+                //Rellenando los datos obtenidos con el DataReader
                 while (dr.Read())
                 {
                     camp.IdCampaña = dr.GetInt32(0);
@@ -164,36 +161,38 @@ namespace CarteleriaDigital.DAO
             }
             catch (NpgsqlException ex)
             {
-
+                throw ex;
             }
 
             Connection.con.Close();
 
             return listaCamp;
-
         }
 
+        /// <summary>
+        /// Lista todas las campañas para las cuales si fecha de inicio o su fecha de fin esté comprandida entre las dos fechas indicadas.
+        /// </summary>
+        /// <param name="pFechaIni"></param>
+        /// <param name="pFechaFin"></param>
+        /// <returns></returns>
         public List<CampañaDTO> ListarPorFecha(DateTime pFechaIni, DateTime pFechaFin)
         {
             List<CampañaDTO> listaCamp = new List<CampañaDTO>();
             CampañaDTO camp = new CampañaDTO();
 
             Connection.con.Open();
-
-            try
-            {
-                // Create select command.
+                        
                 NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM campaña, rango WHERE "+ 
                     "campaña.idrango = rango.idrango and '" + pFechaIni.Year + "-" + pFechaIni.Month + "-" + pFechaIni.Day + "' < rango.fechainicio and '" 
                     + pFechaFin.Year + "-" + pFechaFin.Month + "-" + pFechaFin.Day + "' > rango.fechafin ORDER BY idcampaña ASC", Connection.con);
                 
-                // Prepare the command.
                 command.Prepare();
 
-                // Execute SQL command.
+            try
+            {
                 NpgsqlDataReader dr = command.ExecuteReader();
 
-                // Fill results to music list.
+                // Rellenando el DTO con los datos de cada registro obtenido.
                 while (dr.Read())
                 {
                     camp.IdCampaña = dr.GetInt32(0);
@@ -205,7 +204,7 @@ namespace CarteleriaDigital.DAO
             }
             catch (NpgsqlException ex)
             {
-
+                throw ex;
             }
 
             Connection.con.Close();
@@ -213,6 +212,10 @@ namespace CarteleriaDigital.DAO
             return listaCamp;
         }
 
+        /// <summary>
+        /// Devuelve el ID de la última campaña agregada 
+        /// </summary>
+        /// <returns></returns>
         public int ObtenerUltimoId()
         {
 
