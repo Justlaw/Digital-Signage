@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CarteleriaDigital.DTO;
+using CarteleriaDigital.DAO;
 
 
 namespace CarteleriaDigital.Controladores
@@ -33,8 +34,10 @@ namespace CarteleriaDigital.Controladores
             camp.Modificar(camp_DTO, rng_DTO, listImg_DTO, listImgV_DTO);
         }
 
-        public static void BajaCampaña(Campaña camp) {
-            camp.Baja();
+        public static CampañaDTO buscarCampaña(int idCampaña) {
+            List<Imagen> listImg = new List<Imagen>();
+            CampañaDAO camp = new CampañaDAO();
+            return camp.BuscarCampañaPorID(idCampaña); 
         }
     }
 }
