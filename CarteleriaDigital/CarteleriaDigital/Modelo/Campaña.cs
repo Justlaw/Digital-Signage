@@ -52,10 +52,11 @@ namespace CarteleriaDigital
             CampañaDAO camp_DAO = new CampañaDAO();
             ImagenDAO Img_DAO = new ImagenDAO();
             RangoDAO rng_DAO = new RangoDAO();
+            Rango rng = new Rango(rng_DTO);
 
 
             //Se controla que el rango esté disponible y en caso que lo esté, se procede a insertar la campaña.
-            if (rng_DAO.RangoDisponible(rng_DTO))
+            if (Rango.RangoDisponibleCampaña())
             {
                 rng_DAO.Insertar(rng_DTO);
                 camp_DTO.IdRango = rng_DAO.ObtenerUltimoId();
