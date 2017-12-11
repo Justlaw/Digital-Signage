@@ -46,7 +46,7 @@ namespace CarteleriaDigital.Pantallas
         private void button2_Click(object sender, EventArgs e)
         {
 
-            if ((txtNombreCamp.Text == "" || cbHoraInicio.Text == "" || cbHoraFin.Text == "" || cbMinutoInicio.Text == "" || cbMinutoFin.Text == ""))
+            if ((tbNombre.Text == "" || cbHoraInicio.Text == "" || cbHoraFin.Text == "" || cbMinutoInicio.Text == "" || cbMinutoFin.Text == ""))
             {
                 MessageBox.Show("Falta ingresar el nombre, fecha o horarios de la campaña", "Advertencia");
             }
@@ -62,7 +62,7 @@ namespace CarteleriaDigital.Pantallas
                 rng.MinutoInicio = Int16.Parse(cbMinutoInicio.Text);
                 rng.MinutoFin = Int16.Parse(cbMinutoFin.Text);
                 camp.Activo = true;
-                camp.Nombre = txtNombreCamp.Text;
+                camp.Nombre = tbNombre.Text;
                
                 ControladorCampañas.CrearCampaña(camp,rng,ListIMG);
 
@@ -117,7 +117,7 @@ namespace CarteleriaDigital.Pantallas
 
             if (Img.ShowDialog() == DialogResult.OK)
             {
-                pictureBox1.ImageLocation = Img.FileName; 
+                pbMiniImg.ImageLocation = Img.FileName; 
             }
         }
 
@@ -128,39 +128,39 @@ namespace CarteleriaDigital.Pantallas
             {
                 try
                 {
-                   if (Convert.ToInt16(textBox2.Text) > 0)
+                   if (Convert.ToInt16(tbDuracion.Text) > 0)
                     {
-                        this.listView1.Items.Clear();
+                        this.vistaImagenes.Items.Clear();
                       
                         //Carga la imagen desde la ruta y de la un formato, luego la agrega la lista de img.
                         Image fotoEntra = Image.FromFile(Img.FileName);
                         imageList1.Images.Add(fotoEntra);
                         imageList1.ImageSize = new Size(156, 156);
-                        this.listView1.View = View.LargeIcon;
+                        this.vistaImagenes.View = View.LargeIcon;
                       
                         //Arma los indices del listview.
                         for (int counter = 0; counter < imageList1.Images.Count; counter++)
                         {
                             ListViewItem item = new ListViewItem();
                             item.ImageIndex = counter;
-                            this.listView1.Items.Add(item);
+                            this.vistaImagenes.Items.Add(item);
                         }
                       
                         //Carga la lista de imagenes al listview
                         imageList1.ColorDepth = ColorDepth.Depth16Bit;
-                        this.listView1.LargeImageList = imageList1;
+                        this.vistaImagenes.LargeImageList = imageList1;
                      
                         //Carga el objeto de tipo imagen con los datos del usuario.
                         ImagenDTO imagen1 = new ImagenDTO();                  
-                        imagen1.Duracion = Convert.ToInt16(textBox2.Text);
+                        imagen1.Duracion = Convert.ToInt16(tbDuracion.Text);
                         imagen1.RutaImagen = Img.FileName;
                         openFileDialog1.FileName = "";
                       
                         //Lo agrega a la lista de imagenes de la campaña y vacia el picturebox.
                         ListIMG.Add(imagen1);
-                        pictureBox1.Image = null;
-                        pictureBox1.Update();
-                        button4.Enabled = true;
+                        pbMiniImg.Image = null;
+                        pbMiniImg.Update();
+                        btnAgregar.Enabled = true;
                     }
                     else
                     {
@@ -192,27 +192,27 @@ namespace CarteleriaDigital.Pantallas
         private void button5_Click(object sender, EventArgs e)
 
         {
-            if (listView1.Items.Count > 0)
+            if (vistaImagenes.Items.Count > 0)
             {
                 {
 
                     {   //Se obtiene la posicion del elemento seleccionado.
-                        Int32 pos = listView1.SelectedIndices[0];
+                        Int32 pos = vistaImagenes.SelectedIndices[0];
                         //Se establece el índice de la imágen.
                         ListViewItem item = new ListViewItem();
                         item.ImageIndex = pos;
                         //Se elimina la imágen de la posicion.
                         imageList1.Images.RemoveAt(pos);
                         ListIMG.RemoveAt(pos);
-                        listView1.Clear();
+                        vistaImagenes.Clear();
                         //Actualizo los indices.
                         for (int counter = 0; counter < imageList1.Images.Count; counter++)
                         {
                             ListViewItem item1 = new ListViewItem();
                             item1.ImageIndex = counter;
-                            this.listView1.Items.Add(item1);
+                            this.vistaImagenes.Items.Add(item1);
                         }
-                        this.listView1.LargeImageList = imageList1;
+                        this.vistaImagenes.LargeImageList = imageList1;
                     }
                 }
             }
@@ -220,20 +220,20 @@ namespace CarteleriaDigital.Pantallas
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {           
             {   //Al seleccionar una imagen se activa el boton Borrar.
-                if (listView1.SelectedIndices.Count != 0)
-                { button5.Enabled = true; }
-                else { button5.Enabled = false; }
+                if (vistaImagenes.SelectedIndices.Count != 0)
+                { btnBorrar.Enabled = true; }
+                else { btnBorrar.Enabled = false; }
             }
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            {   //Quita todas las imagenes del ListView.
-                imageList1.Dispose();
-                ListIMG.Clear();
-                listView1.LargeImageList = null;
-                listView1.Clear();
-            }
+            //Quita todas las imagenes del ListView.
+            imageList1.Dispose();
+            ListIMG.Clear();
+            vistaImagenes.LargeImageList = null;
+            vistaImagenes.Clear();
+            
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
