@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ServiceModel;
+using System.ServiceModel.Syndication;
+using System.Xml;
 
 namespace CarteleriaDigital
 {
@@ -21,8 +24,6 @@ namespace CarteleriaDigital
             this.URL = brss.FuenteRSS;
             this.Tipo = "rss";
             this.Rango = rango;
-            
-
         }
         
         public BannerRSS(String pURL, Boolean pActivo, String pNombre, Rango pRango)
@@ -92,6 +93,19 @@ namespace CarteleriaDigital
             {
                 return false;
             }
+        }
+
+        public String ObtenerTitulos()
+        {
+            String texto = "";
+            XmlReader lector = XmlReader.Create(this.iURL);
+            SyndicationFeed feed = SyndicationFeed.Load(lector);
+            lector.Close();
+            foreach (SyndicationItem item in feed.Items)
+            {
+                texto = String.Concat(texto, " | " + item.Title.Text);
+            }
+            return texto;
         }
     }
 }
