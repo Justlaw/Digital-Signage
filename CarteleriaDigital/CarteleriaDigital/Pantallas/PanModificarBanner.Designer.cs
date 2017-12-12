@@ -318,6 +318,7 @@
             this.btnCancelar.TabIndex = 21;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnAceptar
             // 
@@ -330,7 +331,7 @@
             this.btnAceptar.UseVisualStyleBackColor = true;
             this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
-            // ModificarBanner
+            // PanModificarBanner
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -347,7 +348,7 @@
             this.Controls.Add(this.txtTexto);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtNombre);
-            this.Name = "ModificarBanner";
+            this.Name = "PanModificarBanner";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ModificarBanner";
             this.groupBox1.ResumeLayout(false);

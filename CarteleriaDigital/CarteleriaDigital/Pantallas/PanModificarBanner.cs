@@ -43,14 +43,16 @@ namespace CarteleriaDigital.Pantallas
             RangoDTO rngDTO = ControladorBanners.BuscarRangoPorId(idrango);
             dtpFechaInicio.Value = rngDTO.FechaInicio;
             dtpFechaFin.Value = rngDTO.FechaFin;
-            cbHoraInicio.Text = rngDTO.HoraInicio.ToString();
-            cbMinutoInicio.Text = rngDTO.MinutoInicio.ToString();
-            cbHoraFin.Text = rngDTO.HoraFin.ToString();
-            cbMinutoFin.Text = rngDTO.MinutoFin.ToString();
+            cbHoraInicio.SelectedIndex = cbHoraInicio.FindString(rngDTO.HoraInicio.ToString());
+            cbHoraFin.SelectedIndex = cbHoraFin.FindString(rngDTO.HoraFin.ToString());
+            cbMinutoInicio.SelectedIndex = cbMinutoInicio.FindString(rngDTO.MinutoInicio.ToString());
+            cbMinutoFin.SelectedIndex = cbMinutoFin.FindString(rngDTO.MinutoFin.ToString());
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
+
+
             RangoDTO rngDTO = new RangoDTO
             {
                 IdRango = idrango,
@@ -62,34 +64,67 @@ namespace CarteleriaDigital.Pantallas
                 MinutoFin = Int16.Parse(cbMinutoFin.Text)
             };
 
-            if (rbBS.Checked)
+            if (VerificarRango(rngDTO))
             {
-                BannerSimpleDTO bsDTO = new BannerSimpleDTO
+                if (rbBS.Checked)
                 {
-                    IdBanner = idbanner,
-                    Nombre = txtNombre.Text,
-                    Texto = txtTexto.Text
-                };
+                    BannerSimpleDTO bsDTO = new BannerSimpleDTO
+                    {
+                        IdBanner = idbanner,
+                        Nombre = txtNombre.Text,
+                        Texto = txtTexto.Text
+                    };
 
-                ControladorBanners.ModificarBannerSimple(bsDTO, rngDTO);
+                    ControladorBanners.ModificarBannerSimple(bsDTO, rngDTO);
+                }
+
+                if (rbRSS.Checked)
+                {
+                    BannerRSSDTO brssDTO = new BannerRSSDTO
+                    {
+                        IdBanner = idbanner,
+                        Nombre = txtNombre.Text,
+                        FuenteRSS = txtURL.Text
+                    };
+
+                    ControladorBanners.ModificarBannerRSS(brssDTO, rngDTO);
+                }
+
+                MessageBox.Show("El banner ha sido modificado satisfactoriamente", "Éxito!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
+        }
+            
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            
+            if (MessageBox.Show("¿Está seguro que desea cancelar la modificación?", "Atención!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+            {
+                this.Close();
+            }
+        }
+
+
+        private bool VerificarRango(RangoDTO rng)
+        {
+            bool resultado = false;
+            if (rng.FechaInicio <= rng.FechaFin)
+            {
+                if (rng.HoraInicio < rng.HoraFin)
+                {
+                    resultado = true;
+                }
+                else if (rng.HoraInicio == rng.HoraFin)
+                {
+                    if (rng.MinutoInicio < rng.MinutoFin)
+                    {
+                        resultado = true;
+                    }
+                }
             }
 
-            if (rbRSS.Checked)
-            {
-                BannerRSSDTO brssDTO = new BannerRSSDTO
-                {
-                    IdBanner = idbanner,
-                    Nombre = txtNombre.Text,
-                    FuenteRSS = txtURL.Text
-                };
-
-                ControladorBanners.ModificarBannerRSS(brssDTO, rngDTO);
-            }
-
-            MessageBox.Show("El banner ha sido modificado satisfactoriamente", "Éxito!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-           
+            return resultado;
         }
     }
-
-
 }
