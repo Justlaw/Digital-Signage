@@ -44,12 +44,11 @@ namespace CarteleriaDigital.DAO
         {
             Connection.con.Open();
                 
-            NpgsqlCommand command = new NpgsqlCommand(@"UPDATE Banner " +
-                    "SET idbanner = @idbanner, fuenterss = @fuenterss WHERE idbannerRSS = " + bRSSDTO.IdBannerRSS, Connection.con);
+            NpgsqlCommand command = new NpgsqlCommand("UPDATE banerrss " +
+                    "SET fuenterss = @fuenterss WHERE idbannerrss = @idbannerrss", Connection.con);
 
-                
-            command.Parameters.AddWithValue("@idbanner", bRSSDTO.IdBanner);
-            command.Parameters.AddWithValue("@fuenterss", bRSSDTO.FuenteRSS);
+            command.Parameters.AddWithValue("@fuenterss", bRSSDTO.FuenteRSS);    
+            command.Parameters.AddWithValue("@idbannerrss", bRSSDTO.IdBannerRSS);
 
             try
             {  
@@ -72,11 +71,12 @@ namespace CarteleriaDigital.DAO
         {
             Connection.con.Open();
 
-            NpgsqlCommand cmd = new NpgsqlCommand("SELECT nombre, fuenterss, idbannersimple, idbanner, idrango FROM banner b, bannerrss brss " +
+            NpgsqlCommand cmd = new NpgsqlCommand("SELECT nombre, fuenterss, idbannerrss, b.idbanner, idrango FROM banner b, bannerrss brss " +
                                                     "WHERE b.idbanner = brss.idbanner and b.idbanner = " + id, Connection.con);
 
                 NpgsqlDataReader dr = cmd.ExecuteReader();
 
+            dr.Read();
                 BannerRSSDTO brssDTO = new BannerRSSDTO
                 {
                     IdBanner = dr.GetInt16(3),

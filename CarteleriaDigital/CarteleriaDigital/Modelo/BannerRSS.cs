@@ -95,17 +95,37 @@ namespace CarteleriaDigital
             }
         }
 
+        /// <summary>
+        /// Obtiene todos los item Titulo de un RSS o un Atom  
+        /// </summary>
+        /// <returns></returns>
         public String ObtenerTitulos()
         {
             String texto = "";
-            XmlReader lector = XmlReader.Create(this.iURL);
-            SyndicationFeed feed = SyndicationFeed.Load(lector);
-            lector.Close();
-            foreach (SyndicationItem item in feed.Items)
+            try
             {
-                texto = String.Concat(texto, " | " + item.Title.Text);
+                XmlReader lector = XmlReader.Create(this.iURL);
+                SyndicationFeed feed = SyndicationFeed.Load(lector);
+                lector.Close();
+                foreach (SyndicationItem item in feed.Items)
+                {
+                    texto = String.Concat(texto, " | " + item.Title.Text);
+                }
+
             }
+            catch (XmlException e)
+            {
+               throw e;
+            }
+
+            catch (Exception e)
+            {
+                throw e;
+            }
+
             return texto;
+        } 
         }
     }
-}
+
+
