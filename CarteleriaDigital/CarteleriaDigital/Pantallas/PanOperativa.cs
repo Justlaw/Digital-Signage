@@ -13,8 +13,9 @@ namespace CarteleriaDigital.Pantallas
 {
     public partial class PanOperativa : Form
     {   //Defino variables globales
-        bool verCursor = false; 
-
+        bool verCursor = false;
+        ImageList imagenL = new ImageList();
+        int i = 0;
 
         public PanOperativa()
         {   //Se inicializan los controles.
@@ -26,11 +27,9 @@ namespace CarteleriaDigital.Pantallas
             
         }
 
-
-
         private void PanOperativa_Load(object sender, EventArgs e)
         {
-
+            timer1.Enabled = true;
         }
 
         private void teclaPresionada(object sender, KeyEventArgs e)
@@ -107,6 +106,18 @@ namespace CarteleriaDigital.Pantallas
 
         private void nosotrosToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void pbImagenes_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            
+            pbImagenes.Image = imagenL.Images[i];
 
         }
     }

@@ -22,8 +22,11 @@ namespace CarteleriaDigital.Controladores
             camp.Guardar(camp_DTO,rng_DTO,listImg_DTO);
         }
 
-        public static void ModificarCampaña(CampañaDTO camp_DTO, RangoDTO rng_DTO, List<ImagenDTO> listImg_DTO, List<ImagenDTO> listImgV_DTO) {
+        public static void ModificarCampaña(CampañaDTO camp_DTO, RangoDTO rng_DTO, List<ImagenDTO> listImgV_DTO) {
             List<Imagen> listImg = new List<Imagen>();
+            List<ImagenDTO> listImg_DTO = new List<ImagenDTO>();
+            listImg_DTO = buscarImagenesCampaña(camp_DTO.IdCampaña);
+
             foreach (ImagenDTO imgDTO in listImg_DTO)
             {
                 Imagen img = new Imagen(imgDTO.RutaImagen, imgDTO.Duracion);
@@ -38,6 +41,26 @@ namespace CarteleriaDigital.Controladores
             List<Imagen> listImg = new List<Imagen>();
             CampañaDAO camp = new CampañaDAO();
             return camp.BuscarCampañaPorID(idCampaña); 
+        }
+
+        public static CampañaDTO buscarCampañaActual()
+        {
+            DateTime FechaActual = DateTime.Today;
+            CampañaDAO camp = new CampañaDAO();
+            return camp.BuscarPorFecha(FechaActual);
+        } 
+
+        public static RangoDTO buscarRangoPorID(int idRango) {
+            RangoDAO rng_DAO = new RangoDAO();
+            rng_DAO.BuscarRangoPorID(idRango);
+            return rng_DAO.BuscarRangoPorID(idRango);
+        }
+
+        public static List<ImagenDTO> buscarImagenesCampaña(int idCampaña) {
+            List<Imagen> listImg = new List<Imagen>();
+            ImagenDAO img_DAO = new ImagenDAO();
+                        
+            return img_DAO.ListarPorCampaña(idCampaña); 
         }
     }
 }

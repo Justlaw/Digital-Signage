@@ -112,7 +112,7 @@ namespace CarteleriaDigital.DAO
         public List<ImagenDTO> ListarPorCampaña(int pIdCampaña)
         {
             List<ImagenDTO> listaImagenes = new List<ImagenDTO>();
-            ImagenDTO img = new ImagenDTO();
+            
             Connection.con.Open();
 
                 NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM imagen WHERE imagen.idcampaña = "+ pIdCampaña +" ORDER BY idimagen ASC", Connection.con);
@@ -124,6 +124,7 @@ namespace CarteleriaDigital.DAO
                 //Rellenando los datos de la imágen y agregándolos a la lista
                 while (dr.Read())
                 {
+                    ImagenDTO img = new ImagenDTO();
                     img.IdImagen = dr.GetInt32(0);
                     img.IdCampaña = dr.GetInt32(1);
                     img.RutaImagen = dr.GetString(2);

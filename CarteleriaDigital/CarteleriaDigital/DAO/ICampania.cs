@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CarteleriaDigital.DTO;
+using System.Data;
 
 namespace CarteleriaDigital.DAO
 {
@@ -15,10 +16,12 @@ namespace CarteleriaDigital.DAO
 
         CampañaDTO BuscarCampañaPorID(int id_Camp);
 
+        CampañaDTO BuscarPorFecha(DateTime pFechaIni);
+
         CampañaDTO BuscarPorNombre(String pNombre);
 
-        List<CampañaDTO> ListarPorActivo(Boolean pActivo);
+        DataSet filtrarCampañaPorNombre(String pNombre);
 
-        List<CampañaDTO> ListarPorFecha(DateTime pFechaIni, DateTime pFechaFin);
+        DataSet filtrarCampañaPorFecha(DateTime pFechaIni, DateTime pFechaFin);
     }
 }

@@ -175,32 +175,25 @@ namespace CarteleriaDigital.DAO
         /// <param name="pFechaIni"></param>
         /// <param name="pFechaFin"></param>
         /// <returns></returns>
-        public List<CampañaDTO> ListarPorFecha(DateTime pFechaIni, DateTime pFechaFin)
+        public CampañaDTO BuscarPorFecha(DateTime pFechaIni)
         {
-            List<CampañaDTO> listaCamp = new List<CampañaDTO>();
             CampañaDTO camp = new CampañaDTO();
 
             Connection.con.Open();
                         
                 NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM campaña, rango WHERE "+ 
-                    "campaña.idrango = rango.idrango and '" + pFechaIni.Year + "-" + pFechaIni.Month + "-" + pFechaIni.Day + "' < rango.fechainicio and '" 
-                    + pFechaFin.Year + "-" + pFechaFin.Month + "-" + pFechaFin.Day + "' > rango.fechafin ORDER BY idcampaña ASC", Connection.con);
+                    "campaña.idrango = rango.idrango and '" + pFechaIni.Year + "-" + pFechaIni.Month + "-" + pFechaIni.Day + "' > rango.fechainicio and '" 
+                    + pFechaIni.Year + "-" + pFechaIni.Month + "-" + pFechaIni.Day + "' < rango.fechafin ORDER BY idcampaña ASC", Connection.con);
                 
                 command.Prepare();
 
             try
             {
                 NpgsqlDataReader dr = command.ExecuteReader();
-
-                // Rellenando el DTO con los datos de cada registro obtenido.
-                while (dr.Read())
-                {
-                    camp.IdCampaña = dr.GetInt32(0);
-                    camp.IdRango = dr.GetInt32(1);
-                    camp.Nombre = dr.GetString(2);
-                    camp.Activo = dr.GetBoolean(3);
-                    listaCamp.Add(camp);
-                }
+                camp.IdCampaña = dr.GetInt32(0);
+                camp.IdRango = dr.GetInt32(1);
+                camp.Nombre = dr.GetString(2);
+                camp.Activo = dr.GetBoolean(3);
             }
             catch (NpgsqlException ex)
             {
@@ -209,7 +202,7 @@ namespace CarteleriaDigital.DAO
 
             Connection.con.Close();
 
-            return listaCamp;
+            return camp;
         }
 
         /// <summary>
