@@ -75,17 +75,12 @@ namespace CarteleriaDigital
         }
         #endregion 
 
-        /// <summary>
-        /// Devuelve verdadero o falso según el rango esté disponible para agregar un banner
-        /// </summary>
-        /// <returns></returns>
-        public bool RangoDisponibleBanner()
+        private bool EstaDisponible(List<RangoDTO> listaRangos)
         {
-            RangoDAO rng_DAO = new RangoDAO();
-            foreach (RangoDTO rango in rng_DAO.RangosBanners())
+            foreach (RangoDTO rango in listaRangos)
             {
                 if ((iFechaInicio.Date >= rango.FechaInicio.Date && iFechaInicio.Date <= rango.FechaFin.Date) ||
-                    (iFechaFin >= rango.FechaInicio && iFechaFin <= rango.FechaFin))
+                    (iFechaFin.Date >= rango.FechaInicio.Date && iFechaFin.Date <= rango.FechaFin.Date))
                 {
                     if (
                         iHoraInicio >= rango.HoraInicio && iHoraInicio <= rango.HoraFin
@@ -98,6 +93,16 @@ namespace CarteleriaDigital
             }
             return true;
         }
+        /// <summary>
+        /// Devuelve verdadero o falso según el rango esté disponible para agregar un banner
+        /// </summary>
+        /// <returns></returns>
+        public bool RangoDisponibleBanner()
+        {
+            RangoDAO rng_DAO = new RangoDAO();
+            List < RangoDTO > lista = rng_DAO.RangosBanners();
+            return EstaDisponible(lista);
+        }
 
         /// <summary>
         /// Devuelve verdadero o falso según el rango esté disponible para agregar una campña
@@ -107,21 +112,7 @@ namespace CarteleriaDigital
         {
             RangoDAO rng_DAO = new RangoDAO();
             List<RangoDTO> lista = rng_DAO.RangosCampañas();
-            foreach (RangoDTO rango in lista)
-            {
-                if ((iFechaInicio.Date >= rango.FechaInicio.Date && iFechaInicio.Date <= rango.FechaFin.Date) ||
-                    (iFechaFin >= rango.FechaInicio && iFechaFin <= rango.FechaFin))
-                {
-                    if (
-                        iHoraInicio >= rango.HoraInicio && iHoraInicio <= rango.HoraFin
-                        && iMinutoInicio >= rango.MinutoInicio && iMinutoInicio <= rango.MinutoFin
-                        )
-                    {
-                        return false;
-                    }
-                }
-            }
-            return true;
+            return EstaDisponible(lista);
         }
 
 
