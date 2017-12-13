@@ -15,7 +15,6 @@ namespace CarteleriaDigital.Controladores
             Rango rng = new Rango(rng_DTO);
             BannerSimple bs = new BannerSimple(bs_DTO, rng);
             return bs.Guardar(bs_DTO, rng_DTO);
-            
         }
 
         public static bool CrearBannerRSS(BannerRSSDTO brss_DTO, RangoDTO rng_DTO)
@@ -43,14 +42,40 @@ namespace CarteleriaDigital.Controladores
             return rngDAO.BuscarRangoPorID(id);
         }
 
-        public static bool ModificarBannerSimple(BannerSimpleDTO bsDTO, RangoDTO rngDTO)
+        public static void ModificarBannerSimple(BannerSimpleDTO bsDTO, RangoDTO rngDTO)
         {
-            return true;
+            RangoDAO rDAO = new RangoDAO();
+            BannerDAO bDAO = new BannerDAO();
+            BannerSimpleDAO bsDAO = new BannerSimpleDAO();
+
+            BannerDTO bDTO = new BannerDTO()
+            {
+                IdBanner = bsDTO.IdBanner,
+                Nombre = bsDTO.Nombre,
+                Tipo = "simple"
+            };
+
+            rDAO.Modificar(rngDTO);
+            bDAO.Modificar(bDTO);
+            bsDAO.Modificar(bsDTO);
         }
 
-        public static bool ModificarBannerRSS(BannerRSSDTO brssDTO, RangoDTO rngDTO)
+        public static void ModificarBannerRSS(BannerRSSDTO brssDTO, RangoDTO rngDTO)
         {
-            return true;
+            RangoDAO rDAO = new RangoDAO();
+            BannerDAO bDAO = new BannerDAO();
+            BannerRSSDAO brssDAO = new BannerRSSDAO();
+
+            BannerDTO bDTO = new BannerDTO()
+            {
+                IdBanner = brssDTO.IdBanner,
+                Nombre = brssDTO.Nombre,
+                Tipo = "rss"
+            };
+
+            rDAO.Modificar(rngDTO);
+            bDAO.Modificar(bDTO);
+            brssDAO.Modificar(brssDTO);
         }
     }
 }

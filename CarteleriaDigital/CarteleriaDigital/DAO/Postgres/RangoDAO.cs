@@ -265,5 +265,9 @@ namespace CarteleriaDigital.DAO
             return id;
         }
 
+        public static implicit operator RangoDAO(BannerDAO v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
