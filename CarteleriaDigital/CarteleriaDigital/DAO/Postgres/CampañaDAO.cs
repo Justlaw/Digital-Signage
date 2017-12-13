@@ -88,6 +88,8 @@ namespace CarteleriaDigital.DAO
             {
                 NpgsqlDataReader dr = command.ExecuteReader();
 
+                dr.Read();
+
                 camp_DTO.IdCampaña = dr.GetInt16(0);
                 camp_DTO.IdRango = dr.GetInt16(1);
                 camp_DTO.Nombre = dr.GetString(2);
@@ -120,6 +122,8 @@ namespace CarteleriaDigital.DAO
             {
                 NpgsqlDataReader dr = command.ExecuteReader();
 
+                dr.Read();
+
                 camp.IdCampaña = dr.GetInt32(0);
                 camp.IdRango = dr.GetInt32(1);
                 camp.Activo = dr.GetBoolean(2);
@@ -142,9 +146,10 @@ namespace CarteleriaDigital.DAO
 
             Connection.con.Open();
 
-                NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM campaña WHERE activo = " + pActivo + "ORDER BY idcampaña ASC", Connection.con);
+            NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM campaña WHERE activo = " + pActivo + "ORDER BY idcampaña ASC", Connection.con);
 
-                command.Prepare();
+            command.Prepare();
+
             try
             {
                 NpgsqlDataReader dr = command.ExecuteReader();
@@ -181,17 +186,20 @@ namespace CarteleriaDigital.DAO
 
             Connection.con.Open();
                         
-                NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM campaña, rango WHERE "+ 
-                    "campaña.idrango = rango.idrango and '" + pFechaIni.Year + "-" + pFechaIni.Month + "-" + pFechaIni.Day + "' > rango.fechainicio and '" 
-                    + pFechaIni.Year + "-" + pFechaIni.Month + "-" + pFechaIni.Day + "' < rango.fechafin ORDER BY idcampaña ASC", Connection.con);
+            NpgsqlCommand command = new NpgsqlCommand("SELECT campaña.idcampaña, campaña.idrango, campaña.nombre, campaña.activo FROM campaña, rango WHERE "+ 
+                "campaña.idrango = rango.idrango and '" + pFechaIni.Year + "-" + pFechaIni.Month + "-" + pFechaIni.Day + "' >= rango.fechainicio and '" 
+                + pFechaIni.Year + "-" + pFechaIni.Month + "-" + pFechaIni.Day + "' <= rango.fechafin", Connection.con);
                 
-                command.Prepare();
+            command.Prepare();
 
             try
             {
                 NpgsqlDataReader dr = command.ExecuteReader();
-                camp.IdCampaña = dr.GetInt32(0);
-                camp.IdRango = dr.GetInt32(1);
+
+                dr.Read();
+
+                camp.IdCampaña = dr.GetInt16(0);
+                camp.IdRango = dr.GetInt16(1);
                 camp.Nombre = dr.GetString(2);
                 camp.Activo = dr.GetBoolean(3);
             }

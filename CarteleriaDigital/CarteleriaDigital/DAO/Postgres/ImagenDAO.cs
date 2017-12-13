@@ -89,6 +89,8 @@ namespace CarteleriaDigital.DAO
             {
                 NpgsqlDataReader dr = command.ExecuteReader();
 
+                dr.Read();
+
                 img_DTO.IdImagen = dr.GetInt16(0);
                 img_DTO.IdCampaña = dr.GetInt16(1);
                 img_DTO.RutaImagen = dr.GetString(2);

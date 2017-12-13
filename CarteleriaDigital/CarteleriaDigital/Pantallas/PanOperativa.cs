@@ -8,6 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using CarteleriaDigital.DTO;
+using CarteleriaDigital.Controladores;
+using CarteleriaDigital.DAO;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace CarteleriaDigital.Pantallas
 {
@@ -15,7 +20,7 @@ namespace CarteleriaDigital.Pantallas
     {   //Defino variables globales
         bool verCursor = false;
         ImageList imagenL = new ImageList();
-        int i = 0;
+        Thread thread1;
 
         public PanOperativa()
         {   //Se inicializan los controles.
@@ -29,7 +34,9 @@ namespace CarteleriaDigital.Pantallas
 
         private void PanOperativa_Load(object sender, EventArgs e)
         {
-            timer1.Enabled = true;
+            thread1 = new Thread(new ThreadStart(pasoImagenes));
+            thread1.Start();
+            thread1.Priority = ThreadPriority.Normal;
         }
 
         private void teclaPresionada(object sender, KeyEventArgs e)
@@ -109,16 +116,39 @@ namespace CarteleriaDigital.Pantallas
 
         }
 
-        private void pbImagenes_Click(object sender, EventArgs e)
-        {
+        private async void pasoImagenes() {
+            //Se le solicitan todas las campañas a la clase Controlador
+            List<ImagenDTO> listIMG = new List<ImagenDTO>();
+            CampañaDTO camp = new CampañaDTO();
+            camp = ControladorCampañas.buscarCampañaActual();
+            listIMG = ControladorCampañas.buscarImagenesCampaña(camp.IdCampaña);
 
+            //Se itera sobre la lista de imagenes y se las va cargando periodicamente a un picturebox
+            if (listIMG != null)
+            {
+                foreach (ImagenDTO img in listIMG)
+                {
+                    try
+                    {
+                        Image imagen = Image.FromFile(img.RutaImagen);
+                        pbImagenes.Image = imagen;
+                    }
+                    catch
+                    {
+                        //Si no puede acceder a la imagen de la ubicacion, carga una imagen de error.
+                        pbImagenes.Image = Properties.Resources.LogoUTN;
+
+                    }
+                    await Task.Delay(1000 * img.Duracion);
+                }
+            }
+            //Al finalizar la lista, vuelve a cargarla con nuevas imágenes correspondientes a la fecha y hora actual.
+            camp = ControladorCampañas.buscarCampañaActual();
+            listIMG = ControladorCampañas.buscarImagenesCampaña(camp.IdCampaña);
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private async void pbImagenes_Click(object sender, EventArgs e)
         {
-            
-            pbImagenes.Image = imagenL.Images[i];
-
         }
     }
 }
