@@ -96,7 +96,6 @@ namespace CarteleriaDigital
                     }
                 }
             }
-
             return true;
         }
 
@@ -106,25 +105,25 @@ namespace CarteleriaDigital
         /// <returns></returns>
         public bool RangoDisponibleCampaña()
         {
-            bool result = true;
             RangoDAO rng_DAO = new RangoDAO();
             List<RangoDTO> lista = rng_DAO.RangosCampañas();
             foreach (RangoDTO rango in lista)
             {
-                if (iFechaInicio >= rango.FechaInicio && iFechaInicio <= rango.FechaFin)
+                if ((iFechaInicio.Date >= rango.FechaInicio.Date && iFechaInicio.Date <= rango.FechaFin.Date) ||
+                    (iFechaFin >= rango.FechaInicio && iFechaFin <= rango.FechaFin))
                 {
                     if (
                         iHoraInicio >= rango.HoraInicio && iHoraInicio <= rango.HoraFin
                         && iMinutoInicio >= rango.MinutoInicio && iMinutoInicio <= rango.MinutoFin
                         )
                     {
-                        result = false;
-                        return result;
+                        return false;
                     }
                 }
             }
-
-            return result;
+            return true;
         }
+
+
     }
 }
