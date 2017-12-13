@@ -82,10 +82,10 @@ namespace CarteleriaDigital
         public bool RangoDisponibleBanner()
         {
             RangoDAO rng_DAO = new RangoDAO();
-            List<RangoDTO> lista = rng_DAO.RangosBanners();
-            foreach (RangoDTO rango in lista)
+            foreach (RangoDTO rango in rng_DAO.RangosBanners())
             {
-                if (iFechaInicio >= rango.FechaInicio && iFechaInicio <= rango.FechaFin)
+                if ((iFechaInicio.Date >= rango.FechaInicio.Date && iFechaInicio.Date <= rango.FechaFin.Date) ||
+                    (iFechaFin >= rango.FechaInicio && iFechaFin <= rango.FechaFin))
                 {
                     if (
                         iHoraInicio >= rango.HoraInicio && iHoraInicio <= rango.HoraFin
