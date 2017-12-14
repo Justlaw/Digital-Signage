@@ -143,7 +143,6 @@
             this.pbImagenes.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbImagenes.TabIndex = 0;
             this.pbImagenes.TabStop = false;
-            this.pbImagenes.Click += new System.EventHandler(this.pbImagenes_Click);
             // 
             // PanOperativa
             // 

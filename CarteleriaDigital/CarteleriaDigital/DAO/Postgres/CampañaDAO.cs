@@ -180,15 +180,15 @@ namespace CarteleriaDigital.DAO
         /// <param name="pFechaIni"></param>
         /// <param name="pFechaFin"></param>
         /// <returns></returns>
-        public CampañaDTO BuscarPorFecha(DateTime pFechaIni)
+        public CampañaDTO BuscarPorFecha(DateTime pFechaActual)
         {
             CampañaDTO camp = new CampañaDTO();
 
             Connection.con.Open();
                         
             NpgsqlCommand command = new NpgsqlCommand("SELECT campaña.idcampaña, campaña.idrango, campaña.nombre, campaña.activo FROM campaña, rango WHERE "+ 
-                "campaña.idrango = rango.idrango and '" + pFechaIni.Year + "-" + pFechaIni.Month + "-" + pFechaIni.Day + "' >= rango.fechainicio and '" 
-                + pFechaIni.Year + "-" + pFechaIni.Month + "-" + pFechaIni.Day + "' <= rango.fechafin", Connection.con);
+                "campaña.idrango = rango.idrango and '" + pFechaActual.Year + "-" + pFechaActual.Month + "-" + pFechaActual.Day + "' >= rango.fechainicio and '" 
+                + pFechaActual.Year + "-" + pFechaActual.Month + "-" + pFechaActual.Day + "' <= rango.fechafin", Connection.con);
                 
             command.Prepare();
 
@@ -196,12 +196,16 @@ namespace CarteleriaDigital.DAO
             {
                 NpgsqlDataReader dr = command.ExecuteReader();
 
-                dr.Read();
-
-                camp.IdCampaña = dr.GetInt16(0);
-                camp.IdRango = dr.GetInt16(1);
-                camp.Nombre = dr.GetString(2);
-                camp.Activo = dr.GetBoolean(3);
+                if (dr.Read())
+                {
+                    camp.IdCampaña = dr.GetInt16(0);
+                    camp.IdRango = dr.GetInt16(1);
+                    camp.Nombre = dr.GetString(2);
+                    camp.Activo = dr.GetBoolean(3);
+                } else
+                {
+                    camp = null;
+                }
             }
             catch (NpgsqlException ex)
             {

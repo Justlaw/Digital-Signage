@@ -12,7 +12,6 @@ using CarteleriaDigital.DTO;
 using CarteleriaDigital.Controladores;
 using CarteleriaDigital.DAO;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace CarteleriaDigital.Pantallas
 {
@@ -143,12 +142,7 @@ namespace CarteleriaDigital.Pantallas
                 }
             }
             //Al finalizar la lista, vuelve a cargarla con nuevas imágenes correspondientes a la fecha y hora actual.
-            camp = ControladorCampañas.buscarCampañaActual();
-            listIMG = ControladorCampañas.buscarImagenesCampaña(camp.IdCampaña);
-        }
-
-        private async void pbImagenes_Click(object sender, EventArgs e)
-        {
+            pasoImagenes();
         }
     }
 }

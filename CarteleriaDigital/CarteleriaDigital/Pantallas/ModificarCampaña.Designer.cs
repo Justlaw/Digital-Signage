@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("");
             this.gbFechaHora = new System.Windows.Forms.GroupBox();
             this.cbMinutoFin = new System.Windows.Forms.ComboBox();
             this.cbHoraFin = new System.Windows.Forms.ComboBox();
@@ -304,7 +304,7 @@
             // vistaImagenes
             // 
             this.vistaImagenes.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
+            listViewItem2});
             this.vistaImagenes.Location = new System.Drawing.Point(319, 23);
             this.vistaImagenes.Margin = new System.Windows.Forms.Padding(4);
             this.vistaImagenes.Name = "vistaImagenes";
@@ -332,6 +332,8 @@
             this.tbDuracion.Name = "tbDuracion";
             this.tbDuracion.Size = new System.Drawing.Size(57, 22);
             this.tbDuracion.TabIndex = 3;
+            this.tbDuracion.TextChanged += new System.EventHandler(this.tbDuracion_TextChanged);
+            this.tbDuracion.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbDuracion_KeyPress);
             // 
             // lDuracion
             // 

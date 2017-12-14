@@ -83,7 +83,7 @@
             this.tbNombre.Name = "tbNombre";
             this.tbNombre.Size = new System.Drawing.Size(557, 22);
             this.tbNombre.TabIndex = 1;
-            this.tbNombre.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.tbNombre.TextChanged += new System.EventHandler(this.tbNombre_TextChanged);
             // 
             // btnAceptar
             // 
@@ -95,7 +95,7 @@
             this.btnAceptar.TabIndex = 7;
             this.btnAceptar.Text = "Aceptar";
             this.btnAceptar.UseVisualStyleBackColor = true;
-            this.btnAceptar.Click += new System.EventHandler(this.button2_Click);
+            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
             // btnCancelar
             // 
@@ -107,7 +107,7 @@
             this.btnCancelar.TabIndex = 8;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
-            this.btnCancelar.Click += new System.EventHandler(this.button3_Click);
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // openFileDialog1
             // 
@@ -334,7 +334,7 @@
             this.gbImagenes.TabIndex = 14;
             this.gbImagenes.TabStop = false;
             this.gbImagenes.Text = "Imágenes";
-            this.gbImagenes.Enter += new System.EventHandler(this.groupBox3_Enter);
+            this.gbImagenes.Enter += new System.EventHandler(this.gbImagenes_Enter);
             // 
             // btnLimpiar
             // 
@@ -346,7 +346,7 @@
             this.btnLimpiar.TabIndex = 7;
             this.btnLimpiar.Text = "Limpiar todo";
             this.btnLimpiar.UseVisualStyleBackColor = true;
-            this.btnLimpiar.Click += new System.EventHandler(this.button6_Click);
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // btnBorrar
             // 
@@ -358,7 +358,7 @@
             this.btnBorrar.TabIndex = 6;
             this.btnBorrar.Text = "Borrar imágen";
             this.btnBorrar.UseVisualStyleBackColor = true;
-            this.btnBorrar.Click += new System.EventHandler(this.button5_Click);
+            this.btnBorrar.Click += new System.EventHandler(this.btnBorrar_Click);
             // 
             // vistaImagenes
             // 
@@ -368,7 +368,7 @@
             this.vistaImagenes.Size = new System.Drawing.Size(359, 324);
             this.vistaImagenes.TabIndex = 5;
             this.vistaImagenes.UseCompatibleStateImageBehavior = false;
-            this.vistaImagenes.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.vistaImagenes.SelectedIndexChanged += new System.EventHandler(this.vistaImagenes_SelectedIndexChanged);
             // 
             // btnAgregar
             // 
@@ -380,7 +380,7 @@
             this.btnAgregar.TabIndex = 4;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
-            this.btnAgregar.Click += new System.EventHandler(this.button4_Click);
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // tbDuracion
             // 
@@ -389,7 +389,8 @@
             this.tbDuracion.Name = "tbDuracion";
             this.tbDuracion.Size = new System.Drawing.Size(57, 22);
             this.tbDuracion.TabIndex = 3;
-            this.tbDuracion.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.tbDuracion.TextChanged += new System.EventHandler(this.tbDuracion_TextChanged);
+            this.tbDuracion.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbDuracion_KeyPress);
             // 
             // lDuracion
             // 
@@ -411,7 +412,7 @@
             this.btnBuscar.TabIndex = 1;
             this.btnBuscar.Text = "Buscar...";
             this.btnBuscar.UseVisualStyleBackColor = true;
-            this.btnBuscar.Click += new System.EventHandler(this.button1_Click_1);
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // pbMiniImg
             // 
@@ -423,7 +424,7 @@
             this.pbMiniImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbMiniImg.TabIndex = 0;
             this.pbMiniImg.TabStop = false;
-            this.pbMiniImg.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.pbMiniImg.Click += new System.EventHandler(this.pbMiniImg_Click);
             // 
             // imageList1
             // 
