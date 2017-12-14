@@ -188,7 +188,8 @@ namespace CarteleriaDigital.DAO
                         
             NpgsqlCommand command = new NpgsqlCommand("SELECT campaña.idcampaña, campaña.idrango, campaña.nombre, campaña.activo FROM campaña, rango WHERE "+ 
                 "campaña.idrango = rango.idrango and '" + pFechaActual.Year + "-" + pFechaActual.Month + "-" + pFechaActual.Day + "' >= rango.fechainicio and '" 
-                + pFechaActual.Year + "-" + pFechaActual.Month + "-" + pFechaActual.Day + "' <= rango.fechafin", Connection.con);
+                + pFechaActual.Year + "-" + pFechaActual.Month + "-" + pFechaActual.Day + "' <= rango.fechafin and " + pFechaActual.Hour + pFechaActual.Minute +
+                " >= (rango.horainicio*100)+rango.minutoinicio and " + pFechaActual.Hour + pFechaActual.Minute + " < (rango.horafin*100)+rango.minutofin", Connection.con);
                 
             command.Prepare();
 

@@ -45,7 +45,7 @@ namespace CarteleriaDigital.Controladores
 
         public static CampañaDTO buscarCampañaActual()
         {
-            DateTime FechaActual = DateTime.Today;
+            DateTime FechaActual = DateTime.Now;
             CampañaDAO camp = new CampañaDAO();
             return camp.BuscarPorFecha(FechaActual);
         } 
