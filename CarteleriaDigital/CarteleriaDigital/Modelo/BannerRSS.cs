@@ -24,7 +24,7 @@ namespace CarteleriaDigital
             this.Activo = true;
             this.Nombre = brss.Nombre;
             this.URL = brss.FuenteRSS;
-            this. = brss.TextoDeRespaldo;
+            this.textoDeRespaldo = brss.TextoDeRespaldo;
             this.Tipo = "rss";
             this.Rango = rango;
         }

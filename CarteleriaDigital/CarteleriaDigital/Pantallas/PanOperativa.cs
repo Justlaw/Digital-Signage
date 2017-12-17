@@ -43,6 +43,13 @@ namespace CarteleriaDigital.Pantallas
 
         private void PanOperativa_Load(object sender, EventArgs e)
         {
+            String texto = ControladorBanners.ObtenerTextoActual();
+            if (texto != null)
+            {
+                char[] charr = texto.ToCharArray();
+                Deslizar(charr);
+            }
+
             DateTime fechaActual = DateTime.Now;
             //Ciclo para saber cuanto falta para la proxima buscada de una campaña
             for (int i = 0; i < minutosDisp.Length; i++)
@@ -206,6 +213,31 @@ namespace CarteleriaDigital.Pantallas
             {
                 iniciarTimer();
             }
+        }
+
+        private async void Deslizar(char[] texto)
+        {
+
+            for (int i = 0; i < texto.Length; i++)
+            {
+                if (i < texto.Length - 1)
+                {
+                    await Task.Delay(75);
+                    //Probar
+                    if (textoBanner.Text.Length == 81)
+                    {
+                        textoBanner.Text = textoBanner.Text.Remove(textoBanner.Text.Length - 1);
+                        textoBanner.Text += texto[i];
+                    }
+                    else { textoBanner.Text += texto[i]; }
+                }
+                else
+                {
+                    await Task.Delay(1000);
+                    Deslizar(texto);
+                }
+            }
+
         }
     }
 }
