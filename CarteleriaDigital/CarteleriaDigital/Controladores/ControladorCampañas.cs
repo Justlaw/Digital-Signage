@@ -52,8 +52,20 @@ namespace CarteleriaDigital.Controladores
         public static List<ImagenDTO> buscarImagenesCampaña(int idCampaña) {
             List<Imagen> listImg = new List<Imagen>();
             ImagenDAO img_DAO = new ImagenDAO();
-                        
             return img_DAO.ListarPorCampaña(idCampaña); 
+        }
+
+        public static void eliminarCampaña(int idcampaña)
+        {
+            CampañaDAO camp = new CampañaDAO();
+            ImagenDAO img = new ImagenDAO();
+            RangoDAO rng = new RangoDAO();
+
+            CampañaDTO campDTO = buscarCampaña(idcampaña);
+
+            img.eliminarImagenesCampaña(idcampaña);
+            camp.Eliminar(idcampaña);
+            rng.Eliminar(campDTO.IdRango);
         }
     }
 }

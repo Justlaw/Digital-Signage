@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CarteleriaDigital.DTO;
 using CarteleriaDigital.DAO;
+using CarteleriaDigital.Controladores;
 
 namespace CarteleriaDigital.Pantallas
 {
     public partial class ListarCampaña : Form
-    {      
-
+    {
         public ListarCampaña()
         {
             InitializeComponent();
@@ -74,7 +74,7 @@ namespace CarteleriaDigital.Pantallas
 
 
         //button1 es el bFiltrar
-        private void button1_Click(object sender, EventArgs e)
+        private void bFiltrar_Click(object sender, EventArgs e)
         {
             int tam = dgvVista.Rows.Count - 1;
 
@@ -110,7 +110,6 @@ namespace CarteleriaDigital.Pantallas
 
         }
 
-
         private void DataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             /// Crear una lista y levantar los datos
@@ -144,11 +143,11 @@ namespace CarteleriaDigital.Pantallas
             {
                 MessageBox.Show("Debe seleccionar el renglón completo haciendo click en la flechita a la izquierda", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
             else
             {
                 DataGridViewRow renglonCampaña = dgvVista.CurrentRow;
-                Pantallas.ModificarCampaña abrir = new Pantallas.ModificarCampaña(renglonCampaña);
+                ControladorCampañas.eliminarCampaña(Int16.Parse(renglonCampaña.Cells["idCampaña"].Value.ToString()));
+                Pantallas.ListarCampaña abrir = new Pantallas.ListarCampaña();
                 abrir.Show();
                 this.SetVisibleCore(false);
             }

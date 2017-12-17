@@ -156,8 +156,6 @@ namespace CarteleriaDigital.DAO
             NpgsqlCommand command = new NpgsqlCommand("DELETE FROM " +
                     "imagen WHERE idcampaña = " + idCampaña, Connection.con);
 
-            command.Parameters.AddWithValue("@idimagen", idCampaña);
-
             try
             {
                 command.ExecuteNonQuery();

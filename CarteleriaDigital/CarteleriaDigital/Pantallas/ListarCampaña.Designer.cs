@@ -181,7 +181,7 @@
             this.bFiltrar.TabIndex = 6;
             this.bFiltrar.Text = "Filtrar";
             this.bFiltrar.UseVisualStyleBackColor = true;
-            this.bFiltrar.Click += new System.EventHandler(this.button1_Click);
+            this.bFiltrar.Click += new System.EventHandler(this.bFiltrar_Click);
             // 
             // bEliminar
             // 
