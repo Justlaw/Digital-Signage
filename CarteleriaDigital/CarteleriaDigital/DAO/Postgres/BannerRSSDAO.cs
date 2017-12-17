@@ -67,7 +67,7 @@ namespace CarteleriaDigital.DAO
         /// </summary>
         /// <param name="id">debe ser el de la clase banner padre</param>
         /// <returns></returns>
-        public BannerRSSDTO BuscarPorId (int id)
+        public BannerRSSDTO BuscarPorId (int? id)
         {
             Connection.con.Open();
 
@@ -75,17 +75,16 @@ namespace CarteleriaDigital.DAO
                                                     "WHERE b.idbanner = brss.idbanner and b.idbanner = " + id, Connection.con);
 
                 NpgsqlDataReader dr = cmd.ExecuteReader();
-
-            dr.Read();
-                BannerRSSDTO brssDTO = new BannerRSSDTO
-                {
-                    IdBanner = dr.GetInt16(3),
-                    IdBannerRSS = dr.GetInt16(2),
-                    Nombre = dr.GetString(0),
-                    FuenteRSS = dr.GetString(1),
-                    IdRango = dr.GetInt16(4)
-                };
-
+            BannerRSSDTO brssDTO = new BannerRSSDTO();
+            if (dr.Read())
+            {
+                brssDTO.IdBanner = dr.GetInt16(3);
+                brssDTO.IdBannerRSS = dr.GetInt16(2);
+                brssDTO.Nombre = dr.GetString(0);
+                brssDTO.FuenteRSS = dr.GetString(1);
+                brssDTO.IdRango = dr.GetInt16(4);
+            }
+            else { brssDTO = null; }
             Connection.con.Close();
             return brssDTO;
         }

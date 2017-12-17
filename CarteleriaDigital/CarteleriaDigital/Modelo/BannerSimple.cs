@@ -10,12 +10,12 @@ namespace CarteleriaDigital
 {
     class BannerSimple : Banner
     {
-        private String iText;
+        private String iTexto;
 
         public BannerSimple(BannerSimpleDTO bsDTO, Rango rango)
         {
             this.iNombre = bsDTO.Nombre;
-            this.iText = bsDTO.Texto;
+            this.iTexto = bsDTO.Texto;
             this.iRango = rango;
         }
 
@@ -23,7 +23,7 @@ namespace CarteleriaDigital
         {
             this.iActivo = pActivo;
             this.iNombre = pNombre;
-            this.iText = pText;
+            this.iTexto = pText;
             this.iRango = pRango;
         }
 
@@ -42,10 +42,10 @@ namespace CarteleriaDigital
             set { this.iNombre = value; }
         }
 
-        public String Text
+        public String Texto
         {
-            get { return this.iText; }
-            set { this.iText = value; }
+            get { return this.iTexto; }
+            set { this.iTexto = value; }
         }
 
         public Rango Rango

@@ -236,5 +236,32 @@ namespace CarteleriaDigital.DAO
             Connection.con.Close();
             return id;
         }
+
+        public BannerDTO ObtenerActual(DateTime pFechaActual)
+        {
+            Connection.con.Open();
+
+            NpgsqlCommand cmd = new NpgsqlCommand("SELECT b.idbanner, b.idrango, b.nombre, b.tipo FROM banner b, rango r WHERE " +
+                "b.idrango = r.idrango and '" + pFechaActual.Year + "-" + pFechaActual.Month + "-" + pFechaActual.Day + "' >= r.fechainicio and '"
+                + pFechaActual.Year + "-" + pFechaActual.Month + "-" + pFechaActual.Day + "' <= r.fechafin and " + pFechaActual.Hour + pFechaActual.Minute +
+                " >= (r.horainicio*100)+r.minutoinicio and " + pFechaActual.Hour + pFechaActual.Minute + " < (r.horafin*100)+r.minutofin", Connection.con);
+
+            NpgsqlDataReader dr = cmd.ExecuteReader();
+
+            BannerDTO bDTO = null; 
+            if (dr.Read())
+            {
+                bDTO = new BannerDTO()
+                {
+                    IdBanner = dr.GetInt16(0),
+                    IdRango = dr.GetInt16(1),
+                    Nombre = dr.GetString(2),
+                    Tipo = dr.GetString(3)
+                };
+            }
+
+            Connection.con.Close();
+            return bDTO;
+        }
     }
 }

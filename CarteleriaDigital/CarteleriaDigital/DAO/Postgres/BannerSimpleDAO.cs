@@ -68,24 +68,28 @@ namespace CarteleriaDigital.DAO
         /// </summary>
         /// <param name="id">El id debe ser el perteneciente a la clase padre Banner</param>
         /// <returns></returns>
-        public BannerSimpleDTO BuscarPorId(int id)
+        public BannerSimpleDTO BuscarPorId(int? id)
         {
             Connection.con.Open();
 
             String query = "select b.nombre, bs.texto, bs.idbannersimple, b.idbanner, b.idrango from banner b, bannersimple bs where b.idbanner = "+id+" and b.idbanner = bs.idbanner";
             NpgsqlCommand cmd = new NpgsqlCommand(query, Connection.con);
             NpgsqlDataReader dr = cmd.ExecuteReader();
-
-            dr.Read();
             BannerSimpleDTO bsDTO = new BannerSimpleDTO();
-            bsDTO.Nombre = dr.GetString(0);
-            bsDTO.Texto = dr.GetString(1);
-            bsDTO.IdBannerSimple = dr.GetInt32(2);
-            bsDTO.IdBanner = dr.GetInt32(3);
-            bsDTO.IdRango = dr.GetInt32(4);
 
+            if (dr.Read())
+            {
+                bsDTO.Nombre = dr.GetString(0);
+                bsDTO.Texto = dr.GetString(1);
+                bsDTO.IdBannerSimple = dr.GetInt32(2);
+                bsDTO.IdBanner = dr.GetInt32(3);
+                bsDTO.IdRango = dr.GetInt32(4);
+                
+            }
+            else { bsDTO = null; }
             Connection.con.Close();
             return bsDTO;
         }
+
     }
 }

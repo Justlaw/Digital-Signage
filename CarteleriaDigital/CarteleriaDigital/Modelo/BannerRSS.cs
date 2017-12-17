@@ -13,7 +13,9 @@ namespace CarteleriaDigital
 {
     class BannerRSS : Banner
     {
-        private String iURL;
+        private String url;
+        private String textoDeRespaldo;
+
         public BannerRSS() { }
 
 
@@ -22,6 +24,7 @@ namespace CarteleriaDigital
             this.Activo = true;
             this.Nombre = brss.Nombre;
             this.URL = brss.FuenteRSS;
+            this. = brss.TextoDeRespaldo;
             this.Tipo = "rss";
             this.Rango = rango;
         }
@@ -30,7 +33,7 @@ namespace CarteleriaDigital
         {
             this.iActivo = pActivo;
             this.iNombre = pNombre;
-            this.iURL = pURL;
+            this.url = pURL;
             this.iRango = pRango;
         }
 
@@ -44,8 +47,20 @@ namespace CarteleriaDigital
 
         public String URL
         {
-            get { return this.iURL; }
-            set { this.iURL = value; }
+            get { return this.url; }
+            set { this.url = value; }
+        }
+
+        public String TextoDeRespaldo
+        {
+            get
+            {
+                return textoDeRespaldo;
+            }
+            set
+            {
+                textoDeRespaldo = value;
+            }
         }
 
         public String Nombre
@@ -59,7 +74,6 @@ namespace CarteleriaDigital
             get { return this.iRango; }
             set { this.iRango = value; }
         }
-
         #endregion
 
         public bool Guardar(BannerRSSDTO brss_DTO, RangoDTO rng_DTO)
@@ -79,12 +93,14 @@ namespace CarteleriaDigital
             //Se controla que el rango esté disponible
             if (rng.RangoDisponibleBanner())
             {
+
                 rng_DAO.Insertar(rng_DTO);
 
                 b_DTO.IdRango = rng_DAO.ObtenerUltimoId();
                 b_DAO.Insertar(b_DTO);
 
                 brss_DTO.IdBanner = b_DAO.ObtenerUltimoId();
+                brss_DTO.TextoDeRespaldo = ObtenerTitulos();
                 brss_DAO.Insertar(brss_DTO);
 
                 return true;
@@ -104,7 +120,7 @@ namespace CarteleriaDigital
             String texto = "";
             try
             {
-                XmlReader lector = XmlReader.Create(this.iURL);
+                XmlReader lector = XmlReader.Create(this.url);
                 SyndicationFeed feed = SyndicationFeed.Load(lector);
                 lector.Close();
                 foreach (SyndicationItem item in feed.Items)

@@ -17,6 +17,11 @@ namespace CarteleriaDigital.DTO
         /// url de la fuente RSS
         /// </summary>
         private string fuenteRSS;
+        /// <summary>
+        /// Texto de respaldo. En caso de que al momento de pasar un banner RSS y no se puede obtener la fuente,
+        /// se deslizará el textoDeRespaldo.
+        /// </summary>
+        private string textoDeRespaldo;
         #endregion
 
         #region Constructores
@@ -63,6 +68,17 @@ namespace CarteleriaDigital.DTO
                 fuenteRSS = value;
             }
         }
+
+        public string TextoDeRespaldo
+        {    get
+            {
+                return textoDeRespaldo;
+            }
+            set
+            {
+                textoDeRespaldo = value;
+            }
+        }   
         #endregion
     }
 }
