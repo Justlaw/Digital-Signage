@@ -147,28 +147,27 @@ namespace CarteleriaDigital.DAO
         /// Elimina una imagen por su ID
         /// </summary>
         /// <param name="idImagen"></param>
-        public void Eliminar(int idImagen)
+        public void eliminarImagenesCampaña(int idCampaña)
         {
             Connection.con.Open();
 
                 
-                // Create update command.
-                NpgsqlCommand command = new NpgsqlCommand("DELETE FROM " +
-                        "imagen WHERE idimagen = :idimagen", Connection.con);
+            // Create update command.
+            NpgsqlCommand command = new NpgsqlCommand("DELETE FROM " +
+                    "imagen WHERE idcampaña = " + idCampaña, Connection.con);
 
-                command.Parameters.AddWithValue("@idimagen", idImagen);
+            command.Parameters.AddWithValue("@idimagen", idCampaña);
 
-                command.Parameters[0].Value = idImagen;
-                try
-                {
-                    command.ExecuteNonQuery();
-                }
-                catch (NpgsqlException ex)
-                {
-                    throw ex;
-                }
+            try
+            {
+                command.ExecuteNonQuery();
+            }
+            catch (NpgsqlException ex)
+            {
+                throw ex;
+            }
 
-                Connection.con.Close();
+            Connection.con.Close();
         }
     }
 }

@@ -56,11 +56,11 @@ namespace CarteleriaDigital.DAO
         {
             Connection.con.Open();
 
-                NpgsqlCommand command = new NpgsqlCommand(@"UPDATE rango " +
-                    "SET fechainicio = @fechainicio, fechafin = @fechafin, horainicio = @horainicio, minutoinicio = @minutoinicio, horafin = @horafin, minutofin = @minutofin WHERE idRango = " + ranDTO.IdRango, Connection.con);
+                NpgsqlCommand command = new NpgsqlCommand("UPDATE rango " +
+                    "SET fechainicio = @fechainicio, fechafin = @fechafin, horainicio = @horainicio, minutoinicio = @minutoinicio, horafin = @horafin, minutofin = @minutofin WHERE idrango = "+ranDTO.IdRango+";", Connection.con);
 
-                command.Parameters.AddWithValue("@fechainicio", ranDTO.FechaInicio);
-                command.Parameters.AddWithValue("@fechafin", ranDTO.FechaFin);
+                command.Parameters.AddWithValue("@fechainicio", ranDTO.FechaInicio.Date);
+                command.Parameters.AddWithValue("@fechafin", ranDTO.FechaFin.Date);
                 command.Parameters.AddWithValue("@horainicio", ranDTO.HoraInicio);
                 command.Parameters.AddWithValue("@minutoinicio", ranDTO.MinutoInicio);
                 command.Parameters.AddWithValue("@horafin", ranDTO.HoraFin);
@@ -99,6 +99,7 @@ namespace CarteleriaDigital.DAO
                 NpgsqlDataReader dr = command.ExecuteReader();
                 dr.Read();
 
+                rng_DTO.IdRango = dr.GetInt16(0);
                 rng_DTO.FechaInicio = dr.GetDateTime(1);
                 rng_DTO.FechaFin = dr.GetDateTime(2);
                 rng_DTO.HoraInicio = dr.GetInt16(3);

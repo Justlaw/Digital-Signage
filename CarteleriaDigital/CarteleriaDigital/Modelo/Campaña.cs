@@ -71,11 +71,12 @@ namespace CarteleriaDigital
         }
 
         //Este método permite modificar una campaña junto con su rango y lista de imagenes asociados a la misma
-        public void Modificar(CampañaDTO camp_DTO, RangoDTO rng_DTO, List<ImagenDTO> listImg_DTO, List<ImagenDTO> listImgV_DTO)
+        public void Modificar(CampañaDTO camp_DTO, RangoDTO rng_DTO, List<ImagenDTO> listImg_DTO)
         {
             CampañaDAO camp_DAO = new CampañaDAO();
             ImagenDAO Img_DAO = new ImagenDAO();
             RangoDAO rng_DAO = new RangoDAO();
+            int idcamp = camp_DTO.IdCampaña;
 
             Rango rng = new Rango(rng_DTO.FechaInicio, rng_DTO.FechaFin, rng_DTO.HoraInicio, rng_DTO.MinutoInicio, rng_DTO.HoraFin, rng_DTO.MinutoFin);
 
@@ -86,53 +87,19 @@ namespace CarteleriaDigital
                     rng_DAO.Modificar(rng_DTO);
                 }
             }
+            if (listImg_DTO != null)
+            {
+                Img_DAO.eliminarImagenesCampaña(camp_DTO.IdCampaña);
+                //En esta parte se trata de insertar las imagenes que no estan en la lista o bien modificar si cierto DTO de la lista fue modificado
+                foreach (ImagenDTO imgDTO in listImg_DTO)
+                {
+                    imgDTO.IdCampaña = idcamp;
+                    Img_DAO.Insertar(imgDTO);
+                }
+            }
             if (camp_DTO != null)
             {
                 camp_DAO.Modificar(camp_DTO);
-            }
-            if (listImg_DTO != null)
-            {
-                Boolean encontrada;
-                //En esta parte se trata de insertar las imagenes que no estan en la lista o bien modificar si cierto DTO de la lista fue modificado
-                foreach (ImagenDTO img_DTO in listImg_DTO)
-                {
-                    encontrada = false;
-                    foreach (ImagenDTO img_DTO2 in listImgV_DTO)
-                    {
-                        if (img_DTO.Equals(img_DTO2))
-                        {
-                            encontrada = true;
-                            break;
-                        }
-                        else if ((img_DTO.IdImagen == img_DTO2.IdImagen) && !img_DTO.Equals(img_DTO2))
-                        {
-                            encontrada = true;
-                            Img_DAO.Modificar(img_DTO);
-                            break;
-                        }
-                    }
-                    if (encontrada == false)
-                    {
-                        Img_DAO.Insertar(img_DTO);
-                    }
-                }
-                // En esta parte se encuentra si la imagen necesita ser eliminada debido a que el usuario la elimino de la lista
-                foreach (ImagenDTO img in listImgV_DTO)
-                {
-                    encontrada = false;
-                    foreach (ImagenDTO img2 in listImg_DTO)
-                    {
-                        if (img.IdImagen == img2.IdImagen) //Ver si esta comparación es válida.
-                        {
-                            encontrada = true;
-                            break;
-                        }
-                    }
-                    if (encontrada == false)
-                    {
-                        Img_DAO.Eliminar(img.IdImagen.Value);
-                    }
-                }
             }
         }
 

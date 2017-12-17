@@ -80,7 +80,7 @@ namespace CarteleriaDigital.DAO
 
             Connection.con.Open();
 
-                NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM rango WHERE + " + id_Camp + " = idRango", Connection.con);
+                NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM campaña WHERE + " + id_Camp + " = campaña.idcampaña", Connection.con);
 
                 command.Prepare();
 
@@ -99,6 +99,8 @@ namespace CarteleriaDigital.DAO
             {
                 throw ex;
             }
+
+            Connection.con.Close();
 
             return camp_DTO;
         }
