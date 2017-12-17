@@ -15,7 +15,7 @@ namespace CarteleriaDigital.DAO
 
         ImagenDTO BuscarImagenPorID(int id_Img);
 
-        void Eliminar(int idImagen);
+        void eliminarImagenesCampaña(int idCampaña);
 
         List<ImagenDTO> ListarPorCampaña(int pIdCampaña);
     }

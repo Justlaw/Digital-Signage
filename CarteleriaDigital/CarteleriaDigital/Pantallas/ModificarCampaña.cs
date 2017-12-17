@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CarteleriaDigital.DTO;
 using CarteleriaDigital.Controladores;
+using CarteleriaDigital.DAO;
 
 namespace CarteleriaDigital.Pantallas
 {
@@ -19,6 +20,7 @@ namespace CarteleriaDigital.Pantallas
         List<ImagenDTO> ListIMG = new List<ImagenDTO>();
         OpenFileDialog Img = new OpenFileDialog();
         CampañaDTO camp = new CampañaDTO();
+        CampañaDAO camp_DAO = new CampañaDAO();
         ImageList imageL = new ImageList();
         RangoDTO rngDTO = new RangoDTO();
 
@@ -33,7 +35,7 @@ namespace CarteleriaDigital.Pantallas
             tbNombre.Text = renglonCampaña.Cells["Nombre"].Value.ToString();
             idRango = Int16.Parse(renglonCampaña.Cells["idRango"].Value.ToString());
 
-            
+            camp = camp_DAO.BuscarCampañaPorID(idCampaña);
             rngDTO = ControladorCampañas.buscarRangoPorID(idRango);
             
             dtpFechaInicio.Value = rngDTO.FechaInicio;
@@ -177,6 +179,7 @@ namespace CarteleriaDigital.Pantallas
                     ListIMG.Add(imagen1);
                     pbMiniImg.Image = null;
                     pbMiniImg.Update();
+                    tbDuracion.Text = "";
                     btnAgregar.Enabled = false;
                 }
                 else
@@ -264,7 +267,7 @@ namespace CarteleriaDigital.Pantallas
 
                 ControladorCampañas.ModificarCampaña(camp, rngDTO, ListIMG);
 
-                MessageBox.Show("La campaña ha sido agregada exitosamente", "Atención", MessageBoxButtons.OK);
+                MessageBox.Show("La campaña ha sido modificada exitosamente", "Atención", MessageBoxButtons.OK);
 
                 this.Close();
                 PanCampaña abrir = new PanCampaña();

@@ -18,8 +18,18 @@ namespace CarteleriaDigital.Pantallas
     public partial class PanOperativa : Form
     {   //Defino variables globales
         bool verCursor = false;
+        List<ImagenDTO> listIMG = new List<ImagenDTO>();
+        CampañaDTO camp = new CampañaDTO();
+        CampañaDTO camp2 = new CampañaDTO();
+        RangoDTO rngDTO = new RangoDTO();
         ImageList imagenL = new ImageList();
-        Thread thread1;
+        bool parar = false;
+        Thread threadPasoImagenes;
+        Thread threadTimer;
+
+        int minutoInicio = 0;
+        int segundosInicio = 0;
+        int[] minutosDisp = new int[] { 00, 15, 30, 45 };
 
         public PanOperativa()
         {   //Se inicializan los controles.
@@ -33,9 +43,55 @@ namespace CarteleriaDigital.Pantallas
 
         private void PanOperativa_Load(object sender, EventArgs e)
         {
-            thread1 = new Thread(new ThreadStart(pasoImagenes));
-            thread1.Start();
-            thread1.Priority = ThreadPriority.Normal;
+            DateTime fechaActual = DateTime.Now;
+            //Ciclo para saber cuanto falta para la proxima buscada de una campaña
+            for (int i = 0; i < minutosDisp.Length; i++)
+            {
+                if (fechaActual.Minute == minutosDisp[i])
+                {
+                    
+                    segundosInicio = 59 - fechaActual.Second;
+                    if (segundosInicio > 0)
+                    {
+                        minutoInicio = minutosDisp[i] + 14;
+                    } else
+                    {
+                        minutoInicio = minutosDisp[i]+15;
+                    }
+                    
+                }
+                else if (fechaActual.Minute > minutosDisp[i] &&
+                    fechaActual.Minute <= minutosDisp[i]+14)
+                {
+                    segundosInicio = 59 - fechaActual.Second;
+                    
+                    if (segundosInicio > 0)
+                    {
+                        minutoInicio = (minutosDisp[i] + 14) - fechaActual.Minute;
+                    }
+                    else
+                    {
+                        minutoInicio = (minutosDisp[i] + 15) - fechaActual.Minute;
+                    }
+                }
+            }
+
+
+            camp = ControladorCampañas.buscarCampañaActual();
+            if (camp != null) {
+                rngDTO = ControladorCampañas.buscarRangoPorID(camp.IdRango);
+                listIMG = ControladorCampañas.buscarImagenesCampaña(camp.IdCampaña);
+            }
+
+            threadPasoImagenes = new Thread(new ThreadStart(pasoImagenes));
+            threadPasoImagenes.Start();
+            threadPasoImagenes.Priority = ThreadPriority.Normal;
+
+            Task.Delay((minutoInicio * 60000) + (segundosInicio * 1000));
+
+            threadTimer = new Thread(new ThreadStart(iniciarTimer));
+            threadTimer.Start();
+            threadTimer.Priority = ThreadPriority.Normal;
         }
 
         private void teclaPresionada(object sender, KeyEventArgs e)
@@ -78,19 +134,10 @@ namespace CarteleriaDigital.Pantallas
             this.Close();
         }
 
-        private void administrarCampañaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void nuevaCampañaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void salirToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-           
+            threadPasoImagenes.Abort();
+            threadTimer.Abort();
             this.Close();
         }
 
@@ -116,33 +163,49 @@ namespace CarteleriaDigital.Pantallas
         }
 
         private async void pasoImagenes() {
-            //Se le solicitan todas las campañas a la clase Controlador
-            List<ImagenDTO> listIMG = new List<ImagenDTO>();
-            CampañaDTO camp = new CampañaDTO();
-            camp = ControladorCampañas.buscarCampañaActual();
-            listIMG = ControladorCampañas.buscarImagenesCampaña(camp.IdCampaña);
-
             //Se itera sobre la lista de imagenes y se las va cargando periodicamente a un picturebox
             if (listIMG != null)
             {
-                foreach (ImagenDTO img in listIMG)
-                {
-                    try
+                while (!parar) { 
+                    foreach (ImagenDTO img in listIMG)
                     {
-                        Image imagen = Image.FromFile(img.RutaImagen);
-                        pbImagenes.Image = imagen;
-                    }
-                    catch
-                    {
-                        //Si no puede acceder a la imagen de la ubicacion, carga una imagen de error.
-                        pbImagenes.Image = Properties.Resources.LogoUTN;
+                        try
+                        {
+                            Image imagen = Image.FromFile(img.RutaImagen);
+                            pbImagenes.Image = imagen;
+                            await Task.Delay(1000 * img.Duracion);
+                        }
+                        catch
+                        {
 
+                        }
                     }
-                    await Task.Delay(1000 * img.Duracion);
                 }
+            } else {
+                //Si no hay una lista de imagenes.
+                pbImagenes.Image = Properties.Resources.espera;
+                await Task.Delay(900000);
             }
-            //Al finalizar la lista, vuelve a cargarla con nuevas imágenes correspondientes a la fecha y hora actual.
-            pasoImagenes();
+            
+
+        }
+
+        private async void iniciarTimer() {
+
+            await Task.Delay(900000);
+            camp2 = ControladorCampañas.buscarCampañaActual();
+            if (camp != camp2)
+            {
+                threadPasoImagenes.Abort();
+                camp = camp2;
+                threadPasoImagenes = new Thread(new ThreadStart(pasoImagenes));
+                threadPasoImagenes.Start();
+                iniciarTimer();
+            }
+            else
+            {
+                iniciarTimer();
+            }
         }
     }
 }

@@ -201,6 +201,7 @@ namespace CarteleriaDigital.Pantallas
                     ListIMG.Add(imagen1);
                     pbMiniImg.Image = null;
                     pbMiniImg.Update();
+                    tbDuracion.Text = "";
                     btnAgregar.Enabled = false;
                 }
                 else

@@ -10,8 +10,9 @@
 
 namespace CarteleriaDigital.Properties {
     using System;
-    
-    
+    using System.Drawing;
+
+
     /// <summary>
     ///   Clase de recurso fuertemente tipado, para buscar cadenas traducidas, etc.
     /// </summary>
@@ -23,7 +24,6 @@ namespace CarteleriaDigital.Properties {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
-        
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
@@ -86,6 +86,15 @@ namespace CarteleriaDigital.Properties {
         internal static System.Drawing.Bitmap LogoUTN3 {
             get {
                 object obj = ResourceManager.GetObject("LogoUTN3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        internal static System.Drawing.Bitmap espera
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("espera", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

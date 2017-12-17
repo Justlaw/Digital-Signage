@@ -10,7 +10,7 @@ namespace CarteleriaDigital.DTO
     {
         #region Atributos
         private int idCampaña;
-        private int? idRango;
+        private int idRango;
         private bool activo;
         private string nombre;
         #endregion
@@ -33,7 +33,7 @@ namespace CarteleriaDigital.DTO
             }
         }
 
-        public int? IdRango
+        public int IdRango
         {
             get
             {

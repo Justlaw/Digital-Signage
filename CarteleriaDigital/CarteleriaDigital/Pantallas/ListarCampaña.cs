@@ -139,8 +139,19 @@ namespace CarteleriaDigital.Pantallas
             }
         }
         //bEliminar
-        private void Button2_Click(object sender, EventArgs e) {
+        private void bEliminar_Click(object sender, EventArgs e) {
+            if (dgvVista.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Debe seleccionar el renglón completo haciendo click en la flechita a la izquierda", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
+            else
+            {
+                DataGridViewRow renglonCampaña = dgvVista.CurrentRow;
+                Pantallas.ModificarCampaña abrir = new Pantallas.ModificarCampaña(renglonCampaña);
+                abrir.Show();
+                this.SetVisibleCore(false);
+            }
         }
 
         private void ListarCampaña_Load(object sender, EventArgs e)
