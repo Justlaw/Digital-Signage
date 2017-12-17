@@ -74,7 +74,7 @@ namespace CarteleriaDigital.Pantallas
         }
 
         //Acción del boton "Buscar".
-        private void button1_Click(object sender, EventArgs e)
+        private void btnBuscar_Click(object sender, EventArgs e)
         {
             Img.InitialDirectory = "C:/Imágenes";
             Img.Filter = "Archivos de Imagen (*.jpg)(*.jpeg)|*.jpg;*jpeg|PNG (*.png)|*.png|GIF (*.gif)|*.gif";
@@ -116,7 +116,7 @@ namespace CarteleriaDigital.Pantallas
             }
         }
 
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        private void vistaImagenes_SelectedIndexChanged(object sender, EventArgs e)
         {
             //Al seleccionar una imagen se activa el boton Borrar.
             if (vistaImagenes.SelectedIndices.Count != 0)
@@ -125,7 +125,7 @@ namespace CarteleriaDigital.Pantallas
         }
 
         //Hace refencia al boton cancelar de la pantalla
-        private void button3_Click(object sender, EventArgs e)
+        private void btnCancelar_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("¿Está seguro que desea cancelar?", "Advertencia", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {

@@ -50,12 +50,30 @@ namespace CarteleriaDigital.DAO
         {
             Connection.con.Open();
 
-                NpgsqlCommand command = new NpgsqlCommand(@"UPDATE campaña " +
-                    "SET idrango = @idrango, activo = @activo, nombre = @nombre WHERE idcampaña = " + camDTO.IdCampaña, Connection.con);
+            NpgsqlCommand command = new NpgsqlCommand(@"UPDATE campaña " +
+                "SET idrango = @idrango, activo = @activo, nombre = @nombre WHERE idcampaña = " + camDTO.IdCampaña, Connection.con);
 
-                command.Parameters.AddWithValue("@idrango", camDTO.IdRango);
-                command.Parameters.AddWithValue("@activo", camDTO.Activo);
-                command.Parameters.AddWithValue("@nombre", camDTO.Nombre);
+            command.Parameters.AddWithValue("@idrango", camDTO.IdRango);
+            command.Parameters.AddWithValue("@activo", camDTO.Activo);
+            command.Parameters.AddWithValue("@nombre", camDTO.Nombre);
+
+            try
+            {
+                command.ExecuteNonQuery();
+            }
+            catch (NpgsqlException ex)
+            {
+                throw ex;
+            }
+
+            Connection.con.Close();
+        }
+
+        public void Eliminar(int idCampaña)
+        {
+            Connection.con.Open();
+
+            NpgsqlCommand command = new NpgsqlCommand("DELETE FROM campaña WHERE idcampaña = " + idCampaña, Connection.con);
 
             try
             {

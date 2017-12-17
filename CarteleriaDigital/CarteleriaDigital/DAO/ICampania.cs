@@ -14,7 +14,9 @@ namespace CarteleriaDigital.DAO
 
         void Modificar(CampañaDTO camDTO);
 
-        CampañaDTO BuscarCampañaPorID(int id_Camp);
+        void Eliminar(int idCampaña);
+
+        CampañaDTO BuscarCampañaPorID(int idCampaña);
 
         CampañaDTO BuscarPorFecha(DateTime pFechaIni);
 

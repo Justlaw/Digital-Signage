@@ -311,7 +311,7 @@
             this.vistaImagenes.Size = new System.Drawing.Size(359, 324);
             this.vistaImagenes.TabIndex = 5;
             this.vistaImagenes.UseCompatibleStateImageBehavior = false;
-            this.vistaImagenes.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.vistaImagenes.SelectedIndexChanged += new System.EventHandler(this.vistaImagenes_SelectedIndexChanged);
             // 
             // btnAgregar
             // 
@@ -355,7 +355,7 @@
             this.btnBuscar.TabIndex = 1;
             this.btnBuscar.Text = "Buscar...";
             this.btnBuscar.UseVisualStyleBackColor = true;
-            this.btnBuscar.Click += new System.EventHandler(this.button1_Click);
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // pbMiniImg
             // 
@@ -378,7 +378,7 @@
             this.btnCancelar.TabIndex = 18;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
-            this.btnCancelar.Click += new System.EventHandler(this.button3_Click);
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnAceptar
             // 

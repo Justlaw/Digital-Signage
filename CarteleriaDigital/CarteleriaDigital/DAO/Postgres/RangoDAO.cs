@@ -78,6 +78,25 @@ namespace CarteleriaDigital.DAO
             Connection.con.Close();
         }
 
+        public void Eliminar(int idRango)
+        {
+            Connection.con.Open();
+
+            NpgsqlCommand command = new NpgsqlCommand("DELETE FROM " +
+                    "rango WHERE idrango = " + idRango, Connection.con);
+
+            try
+            {
+                command.ExecuteNonQuery();
+            }
+            catch (NpgsqlException ex)
+            {
+                throw ex;
+            }
+
+            Connection.con.Close();
+        }
+
         /// <summary>
         /// Devuelve un rango que coincida 
         /// </summary>
