@@ -244,9 +244,17 @@ namespace CarteleriaDigital.DAO
             NpgsqlCommand cmd = new NpgsqlCommand("SELECT b.idbanner, b.idrango, b.nombre, b.tipo FROM banner b, rango r WHERE " +
                 "b.idrango = r.idrango and '" + pFechaActual.Year + "-" + pFechaActual.Month + "-" + pFechaActual.Day + "' >= r.fechainicio and '"
                 + pFechaActual.Year + "-" + pFechaActual.Month + "-" + pFechaActual.Day + "' <= r.fechafin and " + pFechaActual.Hour + pFechaActual.Minute +
-                " >= (r.horainicio*100)+r.minutoinicio and " + pFechaActual.Hour + pFechaActual.Minute + " < (r.horafin*100)+r.minutofin", Connection.con);
-
-            NpgsqlDataReader dr = cmd.ExecuteReader();
+                " >= (r.horainicio*100)+r.minutoinicio and " + pFechaActual.Hour + pFechaActual.Minute + " < (r.horafin*100)+r.minutofin;", Connection.con);
+            NpgsqlDataReader dr;
+            try
+            {
+                dr = cmd.ExecuteReader();
+            }
+            catch (NpgsqlException ex)
+            {
+                throw ex;
+            }
+            
 
             BannerDTO bDTO = null; 
             if (dr.Read())

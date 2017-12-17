@@ -20,35 +20,36 @@ namespace CarteleriaDigital.Pantallas
         bool verCursor = false;
         List<ImagenDTO> listIMG = new List<ImagenDTO>();
         CampañaDTO camp = new CampañaDTO();
-        CampañaDTO camp2 = new CampañaDTO();
         RangoDTO rngDTO = new RangoDTO();
         ImageList imagenL = new ImageList();
         bool parar = false;
         Thread threadPasoImagenes;
         Thread threadTimer;
 
+        //Para el banner
+        String textoString;
+
         int minutoInicio = 0;
         int segundosInicio = 0;
         int[] minutosDisp = new int[] { 00, 15, 30, 45 };
+        private Thread threadDeslizar;
 
         public PanOperativa()
         {   //Se inicializan los controles.
-            
+
             InitializeComponent();
             this.KeyDown += new KeyEventHandler(this.teclaPresionada);
             menuStrip1.Visible = false;
             //Defino los atajos de teclado
-            
+
         }
 
         private void PanOperativa_Load(object sender, EventArgs e)
         {
-            String texto = ControladorBanners.ObtenerTextoActual();
-            if (texto != null)
-            {
-                char[] charr = texto.ToCharArray();
-                Deslizar(charr);
-            }
+            textoString = ControladorBanners.ObtenerTextoActual();
+            threadDeslizar = new Thread(new ThreadStart(DeslizarTexto));
+            threadDeslizar.Start();
+            threadDeslizar.Priority = ThreadPriority.Normal;
 
             DateTime fechaActual = DateTime.Now;
             //Ciclo para saber cuanto falta para la proxima buscada de una campaña
@@ -56,22 +57,23 @@ namespace CarteleriaDigital.Pantallas
             {
                 if (fechaActual.Minute == minutosDisp[i])
                 {
-                    
+
                     segundosInicio = 59 - fechaActual.Second;
                     if (segundosInicio > 0)
                     {
                         minutoInicio = minutosDisp[i] + 14;
-                    } else
-                    {
-                        minutoInicio = minutosDisp[i]+15;
                     }
-                    
+                    else
+                    {
+                        minutoInicio = minutosDisp[i] + 15;
+                    }
+
                 }
                 else if (fechaActual.Minute > minutosDisp[i] &&
-                    fechaActual.Minute <= minutosDisp[i]+14)
+                    fechaActual.Minute <= minutosDisp[i] + 14)
                 {
                     segundosInicio = 59 - fechaActual.Second;
-                    
+
                     if (segundosInicio > 0)
                     {
                         minutoInicio = (minutosDisp[i] + 14) - fechaActual.Minute;
@@ -85,7 +87,8 @@ namespace CarteleriaDigital.Pantallas
 
 
             camp = ControladorCampañas.buscarCampañaActual();
-            if (camp != null) {
+            if (camp != null)
+            {
                 rngDTO = ControladorCampañas.buscarRangoPorID(camp.IdRango);
                 listIMG = ControladorCampañas.buscarImagenesCampaña(camp.IdCampaña);
             }
@@ -169,11 +172,13 @@ namespace CarteleriaDigital.Pantallas
 
         }
 
-        private async void pasoImagenes() {
+        private async void pasoImagenes()
+        {
             //Se itera sobre la lista de imagenes y se las va cargando periodicamente a un picturebox
             if (listIMG != null)
             {
-                while (!parar) { 
+                while (!parar)
+                {
                     foreach (ImagenDTO img in listIMG)
                     {
                         try
@@ -188,19 +193,20 @@ namespace CarteleriaDigital.Pantallas
                         }
                     }
                 }
-            } else {
+            }
+            else
+            {
                 //Si no hay una lista de imagenes.
                 pbImagenes.Image = Properties.Resources.espera;
                 await Task.Delay(900000);
             }
-            
+
 
         }
 
-        private async void iniciarTimer() {
-
-            await Task.Delay(900000);
-            camp2 = ControladorCampañas.buscarCampañaActual();
+        private async void iniciarTimer()
+        {
+            CampañaDTO camp2 = ControladorCampañas.buscarCampañaActual();
             if (camp != camp2)
             {
                 threadPasoImagenes.Abort();
@@ -213,31 +219,37 @@ namespace CarteleriaDigital.Pantallas
             {
                 iniciarTimer();
             }
+            await Task.Delay(900000);
         }
 
-        private async void Deslizar(char[] texto)
+        private async void DeslizarTexto()
         {
-
-            for (int i = 0; i < texto.Length; i++)
+            if (textoString != null)
             {
-                if (i < texto.Length - 1)
+                char[] texto = textoString.ToCharArray();
+                for (int i = 0; i < texto.Length; i++)
                 {
-                    await Task.Delay(75);
-                    //Probar
-                    if (textoBanner.Text.Length == 81)
+                    if (i < texto.Length - 1)
                     {
-                        textoBanner.Text = textoBanner.Text.Remove(textoBanner.Text.Length - 1);
-                        textoBanner.Text += texto[i];
+                        await Task.Delay(125);
+                        //Probar
+                        if (textoBanner.Text.Length == 81)
+                        {
+                            textoBanner.Text = textoBanner.Text.Remove(textoBanner.Text.Length - 1);
+                            textoBanner.Text += texto[i];
+                        }
+                        else { textoBanner.Text += texto[i]; }
                     }
-                    else { textoBanner.Text += texto[i]; }
+                    else
+                    {
+                        await Task.Delay(1000);
+                        DeslizarTexto();
+                    }
                 }
-                else
-                {
-                    await Task.Delay(1000);
-                    Deslizar(texto);
-                }
-            }
 
+            }
         }
+
+
     }
 }
