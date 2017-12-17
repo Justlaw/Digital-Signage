@@ -77,5 +77,32 @@ namespace CarteleriaDigital.Controladores
             bDAO.Modificar(bDTO);
             brssDAO.Modificar(brssDTO);
         }
+
+        public static string ObtenerTextoActual()
+        {
+            BannerDAO bDAO = new BannerDAO();
+            BannerDTO bDTO = bDAO.ObtenerActual(DateTime.Now);
+            if (bDTO == null)
+            {
+                return null;
+            }
+            else
+            {
+                if (bDTO.Tipo == "rss")
+                {
+                    BannerRSSDAO brssDAO = new BannerRSSDAO();
+                    BannerRSSDTO brssDTO = brssDAO.BuscarPorId(bDTO.IdBanner);
+                    BannerRSS brss = new BannerRSS(brssDTO, null);
+                    return brss.ObtenerTitulos();
+                }
+                else //if (bDTO.Tipo == "simple")
+                {
+                    BannerSimpleDAO bsDAO = new BannerSimpleDAO();
+                    BannerSimpleDTO bsDTO = bsDAO.BuscarPorId(bDTO.IdBanner);
+                    BannerSimple bs = new BannerSimple(bsDTO, null);
+                    return bs.Texto;
+                }
+            }
+        }
     }
 }

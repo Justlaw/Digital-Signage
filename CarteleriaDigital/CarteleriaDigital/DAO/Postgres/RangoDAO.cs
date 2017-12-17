@@ -203,38 +203,6 @@ namespace CarteleriaDigital.DAO
             return listaRango;
         }
 
-        public Boolean RangoDisponibleCampaña (RangoDTO rango)
-        {
-            Boolean disponible;
-
-            Connection.con.Open();
-            
-            NpgsqlCommand command = new NpgsqlCommand("SELECT fechainicio, fechafin, horainicio, minutoinicio, horafin, minutofin FROM rango, " +
-                "campaña WHERE campaña.idrango = rango.idrango and campaña.activo = true and rango.fechaInicio >="+ rango.FechaInicio + 
-                " rango.fechaFin <= "+ rango.FechaFin +
-                " ORDER BY campaña.idrango ASC", Connection.con);
-
-            command.Prepare();
-
-
-            try
-            {
-                NpgsqlDataReader dr = command.ExecuteReader();
-                if (dr.Read()) { 
-                    disponible = false;
-                } else {
-                    disponible = true;
-                }
-            }
-            catch (NpgsqlException ex)
-            {
-                throw ex;
-            }
-
-            Connection.con.Close();
-
-            return disponible;
-        }
 
         /// <summary>
         /// Éste método obtiene la úlima inserción en la tabla Rango de la base de datos
@@ -265,9 +233,6 @@ namespace CarteleriaDigital.DAO
             return id;
         }
 
-        public static implicit operator RangoDAO(BannerDAO v)
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }
