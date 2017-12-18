@@ -260,35 +260,25 @@ namespace CarteleriaDigital.DAO
             return id;
         }
 
-        public DataSet filtrarCampañaPorNombre(String pNombre)
-        {
+        public void ActualizarActivoCampaña() {
+            DateTime pFechaActual = DateTime.Now;
             Connection.con.Open();
 
-            NpgsqlCommand cmd = new NpgsqlCommand("SELECT * FROM campaña, rango WHERE " +
-                    "campaña.idrango = rango.idrango and '"+ pNombre +"' = campaña.nombre ORDER BY idcampaña ASC", Connection.con);
-
-            NpgsqlDataAdapter da = new NpgsqlDataAdapter(cmd);
-            DataSet ds = new DataSet();
-            da.Fill(ds);
-
-            Connection.con.Close();
-            return ds;
-        }
-
-        public DataSet filtrarCampañaPorFecha(DateTime pFechaIni, DateTime pFechaFin)
-        {
-            Connection.con.Open();
-
-            NpgsqlCommand cmd = new NpgsqlCommand("SELECT * FROM campaña, rango WHERE " +
-                    "campaña.idrango = rango.idrango and '" + pFechaIni.Year + "-" + pFechaIni.Month + "-" + pFechaIni.Day + "' < rango.fechainicio and '"
-                    + pFechaFin.Year + "-" + pFechaFin.Month + "-" + pFechaFin.Day + "' > rango.fechafin ORDER BY idcampaña ASC", Connection.con);
-
-            NpgsqlDataAdapter da = new NpgsqlDataAdapter(cmd);
-            DataSet ds = new DataSet();
-            da.Fill(ds);
+            NpgsqlCommand command = new NpgsqlCommand(@"UPDATE campaña as c SET activo = false FROM rango as r WHERE c.idrango = r.idrango AND " +
+                "c.activo = true AND (r.fechaFin < '" + pFechaActual.Year + "-" + pFechaActual.Month + "-" + pFechaActual.Day + "' OR " +
+                "(r.fechaFin = '" + pFechaActual.Year + "-" + pFechaActual.Month + "-" + pFechaActual.Day + "' AND " +
+                pFechaActual.Hour + pFechaActual.Minute + " > ((r.horafin * 100) + r.minutofin)))", Connection.con);
+            
+            try
+            {
+                command.ExecuteNonQuery();
+            }
+            catch (NpgsqlException ex)
+            {
+                throw ex;
+            }
 
             Connection.con.Close();
-            return ds;
         }
 
         public DataTable SelectCampaña()

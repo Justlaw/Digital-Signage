@@ -29,7 +29,7 @@ namespace CarteleriaDigital.Pantallas
                 txtURL.Enabled = false;
                 BannerSimpleDTO bsDTO = ControladorBanners.BuscarBannerSimple(idbanner);
                 txtTexto.Text = bsDTO.Texto;
-                idrango = bsDTO.IdRango.Value;
+                idrango = bsDTO.IdRango;
             }
             else
             {
@@ -37,7 +37,7 @@ namespace CarteleriaDigital.Pantallas
                 txtTexto.Enabled = false;
                 BannerRSSDTO brssDTO = ControladorBanners.BuscarBannerRSS(idbanner);
                 txtURL.Text = brssDTO.FuenteRSS;
-                idrango = brssDTO.IdRango.Value;
+                idrango = brssDTO.IdRango;
             }
 
             RangoDTO rngDTO = ControladorBanners.BuscarRangoPorId(idrango);

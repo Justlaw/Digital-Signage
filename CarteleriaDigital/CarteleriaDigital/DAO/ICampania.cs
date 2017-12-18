@@ -21,9 +21,5 @@ namespace CarteleriaDigital.DAO
         CampañaDTO BuscarPorFecha(DateTime pFechaIni);
 
         CampañaDTO BuscarPorNombre(String pNombre);
-
-        DataSet filtrarCampañaPorNombre(String pNombre);
-
-        DataSet filtrarCampañaPorFecha(DateTime pFechaIni, DateTime pFechaFin);
     }
 }
