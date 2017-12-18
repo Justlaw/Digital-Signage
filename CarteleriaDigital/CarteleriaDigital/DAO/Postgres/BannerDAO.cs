@@ -290,5 +290,27 @@ namespace CarteleriaDigital.DAO
 
             Connection.con.Close();
         }
+
+        public void ActualizarActivosBanner()
+        {
+            DateTime pFechaActual = DateTime.Now;
+            Connection.con.Open();
+
+            NpgsqlCommand command = new NpgsqlCommand(@"UPDATE banner as b SET activo = false FROM rango as r WHERE b.idrango = r.idrango AND " +
+                "b.activo = true AND (r.fechaFin < '" + pFechaActual.Year + "-" + pFechaActual.Month + "-" + pFechaActual.Day + "' OR " +
+                "(r.fechaFin = '" + pFechaActual.Year + "-" + pFechaActual.Month + "-" + pFechaActual.Day + "' AND " +
+                pFechaActual.Hour + pFechaActual.Minute + " > ((r.horafin * 100) + r.minutofin)))", Connection.con);
+
+            try
+            {
+                command.ExecuteNonQuery();
+            }
+            catch (NpgsqlException ex)
+            {
+                throw ex;
+            }
+
+            Connection.con.Close();
+        }
     }
 }
