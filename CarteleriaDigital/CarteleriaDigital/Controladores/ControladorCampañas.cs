@@ -45,7 +45,6 @@ namespace CarteleriaDigital.Controladores
 
         public static RangoDTO buscarRangoPorID(int idRango) {
             RangoDAO rng_DAO = new RangoDAO();
-            rng_DAO.BuscarRangoPorID(idRango);
             return rng_DAO.BuscarRangoPorID(idRango);
         }
 

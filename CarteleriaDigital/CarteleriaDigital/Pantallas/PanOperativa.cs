@@ -18,14 +18,10 @@ namespace CarteleriaDigital.Pantallas
     public partial class PanOperativa : Form
     {   //Defino variables globales
         bool verCursor = false;
-        List<ImagenDTO> listIMG = new List<ImagenDTO>();
-        CampañaDTO camp = new CampañaDTO();
-        RangoDTO rngDTO = new RangoDTO();
         ImageList imagenL = new ImageList();
         bool parar = false;
         Thread threadPasoImagenes;
-        Thread threadTimer;
-
+        int tiempoRestante = 0;
         //Para el banner
         String textoString;
 
@@ -46,10 +42,10 @@ namespace CarteleriaDigital.Pantallas
 
         private void PanOperativa_Load(object sender, EventArgs e)
         {
-            textoString = ControladorBanners.ObtenerTextoActual();
-            threadDeslizar = new Thread(new ThreadStart(DeslizarTexto));
-            threadDeslizar.Start();
-            threadDeslizar.Priority = ThreadPriority.Normal;
+            //textoString = ControladorBanners.ObtenerTextoActual();
+            //threadDeslizar = new Thread(new ThreadStart(DeslizarTexto));
+            //threadDeslizar.Start();
+            //threadDeslizar.Priority = ThreadPriority.Normal;
 
             DateTime fechaActual = DateTime.Now;
             //Ciclo para saber cuanto falta para la proxima buscada de una campaña
@@ -85,23 +81,13 @@ namespace CarteleriaDigital.Pantallas
                 }
             }
 
+            tiempoRestante = ((minutoInicio * 60000) + (segundosInicio * 1000));
 
-            camp = ControladorCampañas.buscarCampañaActual();
-            if (camp != null)
-            {
-                rngDTO = ControladorCampañas.buscarRangoPorID(camp.IdRango);
-                listIMG = ControladorCampañas.buscarImagenesCampaña(camp.IdCampaña);
-            }
-
+            
             threadPasoImagenes = new Thread(new ThreadStart(pasoImagenes));
             threadPasoImagenes.Start();
             threadPasoImagenes.Priority = ThreadPriority.Normal;
 
-            Task.Delay((minutoInicio * 60000) + (segundosInicio * 1000));
-
-            threadTimer = new Thread(new ThreadStart(iniciarTimer));
-            threadTimer.Start();
-            threadTimer.Priority = ThreadPriority.Normal;
         }
 
         private void teclaPresionada(object sender, KeyEventArgs e)
@@ -147,7 +133,6 @@ namespace CarteleriaDigital.Pantallas
         private void salirToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             threadPasoImagenes.Abort();
-            threadTimer.Abort();
             this.Close();
         }
 
@@ -174,22 +159,31 @@ namespace CarteleriaDigital.Pantallas
 
         private async void pasoImagenes()
         {
-            //Se itera sobre la lista de imagenes y se las va cargando periodicamente a un picturebox
-            if (listIMG != null)
+            List<ImagenDTO> listIMG = new List<ImagenDTO>();
+            CampañaDTO camp = new CampañaDTO();
+            camp = ControladorCampañas.buscarCampañaActual();
+
+            if (camp != null)
             {
+                int tiempoAcumulado = 0;
+                listIMG = ControladorCampañas.buscarImagenesCampaña(camp.IdCampaña);
+
+                //Se itera sobre la lista de imagenes y se las va cargando periodicamente a un picturebox
                 while (!parar)
                 {
                     foreach (ImagenDTO img in listIMG)
                     {
-                        try
+                        Image imagen = Image.FromFile(img.RutaImagen);
+                        pbImagenes.Image = imagen;
+                        tiempoAcumulado += 1000 * img.Duracion;
+                        if (tiempoAcumulado > tiempoRestante)
                         {
-                            Image imagen = Image.FromFile(img.RutaImagen);
-                            pbImagenes.Image = imagen;
+                            parar = true;
+                            await Task.Delay((1000*img.Duracion) - (tiempoAcumulado - tiempoRestante));
+                            break;
+                        } else
+                        {
                             await Task.Delay(1000 * img.Duracion);
-                        }
-                        catch
-                        {
-
                         }
                     }
                 }
@@ -197,33 +191,17 @@ namespace CarteleriaDigital.Pantallas
             else
             {
                 //Si no hay una lista de imagenes.
-                pbImagenes.Image = Properties.Resources.espera;
-                await Task.Delay(900000);
+                pbImagenes.Image = Properties.Resources.LogoUTN;
+                await Task.Delay(tiempoRestante);
             }
-
-
-        }
-
-        private async void iniciarTimer()
-        {
-            CampañaDTO camp2 = ControladorCampañas.buscarCampañaActual();
-            if (camp != camp2)
-            {
-                threadPasoImagenes.Abort();
-                camp = camp2;
-                threadPasoImagenes = new Thread(new ThreadStart(pasoImagenes));
-                threadPasoImagenes.Start();
-                iniciarTimer();
-            }
-            else
-            {
-                iniciarTimer();
-            }
-            await Task.Delay(900000);
+            parar = false;
+            tiempoRestante = 900000;            
+            pasoImagenes();
         }
 
         private async void DeslizarTexto()
         {
+            CheckForIllegalCrossThreadCalls = false;
             if (textoString != null)
             {
                 char[] texto = textoString.ToCharArray();
@@ -233,6 +211,7 @@ namespace CarteleriaDigital.Pantallas
                     {
                         await Task.Delay(125);
                         //Probar
+
                         if (textoBanner.Text.Length == 81)
                         {
                             textoBanner.Text = textoBanner.Text.Remove(textoBanner.Text.Length - 1);
@@ -249,7 +228,5 @@ namespace CarteleriaDigital.Pantallas
 
             }
         }
-
-
     }
 }
