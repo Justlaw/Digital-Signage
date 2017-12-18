@@ -10,8 +10,8 @@ namespace CarteleriaDigital.DTO
     {
         #region Atributos
         //Atributos con sus getters y setters
-        private int? idBanner;
-        private int? idRango;
+        private int idBanner;
+        private int idRango;
         private bool activo;
         private string nombre;
         private string tipo;
@@ -23,7 +23,7 @@ namespace CarteleriaDigital.DTO
         #endregion
 
         #region Get&Set
-        public int? IdBanner
+        public int IdBanner
         {
             get
             {
@@ -36,7 +36,7 @@ namespace CarteleriaDigital.DTO
             }
         }
 
-        public int? IdRango
+        public int IdRango
         {
             get
             {

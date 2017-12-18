@@ -69,13 +69,13 @@ namespace CarteleriaDigital.DAO
         }
 
         //Método que permite buscar un banner mediante su nombre
-        public BannerDTO BuscarPorNombre(String pNombre)
+        public BannerDTO BuscarPorId(short id)
         {
 
             Connection.con.Open();
             BannerDTO ban = new BannerDTO();
             
-            NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM banner WHERE nombre = " + pNombre + "ORDER BY idbanner ASC", Connection.con);
+            NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM banner WHERE idbanner = " + id, Connection.con);
 
 
             try
@@ -270,6 +270,24 @@ namespace CarteleriaDigital.DAO
 
             Connection.con.Close();
             return bDTO;
+        }
+
+        public void Eliminar(short idBanner)
+        {
+            Connection.con.Open();
+
+            NpgsqlCommand command = new NpgsqlCommand("DELETE FROM banner WHERE idbanner=" + idBanner, Connection.con);
+
+            try
+            {
+                command.ExecuteNonQuery();
+            }
+            catch (NpgsqlException ex)
+            {
+                throw ex;
+            }
+
+            Connection.con.Close();
         }
     }
 }

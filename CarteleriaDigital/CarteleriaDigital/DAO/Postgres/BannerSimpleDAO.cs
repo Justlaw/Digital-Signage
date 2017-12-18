@@ -91,5 +91,27 @@ namespace CarteleriaDigital.DAO
             return bsDTO;
         }
 
+        /// <summary>
+        /// Eliminar un registro de la clase bannerrss
+        /// </summary>
+        /// <param name="idBanner">id de la clae padre</param>
+        public void Eliminar(short idBanner)
+        {
+            Connection.con.Open();
+
+            NpgsqlCommand command = new NpgsqlCommand("DELETE FROM bannersimple WHERE idbanner=" + idBanner, Connection.con);
+
+            try
+            {
+                command.ExecuteNonQuery();
+            }
+            catch (NpgsqlException ex)
+            {
+                throw ex;
+            }
+
+            Connection.con.Close();
+        }
+
     }
 }

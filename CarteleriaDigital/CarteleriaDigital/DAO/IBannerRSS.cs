@@ -12,5 +12,7 @@ namespace CarteleriaDigital.DAO
         void Insertar(BannerRSSDTO bRSSDTO);
 
         void Modificar(BannerRSSDTO bRSSDTO);
+
+        void Eliminar(short id);
     }
 }
