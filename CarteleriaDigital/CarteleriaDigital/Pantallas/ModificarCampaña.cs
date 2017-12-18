@@ -77,8 +77,9 @@ namespace CarteleriaDigital.Pantallas
 
             btnBorrarImg.Enabled = false;
         }
-
-        //Acción del boton "Buscar".
+        /// <summary>
+        /// Acción del boton "Buscar".
+        /// </summary>
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             Img.InitialDirectory = "C:/Imágenes";
@@ -97,7 +98,6 @@ namespace CarteleriaDigital.Pantallas
                         {
                             btnAgregar.Enabled = true;
                         }
-
                     }
                     else
                     {

@@ -35,7 +35,6 @@
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.nosotrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tutorialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pbImagenes = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -53,7 +52,7 @@
             this.textoBanner.ForeColor = System.Drawing.SystemColors.Desktop;
             this.textoBanner.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.textoBanner.Location = new System.Drawing.Point(35, 433);
-            this.textoBanner.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textoBanner.Margin = new System.Windows.Forms.Padding(4);
             this.textoBanner.Multiline = true;
             this.textoBanner.Name = "textoBanner";
             this.textoBanner.ReadOnly = true;
@@ -103,23 +102,16 @@
             // nosotrosToolStripMenuItem
             // 
             this.nosotrosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tutorialToolStripMenuItem,
             this.acercaDeToolStripMenuItem});
             this.nosotrosToolStripMenuItem.Name = "nosotrosToolStripMenuItem";
             this.nosotrosToolStripMenuItem.Size = new System.Drawing.Size(63, 24);
             this.nosotrosToolStripMenuItem.Text = "Ayuda";
             this.nosotrosToolStripMenuItem.Click += new System.EventHandler(this.nosotrosToolStripMenuItem_Click);
             // 
-            // tutorialToolStripMenuItem
-            // 
-            this.tutorialToolStripMenuItem.Name = "tutorialToolStripMenuItem";
-            this.tutorialToolStripMenuItem.Size = new System.Drawing.Size(150, 26);
-            this.tutorialToolStripMenuItem.Text = "Tutorial";
-            // 
             // acercaDeToolStripMenuItem
             // 
             this.acercaDeToolStripMenuItem.Name = "acercaDeToolStripMenuItem";
-            this.acercaDeToolStripMenuItem.Size = new System.Drawing.Size(150, 26);
+            this.acercaDeToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.acercaDeToolStripMenuItem.Text = "Acerca de";
             this.acercaDeToolStripMenuItem.Click += new System.EventHandler(this.acercaDeToolStripMenuItem_Click);
             // 
@@ -130,7 +122,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pbImagenes.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pbImagenes.Location = new System.Drawing.Point(35, 60);
-            this.pbImagenes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pbImagenes.Margin = new System.Windows.Forms.Padding(4);
             this.pbImagenes.Name = "pbImagenes";
             this.pbImagenes.Size = new System.Drawing.Size(821, 344);
             this.pbImagenes.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -147,7 +139,7 @@
             this.Controls.Add(this.pbImagenes);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "PanOperativa";
             this.Text = "PanOperativa";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -168,7 +160,6 @@
         private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem nosotrosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem tutorialToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem acercaDeToolStripMenuItem;
         private System.Windows.Forms.Timer timer1;
         public System.Windows.Forms.TextBox textoBanner;

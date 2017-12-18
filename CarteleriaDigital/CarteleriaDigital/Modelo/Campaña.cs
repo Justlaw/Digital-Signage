@@ -102,11 +102,5 @@ namespace CarteleriaDigital
                 camp_DAO.Modificar(camp_DTO);
             }
         }
-
-        public void EliminarCampaña()
-        {
-
-        }
-
     }
 }
