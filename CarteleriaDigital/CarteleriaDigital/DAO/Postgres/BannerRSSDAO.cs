@@ -45,10 +45,10 @@ namespace CarteleriaDigital.DAO
             Connection.con.Open();
                 
             NpgsqlCommand command = new NpgsqlCommand("UPDATE banerrss " +
-                    "SET fuenterss = @fuenterss and texto_respaldo = @texto_respaldo WHERE idbannerrss = @idbannerrss", Connection.con);
+                    "SET fuenterss = @fuenterss and texto_respaldo = @texto_respaldo WHERE idbanner = @idbanner", Connection.con);
 
             command.Parameters.AddWithValue("@fuenterss", bRSSDTO.FuenteRSS);    
-            command.Parameters.AddWithValue("@idbannerrss", bRSSDTO.IdBannerRSS);
+            command.Parameters.AddWithValue("@idbanner", bRSSDTO.IdBanner);
             command.Parameters.AddWithValue("@texto_respaldo",bRSSDTO.TextoDeRespaldo);
 
             try

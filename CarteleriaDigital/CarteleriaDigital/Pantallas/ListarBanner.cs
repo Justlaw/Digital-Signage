@@ -18,6 +18,7 @@ namespace CarteleriaDigital.Pantallas
             InitializeComponent();
 
             DAO.BannerDAO bd = new DAO.BannerDAO();
+            bd.ActualizarActivosBanner();
             DataTable dt = bd.SelectBannersConRango();
 
             formatearTabla(dt);
