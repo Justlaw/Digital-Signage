@@ -171,8 +171,11 @@ namespace CarteleriaDigital.Pantallas
                 {
                     ControladorBanners.EliminarBanner(Int16.Parse(renglon.Cells["IdBanner"].Value.ToString()));
                 }
+                ListarBanner abrir = new ListarBanner();
+                abrir.Show();
+                this.SetVisibleCore(false);
             }
         }
     }
-    }
+}
 

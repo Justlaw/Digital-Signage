@@ -75,16 +75,16 @@ namespace CarteleriaDigital
         }
         #endregion 
 
-        private bool EstaDisponible(List<RangoDTO> listaRangos)
+        private bool EstaDisponible(List<RangoDTO> listaRangos, RangoDTO rng_DTO)
         {
             foreach (RangoDTO rango in listaRangos)
             {
-                if ((iFechaInicio.Date >= rango.FechaInicio.Date && iFechaInicio.Date < rango.FechaFin.Date) ||
-                    (iFechaFin.Date >= rango.FechaInicio.Date && iFechaFin.Date < rango.FechaFin.Date))
+                if ((rng_DTO.FechaInicio.Date >= rango.FechaInicio.Date && rng_DTO.FechaInicio.Date < rango.FechaFin.Date) ||
+                    (rng_DTO.FechaFin.Date >= rango.FechaInicio.Date && rng_DTO.FechaFin.Date < rango.FechaFin.Date))
                 {
                     if (
-                        iHoraInicio >= rango.HoraInicio && iHoraInicio < rango.HoraFin
-                        && iMinutoInicio >= rango.MinutoInicio && iMinutoInicio < rango.MinutoFin
+                        rng_DTO.HoraInicio >= rango.HoraInicio && rng_DTO.HoraInicio < rango.HoraFin
+                        && rng_DTO.MinutoInicio >= rango.MinutoInicio && rng_DTO.MinutoInicio < rango.MinutoFin
                         )
                     {
                         return false;
@@ -97,24 +97,24 @@ namespace CarteleriaDigital
         /// Devuelve verdadero o falso según el rango esté disponible para agregar un banner
         /// </summary>
         /// <returns></returns>
-        public bool RangoDisponibleBanner()
+        public bool RangoDisponibleBanner(RangoDTO rng_DTO)
         {
             RangoDAO rng_DAO = new RangoDAO();
             List < RangoDTO > lista = rng_DAO.RangosBanners();
-            return EstaDisponible(lista);
+            bool disp = EstaDisponible(lista, rng_DTO);
+            return disp;
         }
 
         /// <summary>
         /// Devuelve verdadero o falso según el rango esté disponible para agregar una campña
         /// </summary>
         /// <returns></returns>
-        public bool RangoDisponibleCampaña()
+        public bool RangoDisponibleCampaña(RangoDTO rng_DTO)
         {
             RangoDAO rng_DAO = new RangoDAO();
             List<RangoDTO> lista = rng_DAO.RangosCampañas();
-            return EstaDisponible(lista);
+            bool disp = EstaDisponible(lista, rng_DTO);
+            return disp;
         }
-
-
     }
 }

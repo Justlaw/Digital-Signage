@@ -147,8 +147,11 @@ namespace CarteleriaDigital.Pantallas
             else
             {
                 DataGridViewRow renglonCampaña = dgvVista.CurrentRow;
-                ControladorCampañas.eliminarCampaña(Int16.Parse(renglonCampaña.Cells["idCampaña"].Value.ToString()));
-                Pantallas.ListarCampaña abrir = new Pantallas.ListarCampaña();
+                if (MessageBox.Show("Está completamente seguro que desea eliminar la campaña: " + renglonCampaña.Cells["Nombre"].Value.ToString(), "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    ControladorCampañas.eliminarCampaña(Int16.Parse(renglonCampaña.Cells["idCampaña"].Value.ToString()));
+                }
+                ListarCampaña abrir = new ListarCampaña();
                 abrir.Show();
                 this.SetVisibleCore(false);
             }

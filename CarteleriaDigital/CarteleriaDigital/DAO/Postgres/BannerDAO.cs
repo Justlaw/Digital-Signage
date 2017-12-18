@@ -89,6 +89,8 @@ namespace CarteleriaDigital.DAO
                 ban.IdRango = dr.GetInt32(1);
                 ban.Activo = dr.GetBoolean(2);
                 ban.Nombre = dr.GetString(3);
+                ban.Tipo = dr.GetString(4);
+
            
             }
             catch (NpgsqlException ex)
@@ -287,7 +289,6 @@ namespace CarteleriaDigital.DAO
             {
                 throw ex;
             }
-
             Connection.con.Close();
         }
 
