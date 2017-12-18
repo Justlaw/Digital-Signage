@@ -46,9 +46,9 @@ namespace CarteleriaDigital.DAO
             Connection.con.Open();
 
             NpgsqlCommand command = new NpgsqlCommand("UPDATE bannersimple " +
-                "SET texto = @texto WHERE idbannersimple = @idbannersimple", Connection.con);
+                "SET texto = @texto WHERE idbanner = @idbanner", Connection.con);
 
-            command.Parameters.AddWithValue("@idbannersimple", bsDTO.IdBannerSimple);
+            command.Parameters.AddWithValue("@idbanner", bsDTO.IdBanner);
             command.Parameters.AddWithValue("@texto", bsDTO.Texto);
 
             try

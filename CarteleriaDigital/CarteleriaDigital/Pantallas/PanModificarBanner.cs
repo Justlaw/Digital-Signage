@@ -51,8 +51,6 @@ namespace CarteleriaDigital.Pantallas
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-
-
             RangoDTO rngDTO = new RangoDTO
             {
                 IdRango = idrango,
@@ -91,7 +89,10 @@ namespace CarteleriaDigital.Pantallas
                 }
 
                 MessageBox.Show("El banner ha sido modificado satisfactoriamente", "Éxito!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+            }
+            else
+            {
+                MessageBox.Show("Verifique la correctitud de las fechas y las horas", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
             
@@ -107,6 +108,30 @@ namespace CarteleriaDigital.Pantallas
 
 
         private bool VerificarRango(RangoDTO rng)
+        {
+            bool resultado = false;
+            if (VerificarCorrectitudRango(rng))
+            {
+                if (rng.FechaInicio >= DateTime.Today)
+                {
+                    if (rng.HoraInicio > DateTime.Now.Hour)
+                    {
+                        resultado = true;
+                    }
+                    if (rng.HoraInicio == DateTime.Now.Hour)
+                    {
+                        if (rng.MinutoInicio >= DateTime.Now.Minute)
+                        {
+                            resultado = true;
+                        }
+                    }
+                }
+
+            }
+            return resultado;
+        }
+
+        private bool VerificarCorrectitudRango(RangoDTO rng)
         {
             bool resultado = false;
             if (rng.FechaInicio <= rng.FechaFin)
@@ -126,5 +151,6 @@ namespace CarteleriaDigital.Pantallas
 
             return resultado;
         }
+
     }
 }
