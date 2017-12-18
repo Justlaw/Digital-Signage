@@ -20,6 +20,7 @@ namespace CarteleriaDigital.Pantallas
             InitializeComponent();
 
             DAO.CampañaDAO bd = new DAO.CampañaDAO();
+            ControladorCampañas.ActualizarActivo();
             DataTable dt = bd.SelectCampaña();
 
             formatearTablaC(dt);

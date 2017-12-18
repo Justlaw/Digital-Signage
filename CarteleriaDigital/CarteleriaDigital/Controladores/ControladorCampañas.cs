@@ -66,5 +66,11 @@ namespace CarteleriaDigital.Controladores
             camp.Eliminar(idcampaña);
             rng.Eliminar(campDTO.IdRango);
         }
+
+        public static void ActualizarActivo()
+        {
+            CampañaDAO camp = new CampañaDAO();
+            camp.ActualizarActivoCampaña();
+        }
     }
 }

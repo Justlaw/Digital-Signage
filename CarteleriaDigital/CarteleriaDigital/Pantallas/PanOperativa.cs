@@ -41,42 +41,42 @@ namespace CarteleriaDigital.Pantallas
         }
 
         private void PanOperativa_Load(object sender, EventArgs e)
-        {         
+        {
             DateTime fechaActual = DateTime.Now;
             //Ciclo para saber cuanto falta para la proxima buscada de una campaña
-            for (int i = 0; i < minutosDisp.Length; i++)
-            {
-                if (fechaActual.Minute == minutosDisp[i])
-                {
+            //for (int i = 0; i < minutosDisp.Length; i++)
+            //{
+            //    if (fechaActual.Minute == minutosDisp[i])
+            //    {
 
-                    segundosInicio = 59 - fechaActual.Second;
-                    if (segundosInicio > 0)
-                    {
-                        minutoInicio = minutosDisp[i] + 14;
-                    }
-                    else
-                    {
-                        minutoInicio = minutosDisp[i] + 15;
-                    }
+            //        segundosInicio = 59 - fechaActual.Second;
+            //        if (segundosInicio > 0)
+            //        {
+            //            minutoInicio = minutosDisp[i] + 14;
+            //        }
+            //        else
+            //        {
+            //            minutoInicio = minutosDisp[i] + 15;
+            //        }
 
-                }
-                else if (fechaActual.Minute > minutosDisp[i] &&
-                    fechaActual.Minute <= minutosDisp[i] + 14)
-                {
-                    segundosInicio = 59 - fechaActual.Second;
+            //    }
+            //    else if (fechaActual.Minute > minutosDisp[i] &&
+            //        fechaActual.Minute <= minutosDisp[i] + 14)
+            //    {
+            //        segundosInicio = 59 - fechaActual.Second;
 
-                    if (segundosInicio > 0)
-                    {
-                        minutoInicio = (minutosDisp[i] + 14) - fechaActual.Minute;
-                    }
-                    else
-                    {
-                        minutoInicio = (minutosDisp[i] + 15) - fechaActual.Minute;
-                    }
-                }
-            }
+            //        if (segundosInicio > 0)
+            //        {
+            //            minutoInicio = (minutosDisp[i] + 14) - fechaActual.Minute;
+            //        }
+            //        else
+            //        {
+            //            minutoInicio = (minutosDisp[i] + 15) - fechaActual.Minute;
+            //        }
+            //    }
+            //}
 
-            tiempoRestanteCampaña = ((minutoInicio * 60000) + (segundosInicio * 1000));
+            tiempoRestanteCampaña = restante(fechaActual);
             tiempoRestanteBanner = tiempoRestanteCampaña;
 
             threadPasoImagenes = new Thread(new ThreadStart(pasoImagenes));
@@ -198,7 +198,7 @@ namespace CarteleriaDigital.Pantallas
                 await Task.Delay(tiempoRestanteCampaña);
             }
             parar = false;
-            tiempoRestanteCampaña = 900000;
+            tiempoRestanteCampaña = restante(DateTime.Now);
             pasoImagenes();
         }
 
@@ -263,9 +263,46 @@ namespace CarteleriaDigital.Pantallas
                 }
 
             }
-            tiempoRestanteBanner = 900000;
+            tiempoRestanteBanner = restante(DateTime.Now);
             pararBanner = false;
             DeslizarTexto();
+        }
+
+        private int restante(DateTime fechaActual)
+        {
+            for (int i = 0; i < minutosDisp.Length; i++)
+            {
+                if (fechaActual.Minute == minutosDisp[i])
+                {
+
+                    segundosInicio = 59 - fechaActual.Second;
+                    if (segundosInicio > 0)
+                    {
+                        minutoInicio = minutosDisp[i] + 14;
+                    }
+                    else
+                    {
+                        minutoInicio = minutosDisp[i] + 15;
+                    }
+
+                }
+                else if (fechaActual.Minute > minutosDisp[i] &&
+                    fechaActual.Minute <= minutosDisp[i] + 14)
+                {
+                    segundosInicio = 59 - fechaActual.Second;
+
+                    if (segundosInicio > 0)
+                    {
+                        minutoInicio = (minutosDisp[i] + 14) - fechaActual.Minute;
+                    }
+                    else
+                    {
+                        minutoInicio = (minutosDisp[i] + 15) - fechaActual.Minute;
+                    }
+                }
+            }
+
+            return ((minutoInicio * 60000) + (segundosInicio * 1000));
         }
     }
 }
