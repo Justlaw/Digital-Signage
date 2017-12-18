@@ -10,8 +10,8 @@ namespace CarteleriaDigital.DTO
     {
         #region Atributos
 
-        private int? idBannerSimple;
-        private int? idBanner;
+        private int idBannerSimple;
+        private int idBanner;
         private string texto;
 
         #endregion
@@ -24,7 +24,7 @@ namespace CarteleriaDigital.DTO
         #endregion
 
         #region Get&Set
-        public int? IdBannerSimple
+        public int IdBannerSimple
         {
             get
             {
@@ -37,7 +37,7 @@ namespace CarteleriaDigital.DTO
             }
         }
 
-        public int? IdBanner
+        public int IdBanner
         {
             get
             {

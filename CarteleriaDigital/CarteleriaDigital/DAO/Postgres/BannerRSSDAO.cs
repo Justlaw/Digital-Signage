@@ -45,10 +45,11 @@ namespace CarteleriaDigital.DAO
             Connection.con.Open();
                 
             NpgsqlCommand command = new NpgsqlCommand("UPDATE banerrss " +
-                    "SET fuenterss = @fuenterss WHERE idbannerrss = @idbannerrss", Connection.con);
+                    "SET fuenterss = @fuenterss and texto_respaldo = @texto_respaldo WHERE idbannerrss = @idbannerrss", Connection.con);
 
             command.Parameters.AddWithValue("@fuenterss", bRSSDTO.FuenteRSS);    
             command.Parameters.AddWithValue("@idbannerrss", bRSSDTO.IdBannerRSS);
+            command.Parameters.AddWithValue("@texto_respaldo",bRSSDTO.TextoDeRespaldo);
 
             try
             {  
@@ -87,6 +88,28 @@ namespace CarteleriaDigital.DAO
             else { brssDTO = null; }
             Connection.con.Close();
             return brssDTO;
+        }
+
+        /// <summary>
+        /// Eliminar un registro de la clase bannerrss
+        /// </summary>
+        /// <param name="idBanner">id de la clae padre</param>
+        public void Eliminar(short idBanner)
+        {
+            Connection.con.Open();
+
+            NpgsqlCommand command = new NpgsqlCommand("DELETE FROM bannerrss WHERE idbanner="+idBanner, Connection.con);
+
+            try
+            {
+                command.ExecuteNonQuery();
+            }
+            catch (NpgsqlException ex)
+            {
+                throw ex;
+            }
+
+            Connection.con.Close();
         }
     }
 }

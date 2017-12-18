@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CarteleriaDigital.Controladores;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -153,6 +154,22 @@ namespace CarteleriaDigital.Pantallas
 
                 PanModificarBanner mb = new PanModificarBanner(renglon);
                 mb.Show();
+            }
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Debe seleccionar el renglón completo haciendo click en la flechita a la izquierda", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                DataGridViewRow renglon = dataGridView1.CurrentRow;
+                if (MessageBox.Show("Está completamente seguro que desea eliminar el banner: " + renglon.Cells["Nombre"].Value.ToString(), "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    ControladorBanners.EliminarBanner(Int16.Parse(renglon.Cells["IdBanner"].Value.ToString()));
+                }
             }
         }
     }

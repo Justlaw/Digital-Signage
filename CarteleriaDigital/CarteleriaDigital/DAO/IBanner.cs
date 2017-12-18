@@ -14,10 +14,12 @@ namespace CarteleriaDigital.DAO
 
         void Modificar(BannerDTO ban);
 
-        BannerDTO BuscarPorNombre(String pNombre);
+        BannerDTO BuscarPorId(short id);
 
         List<BannerDTO> ListarPorActivo(Boolean pActivo);
 
         List<BannerDTO> ListarPorFecha(DateTime pFechaIni, DateTime pFechaFin);
+
+        void Eliminar(short id);
     }
 }

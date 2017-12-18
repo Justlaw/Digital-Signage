@@ -11,8 +11,8 @@ namespace CarteleriaDigital.DTO
 
         #region Atributos
         //Atributos
-        private int? idBannerRSS;
-        private int? idBanner;
+        private int idBannerRSS;
+        private int idBanner;
         /// <summary>
         /// url de la fuente RSS
         /// </summary>
@@ -30,7 +30,7 @@ namespace CarteleriaDigital.DTO
         #endregion
 
         #region Get&Set
-        public int? IdBannerRSS
+        public int IdBannerRSS
         {
             get
             {
@@ -43,7 +43,7 @@ namespace CarteleriaDigital.DTO
             }
         }
 
-        public int? IdBanner
+        public int IdBanner
         {
             get
             {

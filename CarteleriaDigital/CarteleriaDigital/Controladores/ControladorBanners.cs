@@ -93,7 +93,16 @@ namespace CarteleriaDigital.Controladores
                     BannerRSSDAO brssDAO = new BannerRSSDAO();
                     BannerRSSDTO brssDTO = brssDAO.BuscarPorId(bDTO.IdBanner);
                     BannerRSS brss = new BannerRSS(brssDTO, null);
-                    return brss.ObtenerTitulos();
+
+                    String texto = brss.ObtenerTitulos();
+                    if (texto != null)
+                    {
+                        brssDTO.TextoDeRespaldo = texto;
+                        brssDAO.Modificar(brssDTO);
+                    }
+
+                    return texto;
+
                 }
                 else //if (bDTO.Tipo == "simple")
                 {
@@ -103,6 +112,27 @@ namespace CarteleriaDigital.Controladores
                     return bs.Texto;
                 }
             }
+        }
+
+        public static void EliminarBanner(short idBanner)
+        {
+            BannerDAO bDAO = new BannerDAO();
+            BannerDTO bDTO = bDAO.BuscarPorId(idBanner);
+            if (bDTO.Tipo == "rss")
+            {
+                BannerRSSDAO brssDAO = new BannerRSSDAO();
+                brssDAO.Eliminar(idBanner);
+            }
+            if (bDTO.Tipo == "simple")
+            {
+                BannerSimpleDAO bsDAO = new BannerSimpleDAO();
+                bsDAO.Eliminar(idBanner);
+            }
+            bDAO.Eliminar(idBanner);
+            RangoDAO rngDAO = new RangoDAO();
+            rngDAO.Eliminar(bDTO.IdRango);
+            
+
         }
     }
 }
