@@ -148,18 +148,16 @@ namespace CarteleriaDigital.DAO
             Connection.con.Open();
 
 
-                // Create select command.
+
                 NpgsqlCommand command = new NpgsqlCommand("SELECT fechainicio, fechafin, horainicio, minutoinicio, horafin, minutofin FROM rango, banner WHERE banner.idrango = rango.idrango and banner.activo = true ORDER BY rango.idrango ASC", Connection.con);
 
-                // Prepare the command.
                 command.Prepare();
 
             try
             {
-                // Execute SQL command.
+
                 NpgsqlDataReader dr = command.ExecuteReader();
 
-                // Fill results to music list.
                 while (dr.Read())
                 {
                     rang.FechaInicio = dr.GetDateTime(0);

@@ -20,7 +20,7 @@ namespace CarteleriaDigital.DAO
         {
             
             Connection.con.Open();
-            // Create insert command.
+
             NpgsqlCommand command = new NpgsqlCommand("INSERT INTO " +
                 "bannersimple(idbanner, texto) VALUES(:idbanner, :texto)", Connection.con);
 
@@ -28,7 +28,7 @@ namespace CarteleriaDigital.DAO
             command.Parameters.AddWithValue("@texto", bsDTO.Texto);
 
             try
-            {   // Execute SQL command.
+            {  
                 command.ExecuteNonQuery();
                 
             }

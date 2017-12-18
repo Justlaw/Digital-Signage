@@ -65,9 +65,13 @@ namespace CarteleriaDigital.DAO
             {
                 throw ex;
             }
-
             Connection.con.Close();
         }
+
+        /// <summary>
+        /// Elimina un registro de la tabla campaña
+        /// </summary>
+        /// <param name="idCampaña"></param>
 
         public void Eliminar(int idCampaña)
         {
@@ -159,41 +163,6 @@ namespace CarteleriaDigital.DAO
             return camp;
         }
 
-        public List<CampañaDTO> ListarPorActivo(Boolean pActivo)
-        {
-            List<CampañaDTO> listaCamp = new List<CampañaDTO>();
-            CampañaDTO camp = new CampañaDTO();
-
-            Connection.con.Open();
-
-            NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM campaña WHERE activo = " + pActivo + "ORDER BY idcampaña ASC", Connection.con);
-
-            command.Prepare();
-
-            try
-            {
-                NpgsqlDataReader dr = command.ExecuteReader();
-
-                //Rellenando los datos obtenidos con el DataReader
-                while (dr.Read())
-                {
-                    camp.IdCampaña = dr.GetInt32(0);
-                    camp.IdRango = dr.GetInt32(1);
-                    camp.Activo = dr.GetBoolean(2);
-                    camp.Nombre = dr.GetString(3);
-                    listaCamp.Add(camp); 
-                }
-            }
-            catch (NpgsqlException ex)
-            {
-                throw ex;
-            }
-
-            Connection.con.Close();
-
-            return listaCamp;
-        }
-
         /// <summary>
         /// Lista todas las campañas para las cuales si fecha de inicio o su fecha de fin esté comprandida entre las dos fechas indicadas.
         /// </summary>
@@ -260,6 +229,9 @@ namespace CarteleriaDigital.DAO
             return id;
         }
 
+        /// <summary>
+        /// Actualiza el contenido de campo activo de todas las campañas;
+        /// </summary>
         public void ActualizarActivoCampaña() {
             DateTime pFechaActual = DateTime.Now;
             Connection.con.Open();

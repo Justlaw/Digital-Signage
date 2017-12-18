@@ -152,7 +152,6 @@ namespace CarteleriaDigital.DAO
             Connection.con.Open();
 
                 
-            // Create update command.
             NpgsqlCommand command = new NpgsqlCommand("DELETE FROM " +
                     "imagen WHERE idcampaña = " + idCampaña, Connection.con);
 
