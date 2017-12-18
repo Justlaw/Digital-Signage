@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2006
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarteleriaDigital", "CarteleriaDigital\CarteleriaDigital.csproj", "{E6A7C875-FABD-41A3-AAE2-01439A1D9155}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "CarteleriaDigitalInstaller", "CarteleriaDigitalInstaller\CarteleriaDigitalInstaller.vdproj", "{89EAED35-DC39-4C14-ABF8-41F46050F269}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,8 +17,13 @@ Global
 		{E6A7C875-FABD-41A3-AAE2-01439A1D9155}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E6A7C875-FABD-41A3-AAE2-01439A1D9155}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E6A7C875-FABD-41A3-AAE2-01439A1D9155}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89EAED35-DC39-4C14-ABF8-41F46050F269}.Debug|Any CPU.ActiveCfg = Debug
+		{89EAED35-DC39-4C14-ABF8-41F46050F269}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DEEA2E9E-C053-479A-ACB4-41020A0CD4F8}
 	EndGlobalSection
 EndGlobal

@@ -123,10 +123,23 @@ namespace CarteleriaDigital
                 XmlReader lector = XmlReader.Create(this.url);
                 SyndicationFeed feed = SyndicationFeed.Load(lector);
                 lector.Close();
-                foreach (SyndicationItem item in feed.Items)
+                int i = 0;
+                if (feed.Items != null)
                 {
-                    texto = String.Concat(texto, " | " + item.Title.Text);
+                    foreach (SyndicationItem item in feed.Items)
+                    {
+                        i++;
+                        texto = String.Concat(texto, " | " + item.Title.Text);
+                        if (i == 3)
+                        { break; }
+                    }
+                    return texto;
                 }
+                else
+                {
+                    return TextoDeRespaldo;
+                }
+
 
             }
             catch (XmlException e)
@@ -138,8 +151,6 @@ namespace CarteleriaDigital
             {
                 throw e;
             }
-
-            return texto;
         } 
         }
     }

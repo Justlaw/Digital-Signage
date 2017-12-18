@@ -22,10 +22,11 @@ namespace CarteleriaDigital.DAO
                 Connection.con.Open();
 
                 NpgsqlCommand command = new NpgsqlCommand("INSERT INTO " +
-                    "bannerrss(idbanner, fuenterss) VALUES(:idbanner, :fuenterss)", Connection.con);
+                    "bannerrss(idbanner, fuenterss, texto_respaldo) VALUES(:idbanner, :fuenterss, :texto_respaldo)", Connection.con);
 
                 command.Parameters.AddWithValue("@idbanner", bRSSDTO.IdBanner);
                 command.Parameters.AddWithValue("@fuenterss", bRSSDTO.FuenteRSS);
+            command.Parameters.AddWithValue("@texto_respaldo", bRSSDTO.TextoDeRespaldo);
             try
             {
                 command.ExecuteNonQuery();   
@@ -39,7 +40,7 @@ namespace CarteleriaDigital.DAO
 
         }
 
-        ////Metodo para modificar un banner RSS de la base de datos.
+        //Metodo para modificar un banner RSS de la base de datos.
         public void Modificar(BannerRSSDTO bRSSDTO)
         {
             Connection.con.Open();
