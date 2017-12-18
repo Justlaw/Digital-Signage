@@ -22,8 +22,10 @@ namespace CarteleriaDigital.Pantallas
         CampañaDTO camp = new CampañaDTO();
         CampañaDAO camp_DAO = new CampañaDAO();
         ImageList imageL = new ImageList();
+        ImagenDTO imgDTOresp = new ImagenDTO();
         RangoDTO rngDTO = new RangoDTO();
 
+        private Int32 pos;
         private int idCampaña;
         private int idRango;
 
@@ -47,6 +49,9 @@ namespace CarteleriaDigital.Pantallas
             cbMinutoFin.SelectedIndex = cbMinutoFin.FindString(rngDTO.MinutoFin.ToString());
 
             ListIMG = ControladorCampañas.buscarImagenesCampaña(idCampaña);
+            tbDuracion.Enabled = false;
+            btnAgregar.Enabled = false;
+            btnBorrarImg.Enabled = false;
 
             this.vistaImagenes.Items.Clear();
 
@@ -55,7 +60,7 @@ namespace CarteleriaDigital.Pantallas
                 //Carga la imagen desde la ruta y de la un formato, luego la agrega la lista de img.
                 Image fotoEntra = Image.FromFile(i.RutaImagen);
                 imageL.Images.Add(fotoEntra);
-                imageL.ImageSize = new Size(60, 60);
+                imageL.ImageSize = new Size(156, 156);
                 this.vistaImagenes.View = View.LargeIcon;
             }
                 //Arma los indices del listview.
@@ -120,8 +125,25 @@ namespace CarteleriaDigital.Pantallas
         {
             //Al seleccionar una imagen se activa el boton Borrar.
             if (vistaImagenes.SelectedIndices.Count != 0)
-            { btnBorrarImg.Enabled = true; }
-            else { btnBorrarImg.Enabled = false; }
+            {   btnBorrarImg.Enabled = true;
+                // tbDuracion.Text = vistaImagenes.SelectedItems.
+                if (vistaImagenes.SelectedIndices != null)
+                {
+                    //Se obtiene la posicion del elemento seleccionado.
+                    pos = vistaImagenes.SelectedIndices[0];
+                    //Se establece el índice de la imágen.
+                    ListViewItem item = new ListViewItem();
+                    item.ImageIndex = pos;
+                    //Se establece la duracion de la imagen en pantalla.
+                    tbDuracion.Enabled = true;
+                    tbDuracion.Text = ListIMG[pos].Duracion.ToString();
+                    
+                }
+            }
+            else {
+                btnBorrarImg.Enabled = false;
+                tbDuracion.Enabled = false;
+            }
         }
 
         //Hace refencia al boton cancelar de la pantalla
@@ -279,11 +301,14 @@ namespace CarteleriaDigital.Pantallas
         {
             if (tbDuracion.Text != "")
             {
-                if (Convert.ToInt16(tbDuracion.Text) > 0 && Convert.ToInt16(tbDuracion.Text) <= 60)
+                if (Convert.ToInt16(tbDuracion.Text) > 0 && Convert.ToInt16(tbDuracion.Text) <= 59)
                 {
                     if (pbMiniImg.Image != null)
                     {
                         btnAgregar.Enabled = true;
+                    } else
+                    {
+                        ListIMG[pos].Duracion = Int16.Parse(tbDuracion.Text);
                     }
 
                 }

@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
             this.gbFechaHora = new System.Windows.Forms.GroupBox();
             this.cbMinutoFin = new System.Windows.Forms.ComboBox();
             this.cbHoraFin = new System.Windows.Forms.ComboBox();
@@ -53,6 +53,7 @@
             this.pbMiniImg = new System.Windows.Forms.PictureBox();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnAceptar = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.gbFechaHora.SuspendLayout();
             this.gbDetalles.SuspendLayout();
             this.gbImagenes.SuspendLayout();
@@ -272,6 +273,7 @@
             // 
             // gbImagenes
             // 
+            this.gbImagenes.Controls.Add(this.label1);
             this.gbImagenes.Controls.Add(this.btnBorrarImg);
             this.gbImagenes.Controls.Add(this.vistaImagenes);
             this.gbImagenes.Controls.Add(this.btnAgregar);
@@ -304,7 +306,7 @@
             // vistaImagenes
             // 
             this.vistaImagenes.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem2});
+            listViewItem1});
             this.vistaImagenes.Location = new System.Drawing.Point(319, 23);
             this.vistaImagenes.Margin = new System.Windows.Forms.Padding(4);
             this.vistaImagenes.Name = "vistaImagenes";
@@ -392,6 +394,15 @@
             this.btnAceptar.UseVisualStyleBackColor = true;
             this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(151, 174);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 17);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "seg.";
+            // 
             // ModificarCampaña
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -444,5 +455,6 @@
         private System.Windows.Forms.ComboBox cbHoraFin;
         private System.Windows.Forms.ComboBox cbMinutoInicio;
         private System.Windows.Forms.ComboBox cbHoraInicio;
+        private System.Windows.Forms.Label label1;
     }
 }

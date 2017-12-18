@@ -100,9 +100,7 @@ namespace CarteleriaDigital.Controladores
                         brssDTO.TextoDeRespaldo = texto;
                         brssDAO.Modificar(brssDTO);
                     }
-
                     return texto;
-
                 }
                 else //if (bDTO.Tipo == "simple")
                 {
@@ -131,8 +129,6 @@ namespace CarteleriaDigital.Controladores
             bDAO.Eliminar(idBanner);
             RangoDAO rngDAO = new RangoDAO();
             rngDAO.Eliminar(bDTO.IdRango);
-            
-
         }
     }
 }

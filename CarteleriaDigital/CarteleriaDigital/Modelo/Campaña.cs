@@ -56,7 +56,7 @@ namespace CarteleriaDigital
 
 
             //Se controla que el rango esté disponible y en caso que lo esté, se procede a insertar la campaña.
-            if (rng.RangoDisponibleCampaña())
+            if (rng.RangoDisponibleCampaña(rng_DTO))
             {
                 rng_DAO.Insertar(rng_DTO);
                 camp_DTO.IdRango = rng_DAO.ObtenerUltimoId();
@@ -82,7 +82,7 @@ namespace CarteleriaDigital
 
             if (rng_DTO != null)
             {
-                if (rng.RangoDisponibleCampaña())
+                if (rng.RangoDisponibleCampaña(rng_DTO))
                 {
                     rng_DAO.Modificar(rng_DTO);
                 }

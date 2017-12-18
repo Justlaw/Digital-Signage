@@ -43,38 +43,6 @@ namespace CarteleriaDigital.Pantallas
         private void PanOperativa_Load(object sender, EventArgs e)
         {
             DateTime fechaActual = DateTime.Now;
-            //Ciclo para saber cuanto falta para la proxima buscada de una campaña
-            //for (int i = 0; i < minutosDisp.Length; i++)
-            //{
-            //    if (fechaActual.Minute == minutosDisp[i])
-            //    {
-
-            //        segundosInicio = 59 - fechaActual.Second;
-            //        if (segundosInicio > 0)
-            //        {
-            //            minutoInicio = minutosDisp[i] + 14;
-            //        }
-            //        else
-            //        {
-            //            minutoInicio = minutosDisp[i] + 15;
-            //        }
-
-            //    }
-            //    else if (fechaActual.Minute > minutosDisp[i] &&
-            //        fechaActual.Minute <= minutosDisp[i] + 14)
-            //    {
-            //        segundosInicio = 59 - fechaActual.Second;
-
-            //        if (segundosInicio > 0)
-            //        {
-            //            minutoInicio = (minutosDisp[i] + 14) - fechaActual.Minute;
-            //        }
-            //        else
-            //        {
-            //            minutoInicio = (minutosDisp[i] + 15) - fechaActual.Minute;
-            //        }
-            //    }
-            //}
 
             tiempoRestanteCampaña = restante(fechaActual);
             tiempoRestanteBanner = tiempoRestanteCampaña;
@@ -126,9 +94,12 @@ namespace CarteleriaDigital.Pantallas
 
         private void salirToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            threadPasoImagenes.Abort();
-            threadDeslizar.Abort();
-            this.Close();
+            if (MessageBox.Show("¿Está seguro que desea salir?", "Advertencia", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                this.Close();
+                Application.Exit();
+            }
+            
         }
 
         private void archivoToolStripMenuItem_Click(object sender, EventArgs e)

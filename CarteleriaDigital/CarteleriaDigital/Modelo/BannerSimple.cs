@@ -68,7 +68,7 @@ namespace CarteleriaDigital
             Rango rng = new Rango(rng_DTO);
 
             //Se controla que el rango esté disponible
-            if (rng.RangoDisponibleBanner())
+            if (rng.RangoDisponibleBanner(rng_DTO))
             {
                 rng_DAO.Insertar(rng_DTO);
 

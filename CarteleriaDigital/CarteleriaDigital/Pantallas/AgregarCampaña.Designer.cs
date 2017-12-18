@@ -59,6 +59,7 @@
             this.btnBuscar = new System.Windows.Forms.Button();
             this.pbMiniImg = new System.Windows.Forms.PictureBox();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.label2 = new System.Windows.Forms.Label();
             this.gbDetalles.SuspendLayout();
             this.gbFechaHora.SuspendLayout();
             this.gbImagenes.SuspendLayout();
@@ -317,6 +318,7 @@
             // 
             // gbImagenes
             // 
+            this.gbImagenes.Controls.Add(this.label2);
             this.gbImagenes.Controls.Add(this.btnLimpiar);
             this.gbImagenes.Controls.Add(this.btnBorrar);
             this.gbImagenes.Controls.Add(this.vistaImagenes);
@@ -432,6 +434,15 @@
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(151, 172);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(31, 17);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "seg";
+            // 
             // AgregarCampaña
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -490,5 +501,6 @@
         private System.Windows.Forms.ComboBox cbHoraInicio;
         private System.Windows.Forms.ComboBox cbMinutoFin;
         private System.Windows.Forms.ComboBox cbHoraFin;
+        private System.Windows.Forms.Label label2;
     }
 }
