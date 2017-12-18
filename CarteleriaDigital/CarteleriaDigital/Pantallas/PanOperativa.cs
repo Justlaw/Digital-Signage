@@ -28,11 +28,11 @@ namespace CarteleriaDigital.Pantallas
 
         //Para el banner
         String textoString;
+        Thread threadDeslizar;
 
         int minutoInicio = 0;
         int segundosInicio = 0;
         int[] minutosDisp = new int[] { 00, 15, 30, 45 };
-        private Thread threadDeslizar;
 
         public PanOperativa()
         {   //Se inicializan los controles.
@@ -50,6 +50,7 @@ namespace CarteleriaDigital.Pantallas
             threadDeslizar = new Thread(new ThreadStart(DeslizarTexto));
             threadDeslizar.Start();
             threadDeslizar.Priority = ThreadPriority.Normal;
+
 
             DateTime fechaActual = DateTime.Now;
             //Ciclo para saber cuanto falta para la proxima buscada de una campaña
@@ -86,25 +87,25 @@ namespace CarteleriaDigital.Pantallas
             }
 
 
-            camp = ControladorCampañas.buscarCampañaActual();
-            if (camp != null)
-            {
-                rngDTO = ControladorCampañas.buscarRangoPorID(camp.IdRango);
-                listIMG = ControladorCampañas.buscarImagenesCampaña(camp.IdCampaña);
-            }
+            //camp = ControladorCampañas.buscarCampañaActual();
+            //if (camp != null)
+            //{
+            //    rngDTO = ControladorCampañas.buscarRangoPorID(camp.IdRango);
+            //    listIMG = ControladorCampañas.buscarImagenesCampaña(camp.IdCampaña);
+            //}
 
-            threadPasoImagenes = new Thread(new ThreadStart(pasoImagenes));
-            threadPasoImagenes.Start();
-            threadPasoImagenes.Priority = ThreadPriority.Normal;
+            //threadPasoImagenes = new Thread(new ThreadStart(pasoImagenes));
+            //threadPasoImagenes.Start();
+            //threadPasoImagenes.Priority = ThreadPriority.Normal;
 
-            Task.Delay((minutoInicio * 60000) + (segundosInicio * 1000));
+            //Task.Delay((minutoInicio * 60000) + (segundosInicio * 1000));
 
-            threadTimer = new Thread(new ThreadStart(iniciarTimer));
-            threadTimer.Start();
-            threadTimer.Priority = ThreadPriority.Normal;
+            //threadTimer = new Thread(new ThreadStart(iniciarTimer));
+            //threadTimer.Start();
+            //threadTimer.Priority = ThreadPriority.Normal;
         }
 
-        private void teclaPresionada(object sender, KeyEventArgs e)
+            private void teclaPresionada(object sender, KeyEventArgs e)
         {   // Oculta/Muestra el cursor y la barrar de control adminstrativo al presionar la tecla F1.
             if (e.KeyCode == Keys.F1)
             {
@@ -224,6 +225,7 @@ namespace CarteleriaDigital.Pantallas
 
         private async void DeslizarTexto()
         {
+            CheckForIllegalCrossThreadCalls = false;
             if (textoString != null)
             {
                 char[] texto = textoString.ToCharArray();
@@ -232,7 +234,6 @@ namespace CarteleriaDigital.Pantallas
                     if (i < texto.Length - 1)
                     {
                         await Task.Delay(125);
-                        //Probar
                         if (textoBanner.Text.Length == 81)
                         {
                             textoBanner.Text = textoBanner.Text.Remove(textoBanner.Text.Length - 1);
