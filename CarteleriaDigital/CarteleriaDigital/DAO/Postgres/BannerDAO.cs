@@ -84,6 +84,7 @@ namespace CarteleriaDigital.DAO
                                 
                 NpgsqlDataReader dr = command.ExecuteReader();
 
+                dr.Read();
                 ban.IdBanner = dr.GetInt16(0);
                 ban.IdRango = dr.GetInt32(1);
                 ban.Activo = dr.GetBoolean(2);

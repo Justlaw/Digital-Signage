@@ -106,6 +106,30 @@ namespace CarteleriaDigital.Pantallas
         private bool VerificarRango(RangoDTO rng)
         {
             bool resultado = false;
+            if (VerificarCorrectitudRango(rng))
+            {
+                if (rng.FechaInicio >= DateTime.Today)
+                {
+                    if (rng.HoraInicio > DateTime.Now.Hour)
+                    {
+                        resultado = true;
+                    }
+                    if (rng.HoraInicio == DateTime.Now.Hour)
+                    {
+                        if (rng.MinutoInicio >= DateTime.Now.Minute)
+                        {
+                            resultado = true;
+                        } 
+                    }
+                }
+                
+            }
+            return resultado;
+        }
+
+        private bool VerificarCorrectitudRango(RangoDTO rng)
+        {
+            bool resultado = false;
             if (rng.FechaInicio <= rng.FechaFin)
             {
                 if (rng.HoraInicio < rng.HoraFin)
