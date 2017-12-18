@@ -79,12 +79,12 @@ namespace CarteleriaDigital
         {
             foreach (RangoDTO rango in listaRangos)
             {
-                if ((iFechaInicio.Date >= rango.FechaInicio.Date && iFechaInicio.Date <= rango.FechaFin.Date) ||
-                    (iFechaFin.Date >= rango.FechaInicio.Date && iFechaFin.Date <= rango.FechaFin.Date))
+                if ((iFechaInicio.Date >= rango.FechaInicio.Date && iFechaInicio.Date < rango.FechaFin.Date) ||
+                    (iFechaFin.Date >= rango.FechaInicio.Date && iFechaFin.Date < rango.FechaFin.Date))
                 {
                     if (
-                        iHoraInicio >= rango.HoraInicio && iHoraInicio <= rango.HoraFin
-                        && iMinutoInicio >= rango.MinutoInicio && iMinutoInicio <= rango.MinutoFin
+                        iHoraInicio >= rango.HoraInicio && iHoraInicio < rango.HoraFin
+                        && iMinutoInicio >= rango.MinutoInicio && iMinutoInicio < rango.MinutoFin
                         )
                     {
                         return false;
